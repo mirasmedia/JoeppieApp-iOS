@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     
     private func checkForUser() {
         
-        guard let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) else {
+        guard KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) != nil else {
             loginFrontView.isHidden = true
             return
         }
@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
         
         self.touchMe.authenticateUser() { [weak self] message in
             DispatchQueue.main.async {
-                if let message = message {
+                if message != nil {
                     // if the completion is not nil show an alert
                     self!.loginFrontView.isHidden = true
                     
@@ -152,7 +152,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-//MARK: - Textfield Delegate
+//Shahin - Textfield Delegate
 extension LoginViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Try to find next responder
