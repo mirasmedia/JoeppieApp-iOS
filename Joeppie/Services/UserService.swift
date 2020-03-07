@@ -2,7 +2,7 @@
 //  UserService.swift
 //  Joeppie
 //
-//  Created by Mark van den Berg on 06/01/2020.
+//  Created by Shahin Mirza on 06/01/2020.
 //  Copyright © 2020 Bever-Apps. All rights reserved.
 //
 
