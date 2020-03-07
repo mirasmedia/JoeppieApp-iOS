@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Joeppie
+
+  Created by Mark van den Berg on 07/12/2019.
+  Copyright © 2019 Bever-Apps. All rights reserved.
+*/
+
+"" = "";
+
+//MARK: LoginView
+"username_placeholder" = "Username";
+"password_placeholder" = "Password";
+"log_in_button" = "Log in";
+
+//MARK: PatientsTableView
+"log_out_button" = "Log out";
+"patients_title" = "Patients";
+
+//Mark: PatientView
+"cancel_button" = "Cancel";
+"done_button" = "Done";
+"new_patient_title" = "New Patient";
+
+"first_name_placeholder" = "First name";
+"insertion_placeholder" = "Insertion (optional)";
+"last_name_placeholder" = "Last name";
+
+"date_of_birth_title" = "Birthday";
+
+"email_placeholder" = "Email";
+
+
+"time_medicine_text" = "Time for your medicine ";
+"take_medicine" = "Take your medicine";
+"greetting" = "Hi ";
+"logout" = "Log out";
+"goed_zo" = "Nice!";
+"take_now" = "Take now!";
+"take_next_medicine" = "Take also your next medicine";
+"till" = "Till ";
+"hour"=" hour";
+"we_want_see_you_back" = "We want see you back!";
+"was_on_time_text" = "You was on time!";
+"today_we_finish" = "We finish today!";
+"get_next_medicine" = "Take also your next medicine";

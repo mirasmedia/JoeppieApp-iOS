@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Joeppie
+
+  Created by Mark van den Berg on 07/12/2019.
+  Copyright © 2019 Bever-Apps. All rights reserved.
+*/
+
+"" = "";
+
+//MARK: LoginView
+"username_placeholder" = "Gebruikersnaam";
+"password_placeholder" = "Wachtwoord";
+"log_in_button" = "Aanmelden";
+
+//MARK: PatientsTableView
+"log_out_button" = "Uitloggen";
+"patients_title" = "Cliënten";
+
+//Mark: PatientView
+"cancel_button" = "Annuleren";
+"done_button" = "Klaar";
+"new_patient_title" = "Nieuwe Client";
+
+"first_name_placeholder" = "Voornaam";
+"insertion_placeholder" = "Tussenoegsel (optioneel)";
+"last_name_placeholder" = "Achternaam";
+
+"date_of_birth_title" = "Geboortedatum";
+
+"email_placeholder" = "Email";
+
+//ERCAN
+"time_medicine_text" = "Tijd voor je medicijn ";
+"take_medicine" = "Neem je medicijn";
+"greetting" = "Hallo ";
+"logout" = "Uitloggen";
+"goed_zo" = "Goed zo!";
+"take_now" = "Neem het nu in!";
+"take_next_medicine" = "Neem direct je andere medicijn ook in";
+"till" = "Tot ";
+"hour"=" uur";
+"we_want_see_you_back" = "Wij zien je graag terug!";
+"was_on_time_text" = "Je was op tijd!";
+"today_we_finish" = "Voor vandaag zijn we klaar!";
+"get_next_medicine" = "Neem direct je andere medicijn ook in";
+

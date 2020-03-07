@@ -1,0 +1,22 @@
+PODS:
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
+  - SwiftKeychainWrapper (3.4.0)
+
+DEPENDENCIES:
+  - Charts
+  - SwiftKeychainWrapper
+
+SPEC REPOS:
+  trunk:
+    - Charts
+    - SwiftKeychainWrapper
+
+SPEC CHECKSUMS:
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+
+PODFILE CHECKSUM: edae87f250beecbd3a476be09f103f49b504245e
+
+COCOAPODS: 1.9.0

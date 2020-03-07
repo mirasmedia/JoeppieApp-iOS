@@ -1,0 +1,656 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
+		EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */; };
+		EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1B0F2B239D82C6006094BF /* MedicineCell.xib */; };
+		EA1B0F2E239D83EC006094BF /* MedicineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F2D239D83EC006094BF /* MedicineCell.swift */; };
+		EA1B0F32239DBA9C006094BF /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F31239DBA9C006094BF /* TapBarController.swift */; };
+		EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */; };
+		EA25BCD223C51B60001F049F /* DoseTakenTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA25BCD123C51B60001F049F /* DoseTakenTime.swift */; };
+		EA60EF5A239FE89800270B2C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60EF59239FE89800270B2C /* AlertViewController.swift */; };
+		EA61616F239E9FD000076091 /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA61616E239E9FD000076091 /* Medicine.swift */; };
+		EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7912C423A1375F0003BD6A /* TapbarUI.swift */; };
+		EAA7365A23BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */; };
+		EAB719CD23A8026700211816 /* ChartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB719CC23A8026700211816 /* ChartViewCell.xib */; };
+		EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719CE23A805AF00211816 /* ChartsViewController.swift */; };
+		EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719D023A8072000211816 /* ChartViewCell.swift */; };
+		EAD1D7E023C6567F00863DD8 /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1D7DF23C6567F00863DD8 /* TouchIDAuthentication.swift */; };
+		F9137BE723ACD12A00BCA7E1 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9137BE623ACD12A00BCA7E1 /* Role.swift */; };
+		F9137BE923ACE79C00BCA7E1 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9137BE823ACE79C00BCA7E1 /* LoginResponse.swift */; };
+		F9137BEB23ACF1C600BCA7E1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9137BEA23ACF1C600BCA7E1 /* Constants.swift */; };
+		F9137BED23AD0C6800BCA7E1 /* Dose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9137BEC23AD0C6800BCA7E1 /* Dose.swift */; };
+		F9137BEF23AD142A00BCA7E1 /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9137BEE23AD142A00BCA7E1 /* Intake.swift */; };
+		F916CB3E239E5DD7000A051E /* Baxter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F916CB3D239E5DD7000A051E /* Baxter.swift */; };
+		F9A5455823C349B400AFCB2C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5455723C349B400AFCB2C /* UserService.swift */; };
+		F9A6DF16238E8433009C215C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F9A6DF15238E8433009C215C /* Alamofire */; };
+		F9A6DF19238E8472009C215C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F9A6DF18238E8472009C215C /* Kingfisher */; };
+		F9BED61D239E920300E938D5 /* PatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BED61C239E920300E938D5 /* PatientTableViewController.swift */; };
+		F9DE12F223A02B830015F2B8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F9DE12F423A02B830015F2B8 /* Localizable.strings */; };
+		F9E8DD87238DDF1F0055460A /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E8DD86238DDF1F0055460A /* ApiService.swift */; };
+		F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EEF8DF239BB84A00C2C714 /* PatientsTableViewController.swift */; };
+		F9EEF8E8239C030C00C2C714 /* PatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EEF8E6239C030C00C2C714 /* PatientTableViewCell.swift */; };
+		F9EEF8E9239C030C00C2C714 /* PatientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9EEF8E7239C030C00C2C714 /* PatientTableViewCell.xib */; };
+		F9F2B95A239D57F700AC46FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2B959239D57F700AC46FC /* User.swift */; };
+		F9F2B95C239DB6C700AC46FC /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2B95B239DB6C600AC46FC /* Patient.swift */; };
+		F9F2B95E239DB6D600AC46FC /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2B95D239DB6D600AC46FC /* Coach.swift */; };
+		F9F4826E238BF69100299F21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4826D238BF69100299F21 /* AppDelegate.swift */; };
+		F9F48270238BF69100299F21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4826F238BF69100299F21 /* SceneDelegate.swift */; };
+		F9F48272238BF69100299F21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F48271238BF69100299F21 /* LoginViewController.swift */; };
+		F9F48275238BF69100299F21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F48273238BF69100299F21 /* Main.storyboard */; };
+		F9F48277238BF69300299F21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9F48276238BF69300299F21 /* Assets.xcassets */; };
+		F9F4827A238BF69300299F21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F48278238BF69300299F21 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.release.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.release.xcconfig"; sourceTree = "<group>"; };
+		CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.debug.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.debug.xcconfig"; sourceTree = "<group>"; };
+		EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineViewController.swift; sourceTree = "<group>"; };
+		EA1B0F2B239D82C6006094BF /* MedicineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MedicineCell.xib; sourceTree = "<group>"; };
+		EA1B0F2D239D83EC006094BF /* MedicineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCell.swift; sourceTree = "<group>"; };
+		EA1B0F31239DBA9C006094BF /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigiContactViewController.swift; sourceTree = "<group>"; };
+		EA25BCD123C51B60001F049F /* DoseTakenTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTakenTime.swift; sourceTree = "<group>"; };
+		EA60EF59239FE89800270B2C /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		EA61616E239E9FD000076091 /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
+		EA7912C423A1375F0003BD6A /* TapbarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapbarUI.swift; sourceTree = "<group>"; };
+		EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDMEDICINECONTROLLER.swift; sourceTree = "<group>"; };
+		EAB719CC23A8026700211816 /* ChartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewCell.xib; sourceTree = "<group>"; };
+		EAB719CE23A805AF00211816 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		EAB719D023A8072000211816 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
+		EAD1D7DF23C6567F00863DD8 /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
+		F9137BE623ACD12A00BCA7E1 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
+		F9137BE823ACE79C00BCA7E1 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		F9137BEA23ACF1C600BCA7E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F9137BEC23AD0C6800BCA7E1 /* Dose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose.swift; sourceTree = "<group>"; };
+		F9137BEE23AD142A00BCA7E1 /* Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intake.swift; sourceTree = "<group>"; };
+		F916CB3D239E5DD7000A051E /* Baxter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baxter.swift; sourceTree = "<group>"; };
+		F9A5455723C349B400AFCB2C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		F9BED61C239E920300E938D5 /* PatientTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientTableViewController.swift; sourceTree = "<group>"; };
+		F9DE12F523A02BDD0015F2B8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9DE12F623A02C470015F2B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9E8DD86238DDF1F0055460A /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		F9EEF8DF239BB84A00C2C714 /* PatientsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsTableViewController.swift; sourceTree = "<group>"; };
+		F9EEF8E6239C030C00C2C714 /* PatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientTableViewCell.swift; sourceTree = "<group>"; };
+		F9EEF8E7239C030C00C2C714 /* PatientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientTableViewCell.xib; sourceTree = "<group>"; };
+		F9F2B959239D57F700AC46FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F9F2B95B239DB6C600AC46FC /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		F9F2B95D239DB6D600AC46FC /* Coach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
+		F9F4826A238BF69100299F21 /* Joeppie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joeppie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9F4826D238BF69100299F21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F9F4826F238BF69100299F21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F9F48271238BF69100299F21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F9F48274238BF69100299F21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F9F48276238BF69300299F21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9F48279238BF69300299F21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F9F4827B238BF69300299F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F9F48267238BF69100299F21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A6DF19238E8472009C215C /* Kingfisher in Frameworks */,
+				8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */,
+				F9A6DF16238E8433009C215C /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B807F34D5E4AB4EC5105962C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7AC773B4308275297A810D11 /* Pods_Joeppie.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF3090B6E6B4A4B6DB2D82DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */,
+				8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		EA25BCD023C51B49001F049F /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				EA25BCD123C51B60001F049F /* DoseTakenTime.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		EAD1D7DE23C6566400863DD8 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				EAD1D7DF23C6567F00863DD8 /* TouchIDAuthentication.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		F9E8DD82238D6EF50055460A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEF8EA239C032E00C2C714 /* Cells */,
+				F9F48271238BF69100299F21 /* LoginViewController.swift */,
+				F9EEF8DF239BB84A00C2C714 /* PatientsTableViewController.swift */,
+				EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */,
+				EA1B0F31239DBA9C006094BF /* TapBarController.swift */,
+				EA60EF59239FE89800270B2C /* AlertViewController.swift */,
+				EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */,
+				EA7912C423A1375F0003BD6A /* TapbarUI.swift */,
+				EAB719CE23A805AF00211816 /* ChartsViewController.swift */,
+				F9BED61C239E920300E938D5 /* PatientTableViewController.swift */,
+				EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F9E8DD83238D6FEA0055460A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9F2B959239D57F700AC46FC /* User.swift */,
+				F9F2B95B239DB6C600AC46FC /* Patient.swift */,
+				F9F2B95D239DB6D600AC46FC /* Coach.swift */,
+				F916CB3D239E5DD7000A051E /* Baxter.swift */,
+				EA61616E239E9FD000076091 /* Medicine.swift */,
+				F9137BE623ACD12A00BCA7E1 /* Role.swift */,
+				F9137BE823ACE79C00BCA7E1 /* LoginResponse.swift */,
+				F9137BEC23AD0C6800BCA7E1 /* Dose.swift */,
+				F9137BEE23AD142A00BCA7E1 /* Intake.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F9E8DD84238D6FF30055460A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F9EEF8E5239C02D000C2C714 /* Cells */,
+				F9F48273238BF69100299F21 /* Main.storyboard */,
+				F9F48278238BF69300299F21 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F9E8DD85238D700D0055460A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F9E8DD86238DDF1F0055460A /* ApiService.swift */,
+				F9A5455723C349B400AFCB2C /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F9EEF8E5239C02D000C2C714 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EAB719CC23A8026700211816 /* ChartViewCell.xib */,
+				EA1B0F2B239D82C6006094BF /* MedicineCell.xib */,
+				F9EEF8E7239C030C00C2C714 /* PatientTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F9EEF8EA239C032E00C2C714 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EA1B0F2D239D83EC006094BF /* MedicineCell.swift */,
+				F9EEF8E6239C030C00C2C714 /* PatientTableViewCell.swift */,
+				EAB719D023A8072000211816 /* ChartViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F9F48261238BF69100299F21 = {
+			isa = PBXGroup;
+			children = (
+				EAD1D7DE23C6566400863DD8 /* Authentication */,
+				F9F4826C238BF69100299F21 /* Joeppie */,
+				F9F4826B238BF69100299F21 /* Products */,
+				DF3090B6E6B4A4B6DB2D82DA /* Pods */,
+				B807F34D5E4AB4EC5105962C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F9F4826B238BF69100299F21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F9F4826A238BF69100299F21 /* Joeppie.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F9F4826C238BF69100299F21 /* Joeppie */ = {
+			isa = PBXGroup;
+			children = (
+				EA25BCD023C51B49001F049F /* Enum */,
+				F9E8DD83238D6FEA0055460A /* Models */,
+				F9E8DD84238D6FF30055460A /* Views */,
+				F9E8DD82238D6EF50055460A /* Controllers */,
+				F9E8DD85238D700D0055460A /* Services */,
+				F9F4826D238BF69100299F21 /* AppDelegate.swift */,
+				F9F4826F238BF69100299F21 /* SceneDelegate.swift */,
+				F9137BEA23ACF1C600BCA7E1 /* Constants.swift */,
+				F9F48276238BF69300299F21 /* Assets.xcassets */,
+				F9F4827B238BF69300299F21 /* Info.plist */,
+				F9DE12F423A02B830015F2B8 /* Localizable.strings */,
+			);
+			path = Joeppie;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F9F48269238BF69100299F21 /* Joeppie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9F4827E238BF69300299F21 /* Build configuration list for PBXNativeTarget "Joeppie" */;
+			buildPhases = (
+				0D7892A22E3CF8269C74D41D /* [CP] Check Pods Manifest.lock */,
+				F9F48266238BF69100299F21 /* Sources */,
+				F9F48267238BF69100299F21 /* Frameworks */,
+				F9F48268238BF69100299F21 /* Resources */,
+				F7B11FDF994A701872188575 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Joeppie;
+			packageProductDependencies = (
+				F9A6DF15238E8433009C215C /* Alamofire */,
+				F9A6DF18238E8472009C215C /* Kingfisher */,
+			);
+			productName = Joeppie;
+			productReference = F9F4826A238BF69100299F21 /* Joeppie.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F9F48262238BF69100299F21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Bever-Apps";
+				TargetAttributes = {
+					F9F48269238BF69100299F21 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F9F48265238BF69100299F21 /* Build configuration list for PBXProject "Joeppie" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				nl,
+			);
+			mainGroup = F9F48261238BF69100299F21;
+			packageReferences = (
+				F9A6DF14238E8433009C215C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F9A6DF17238E8472009C215C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
+			productRefGroup = F9F4826B238BF69100299F21 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F9F48269238BF69100299F21 /* Joeppie */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F9F48268238BF69100299F21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DE12F223A02B830015F2B8 /* Localizable.strings in Resources */,
+				F9F4827A238BF69300299F21 /* LaunchScreen.storyboard in Resources */,
+				F9EEF8E9239C030C00C2C714 /* PatientTableViewCell.xib in Resources */,
+				EAB719CD23A8026700211816 /* ChartViewCell.xib in Resources */,
+				F9F48277238BF69300299F21 /* Assets.xcassets in Resources */,
+				F9F48275238BF69100299F21 /* Main.storyboard in Resources */,
+				EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D7892A22E3CF8269C74D41D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Joeppie-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7B11FDF994A701872188575 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Joeppie/Pods-Joeppie-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Joeppie/Pods-Joeppie-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Joeppie/Pods-Joeppie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F9F48266238BF69100299F21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9137BED23AD0C6800BCA7E1 /* Dose.swift in Sources */,
+				F9F48272238BF69100299F21 /* LoginViewController.swift in Sources */,
+				F9F4826E238BF69100299F21 /* AppDelegate.swift in Sources */,
+				EAA7365A23BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift in Sources */,
+				EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */,
+				EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */,
+				EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */,
+				F9A5455823C349B400AFCB2C /* UserService.swift in Sources */,
+				EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */,
+				F9137BEB23ACF1C600BCA7E1 /* Constants.swift in Sources */,
+				EAD1D7E023C6567F00863DD8 /* TouchIDAuthentication.swift in Sources */,
+				F9E8DD87238DDF1F0055460A /* ApiService.swift in Sources */,
+				EA1B0F2E239D83EC006094BF /* MedicineCell.swift in Sources */,
+				F9137BE723ACD12A00BCA7E1 /* Role.swift in Sources */,
+				F9EEF8E8239C030C00C2C714 /* PatientTableViewCell.swift in Sources */,
+				F9137BE923ACE79C00BCA7E1 /* LoginResponse.swift in Sources */,
+				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
+				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
+				EA61616F239E9FD000076091 /* Medicine.swift in Sources */,
+				F9BED61D239E920300E938D5 /* PatientTableViewController.swift in Sources */,
+				F916CB3E239E5DD7000A051E /* Baxter.swift in Sources */,
+				F9F2B95C239DB6C700AC46FC /* Patient.swift in Sources */,
+				F9F48270238BF69100299F21 /* SceneDelegate.swift in Sources */,
+				EA1B0F32239DBA9C006094BF /* TapBarController.swift in Sources */,
+				EA25BCD223C51B60001F049F /* DoseTakenTime.swift in Sources */,
+				F9137BEF23AD142A00BCA7E1 /* Intake.swift in Sources */,
+				F9F2B95E239DB6D600AC46FC /* Coach.swift in Sources */,
+				EA60EF5A239FE89800270B2C /* AlertViewController.swift in Sources */,
+				F9F2B95A239D57F700AC46FC /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F9DE12F423A02B830015F2B8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9DE12F523A02BDD0015F2B8 /* nl */,
+				F9DE12F623A02C470015F2B8 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F9F48273238BF69100299F21 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9F48274238BF69100299F21 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F9F48278238BF69300299F21 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9F48279238BF69300299F21 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F9F4827C238BF69300299F21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F9F4827D238BF69300299F21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F9F4827F238BF69300299F21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8XSS3798PL;
+				INFOPLIST_FILE = Joeppie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = asdasdsadsda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9F48280238BF69300299F21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8XSS3798PL;
+				INFOPLIST_FILE = Joeppie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = asdasdsadsda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F9F48265238BF69100299F21 /* Build configuration list for PBXProject "Joeppie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9F4827C238BF69300299F21 /* Debug */,
+				F9F4827D238BF69300299F21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9F4827E238BF69300299F21 /* Build configuration list for PBXNativeTarget "Joeppie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9F4827F238BF69300299F21 /* Debug */,
+				F9F48280238BF69300299F21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F9A6DF14238E8433009C215C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.9.1;
+			};
+		};
+		F9A6DF17238E8472009C215C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F9A6DF15238E8433009C215C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A6DF14238E8433009C215C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		F9A6DF18238E8472009C215C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9A6DF17238E8472009C215C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F9F48262238BF69100299F21 /* Project object */;
+}
