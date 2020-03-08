@@ -50,6 +50,10 @@ class PatientTableViewController: UITableViewController {
         insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("last_name_placeholder", comment: "")
         
+        dateOfBirthPicker.minimumDate = Calendar.current.date(byAdding: .year, value: -99, to: Date())
+        dateOfBirthPicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+
+        
         dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current

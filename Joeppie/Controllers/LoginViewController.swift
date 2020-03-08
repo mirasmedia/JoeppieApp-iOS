@@ -27,6 +27,9 @@ class LoginViewController: UIViewController {
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         logInButton.setTitle(NSLocalizedString("log_in_button", comment: ""), for: .normal)
         
+        // TODO : Delete this
+        usernameTextField.text = "benjamin123"
+        passwordTextField.text = "joeppieBegeleider123"
         
         setup()
     }
