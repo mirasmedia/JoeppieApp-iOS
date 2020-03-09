@@ -27,6 +27,9 @@ class LoginViewController: UIViewController {
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         logInButton.setTitle(NSLocalizedString("log_in_button", comment: ""), for: .normal)
         
+        // TODO : Delete this
+        usernameTextField.text = "benjamin123"
+        passwordTextField.text = "joeppieBegeleider123"
         
         setup()
     }
@@ -47,7 +50,7 @@ class LoginViewController: UIViewController {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
@@ -58,7 +61,7 @@ class LoginViewController: UIViewController {
     
     private func checkForUser() {
         
-        guard let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) else {
+        guard KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) != nil else {
             loginFrontView.isHidden = true
             return
         }
@@ -66,7 +69,7 @@ class LoginViewController: UIViewController {
         
         self.touchMe.authenticateUser() { [weak self] message in
             DispatchQueue.main.async {
-                if let message = message {
+                if message != nil {
                     // if the completion is not nil show an alert
                     self!.loginFrontView.isHidden = true
                     
@@ -114,27 +117,23 @@ class LoginViewController: UIViewController {
         guard let identiefier = usernameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        ApiService.logUserIn(withIdentiefier: identiefier, andPassword: password).responseData(completionHandler: { response in
-            guard let jsonData = response.data else { return }
-            let decoder = JSONDecoder()
-            let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
-            if loginResponse == nil{
-                let alertView = UIAlertController(title: "",
-                                                  message: "Verkeerde wachtwoord of gebruiksnaam",
-                                                  preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default)
-                alertView.addAction(okAction)
-                self.present(alertView, animated: true)
-            }
-            else{
-                UserService.setUser(instance: loginResponse!.user)
-                KeychainWrapper.standard.set(loginResponse!.token, forKey: Constants.tokenIdentifier)
-                //print(loginResponse.token)
-                self.launchNextScreen(forUser: loginResponse!.user)
-            }
-            
-            
-        })
+        if Reachability.isConnectedToNetwork(){
+            ApiService.logUserIn(withIdentiefier: identiefier, andPassword: password).responseData(completionHandler: { response in
+                guard let jsonData = response.data else { return }
+                let decoder = JSONDecoder()
+                let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
+                if loginResponse == nil{
+                    Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("login_error_title", comment: ""), msg: NSLocalizedString("login_error_msg", comment: ""))
+                }else{
+                    UserService.setUser(instance: loginResponse!.user)
+                    KeychainWrapper.standard.set(loginResponse!.token, forKey: Constants.tokenIdentifier)
+                    self.launchNextScreen(forUser: loginResponse!.user)
+                }
+            })
+        }else{
+            Errorpopup.displayConnectionErrorMessage(vc: self)
+        }
+        
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -152,7 +151,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-//MARK: - Textfield Delegate
+//Shahin - Textfield Delegate
 extension LoginViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Try to find next responder

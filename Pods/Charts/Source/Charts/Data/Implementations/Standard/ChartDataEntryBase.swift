@@ -73,7 +73,7 @@ open class ChartDataEntryBase: NSObject
         self.data = data
     }
 
-    // MARK: NSObject
+    // Shahin: NSObject
     
     open override var description: String
     {
@@ -81,7 +81,7 @@ open class ChartDataEntryBase: NSObject
     }
 }
 
-// MARK: Equatable
+// Shahin: Equatable
 extension ChartDataEntryBase/*: Equatable*/ {
     open override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? ChartDataEntryBase else { return false }

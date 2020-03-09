@@ -13,7 +13,7 @@ import SwiftKeychainWrapper
 class ApiService {
     private static let baseURL = "https://api.stider.space"
     
-    //MARK: - User
+    //Shahin: - User
     
     //(POST)/login
     static func logUserIn(withIdentiefier identifier: String, andPassword password: String) -> (DataRequest) {
@@ -105,7 +105,7 @@ class ApiService {
     }
     
     
-    //MARK: - Patient
+    //Shahin: - Patient
     
     //(GET)/patients
     static func getPatients(forCoachId coachId : Int) -> (DataRequest) {
@@ -138,7 +138,7 @@ class ApiService {
         return Alamofire.request(baseURL + "/patients?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
-    //MARK: - Coach
+    //Shahin: - Coach
     
     //(GET)/coaches
     static func getCoach(withUserId userId : Int) -> (DataRequest) {

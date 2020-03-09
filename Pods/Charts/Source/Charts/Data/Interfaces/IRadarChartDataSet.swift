@@ -15,9 +15,9 @@ import CoreGraphics
 @objc
 public protocol IRadarChartDataSet: ILineRadarChartDataSet
 {
-    // MARK: - Data functions and accessors
+    // Shahin: - Data functions and accessors
     
-    // MARK: - Styling functions and accessors
+    // Shahin: - Styling functions and accessors
     
     /// flag indicating whether highlight circle should be drawn or not
     var drawHighlightCircleEnabled: Bool { get set }

@@ -8,16 +8,22 @@
 
 "" = "";
 
-//MARK: LoginView
+//Shahin: Error
+"connection_error_title" = "Verbinding mislukt!";
+"connection_error_msg"   = "Er is iets mis gegaan met internet verbinding.";
+
+//Shahin: LoginView
 "username_placeholder" = "Gebruikersnaam";
 "password_placeholder" = "Wachtwoord";
 "log_in_button" = "Aanmelden";
+"login_error_msg" = "Verkeerde wachtwoord of gebruiksnaam!";
+"login_error_title" = "Login mislukt";
 
-//MARK: PatientsTableView
+//Shahin: PatientsTableView
 "log_out_button" = "Uitloggen";
 "patients_title" = "Cliënten";
 
-//Mark: PatientView
+//Shahin: PatientView
 "cancel_button" = "Annuleren";
 "done_button" = "Klaar";
 "new_patient_title" = "Nieuwe Client";

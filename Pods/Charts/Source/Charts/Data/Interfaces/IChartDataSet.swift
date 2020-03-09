@@ -15,7 +15,7 @@ import CoreGraphics
 @objc
 public protocol IChartDataSet
 {
-    // MARK: - Data functions and accessors
+    // Shahin: - Data functions and accessors
     
     /// Use this method to tell the data set that the underlying data has changed
     func notifyDataSetChanged()
@@ -164,7 +164,7 @@ public protocol IChartDataSet
     /// *optional feature, could throw if not implemented*
     func clear()
     
-    // MARK: - Styling functions and accessors
+    // Shahin: - Styling functions and accessors
     
     /// The label string that describes the DataSet.
     var label: String? { get }

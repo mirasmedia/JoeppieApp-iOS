@@ -139,7 +139,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
         highlightValue(Highlight(x: x, dataSetIndex: dataSetIndex, stackIndex: stackIndex))
     }
 
-    // MARK: Accessors
+    // Shahin: Accessors
     
     /// if set to true, all values are drawn above their bars, instead of below their top
     @objc open var drawValueAboveBarEnabled: Bool
@@ -174,7 +174,7 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
     /// `true` the highlight is be full-bar oriented, `false` ifsingle-value
     open var isHighlightFullBarEnabled: Bool { return highlightFullBarEnabled }
     
-    // MARK: - BarChartDataProvider
+    // Shahin: - BarChartDataProvider
     
     open var barData: BarChartData? { return _data as? BarChartData }
     

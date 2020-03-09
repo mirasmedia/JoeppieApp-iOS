@@ -11,12 +11,12 @@ import SwiftKeychainWrapper
 
 class UserService {
     
-    //MARK: - Instances
+    //Shahin: - Instances
     private static var userInstance : User?
     private static var coachInstance : Coach?
     private static var patientInstance : Patient?
     
-    //MARK: LogOut
+    //Shahin: LogOut
     
     //Removes all instances off the user, coach and patient from the app
     public static func logOut(){
@@ -31,7 +31,7 @@ class UserService {
     }
     
     
-    //MARK: - User
+    //Shahin: - User
     
     //Sets the user instance
     public static func setUser(instance: User) {
@@ -63,7 +63,7 @@ class UserService {
         cH(nil)
     }
     
-    //MARK: - Coach
+    //Shahin: - Coach
     
     //returns the coach instance, if it's not here, it will get it from the api using the user instance, if api doesn't have it, returns nil
     public static func getCoachInstance(withCompletionHandler cH : @escaping (Coach?) -> ()){
@@ -119,7 +119,7 @@ class UserService {
     }
     
     
-    //MARK: - Patient
+    //Shahin: - Patient
     
     //returns the patient instance, if it's not here, it will get it from the api using the user instance, if api doesn't have it, returns nil
     public static func getPatientInstance(withCompletionHandler cH : @escaping (Patient?) -> ()) {

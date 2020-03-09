@@ -100,7 +100,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
             axis: h.axis)
     }
     
-    // MARK: - CombinedChartDataProvider
+    // Shahin: - CombinedChartDataProvider
     
     open var combinedData: CombinedChartData?
     {
@@ -110,7 +110,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - LineChartDataProvider
+    // Shahin: - LineChartDataProvider
     
     open var lineData: LineChartData?
     {
@@ -120,7 +120,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - BarChartDataProvider
+    // Shahin: - BarChartDataProvider
     
     open var barData: BarChartData?
     {
@@ -130,7 +130,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - ScatterChartDataProvider
+    // Shahin: - ScatterChartDataProvider
     
     open var scatterData: ScatterChartData?
     {
@@ -140,7 +140,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - CandleChartDataProvider
+    // Shahin: - CandleChartDataProvider
     
     open var candleData: CandleChartData?
     {
@@ -150,7 +150,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - BubbleChartDataProvider
+    // Shahin: - BubbleChartDataProvider
     
     open var bubbleData: BubbleChartData?
     {
@@ -160,7 +160,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
         }
     }
     
-    // MARK: - Accessors
+    // Shahin: - Accessors
     
     /// if set to true, all values are drawn above their bars, instead of below their top
     @objc open var drawValueAboveBarEnabled: Bool
@@ -203,7 +203,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     /// `true` the highlight is be full-bar oriented, `false` ifsingle-value
     open var isHighlightFullBarEnabled: Bool { return highlightFullBarEnabled }
     
-    // MARK: - ChartViewBase
+    // Shahin: - ChartViewBase
     
     /// draws all MarkerViews on the highlighted positions
     override func drawMarkers(context: CGContext)
