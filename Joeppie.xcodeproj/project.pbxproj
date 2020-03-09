@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		106B5E4E241660390097B0E1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4D241660390097B0E1 /* Reachability.swift */; };
+		106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4F241660950097B0E1 /* ErrorMessage.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
 		EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */; };
 		EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1B0F2B239D82C6006094BF /* MedicineCell.xib */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		106B5E4D241660390097B0E1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		106B5E4F241660950097B0E1 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.release.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.release.xcconfig"; sourceTree = "<group>"; };
 		CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.debug.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106B5E4C24165FF60097B0E1 /* Helppers */ = {
+			isa = PBXGroup;
+			children = (
+				106B5E4D241660390097B0E1 /* Reachability.swift */,
+				106B5E4F241660950097B0E1 /* ErrorMessage.swift */,
+			);
+			path = Helppers;
+			sourceTree = "<group>";
+		};
 		B807F34D5E4AB4EC5105962C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +248,7 @@
 		F9F4826C238BF69100299F21 /* Joeppie */ = {
 			isa = PBXGroup;
 			children = (
+				106B5E4C24165FF60097B0E1 /* Helppers */,
 				EA25BCD023C51B49001F049F /* Enum */,
 				F9E8DD83238D6FEA0055460A /* Models */,
 				F9E8DD84238D6FF30055460A /* Views */,
@@ -382,10 +396,12 @@
 				F9F48272238BF69100299F21 /* LoginViewController.swift in Sources */,
 				F9F4826E238BF69100299F21 /* AppDelegate.swift in Sources */,
 				EAA7365A23BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift in Sources */,
+				106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */,
 				EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */,
 				EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */,
 				EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */,
 				F9A5455823C349B400AFCB2C /* UserService.swift in Sources */,
+				106B5E4E241660390097B0E1 /* Reachability.swift in Sources */,
 				EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */,
 				F9137BEB23ACF1C600BCA7E1 /* Constants.swift in Sources */,
 				EAD1D7E023C6567F00863DD8 /* TouchIDAuthentication.swift in Sources */,
