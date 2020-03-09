@@ -72,7 +72,7 @@ class PatientsTableViewController: UITableViewController {
         self.navigationController?.present(patientViewController, animated: true)
     }
     
-    // MARK: - Table view data source
+    // Shahin: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -138,7 +138,7 @@ class PatientsTableViewController: UITableViewController {
     */
     
     /*
-    // MARK: - Navigation
+    // Shahin: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

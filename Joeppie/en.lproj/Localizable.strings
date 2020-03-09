@@ -8,16 +8,16 @@
 
 "" = "";
 
-//MARK: LoginView
+//Shahin: LoginView
 "username_placeholder" = "Username";
 "password_placeholder" = "Password";
 "log_in_button" = "Log in";
 
-//MARK: PatientsTableView
+//Shahin: PatientsTableView
 "log_out_button" = "Log out";
 "patients_title" = "Patients";
 
-//Mark: PatientView
+//Shahin: PatientView
 "cancel_button" = "Cancel";
 "done_button" = "Done";
 "new_patient_title" = "New Patient";

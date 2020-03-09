@@ -10,7 +10,7 @@ import UIKit
 
 class PatientTableViewController: UITableViewController {
     
-    //MARK: - Outlets
+    //Shahin: - Outlets
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var navigationTitle: UINavigationItem!
@@ -27,12 +27,12 @@ class PatientTableViewController: UITableViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    //MARK: - Properties
+    //Shahin: - Properties
     var selected = false
     var textFields = [UITextField]()
     
     
-    //MARK: - Lifecycle
+    //Shahin: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +40,7 @@ class PatientTableViewController: UITableViewController {
         setup()
     }
     
-    //MARK: - Functions
+    //Shahin: - Functions
     private func setup(){
         cancelButton.title = NSLocalizedString("cancel_button", comment: "")
         doneButton.title = NSLocalizedString("done_button", comment: "")
@@ -74,7 +74,7 @@ class PatientTableViewController: UITableViewController {
         }
     }
     
-    //MARK: - Actions
+    //Shahin: - Actions
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -115,7 +115,7 @@ class PatientTableViewController: UITableViewController {
     }
     
     
-    // MARK: - Table view data source
+    // Shahin: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
