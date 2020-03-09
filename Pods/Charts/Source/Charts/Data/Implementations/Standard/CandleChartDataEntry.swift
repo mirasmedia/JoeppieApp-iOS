@@ -84,7 +84,7 @@ open class CandleChartDataEntry: ChartDataEntry
         }
     }
     
-    // MARK: NSCopying
+    // Shahin: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

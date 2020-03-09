@@ -64,7 +64,7 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
         }
     }
     
-    // MARK: NSCopying
+    // Shahin: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

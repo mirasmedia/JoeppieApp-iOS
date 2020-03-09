@@ -181,7 +181,7 @@ open class CombinedChartRenderer: DataRenderer
         set { _renderers = newValue }
     }
     
-    // MARK: Accessors
+    // Shahin: Accessors
     
     /// `true` if drawing values above bars is enabled, `false` ifnot
     @objc open var isDrawValueAboveBarEnabled: Bool { return drawValueAboveBarEnabled }

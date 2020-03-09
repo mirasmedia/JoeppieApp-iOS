@@ -14,9 +14,9 @@ import Foundation
 
 open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet, ILineScatterCandleRadarChartDataSet
 {
-    // MARK: - Data functions and accessors
+    // Shahin: - Data functions and accessors
     
-    // MARK: - Styling functions and accessors
+    // Shahin: - Styling functions and accessors
     
     /// Enables / disables the horizontal highlight-indicator. If disabled, the indicator is not drawn.
     open var drawHorizontalHighlightIndicatorEnabled = true
@@ -38,7 +38,7 @@ open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDa
         drawVerticalHighlightIndicatorEnabled = enabled
     }
     
-    // MARK: NSCopying
+    // Shahin: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

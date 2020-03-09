@@ -175,7 +175,7 @@ open class Highlight: NSObject
         self.drawY = pt.y
     }
 
-    // MARK: NSObject
+    // Shahin: NSObject
     
     open override var description: String
     {
@@ -184,7 +184,7 @@ open class Highlight: NSObject
 }
 
 
-// MARK: Equatable
+// Shahin: Equatable
 extension Highlight /*: Equatable*/ {
     open override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? Highlight else { return false }
