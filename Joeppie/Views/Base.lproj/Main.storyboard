@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rys-MT-5Y9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rys-MT-5Y9">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -672,6 +672,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="UM9-O4-n40">
+                                        <rect key="frame" x="0.0" y="488.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UM9-O4-n40" id="cj9-y5-pcT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password_placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ifi-m9-ETl">
+                                                    <rect key="frame" x="16" y="10" width="343" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ifi-m9-ETl" firstAttribute="leading" secondItem="cj9-y5-pcT" secondAttribute="leading" constant="16" id="37v-7z-9YI"/>
+                                                <constraint firstItem="Ifi-m9-ETl" firstAttribute="top" secondItem="cj9-y5-pcT" secondAttribute="top" constant="10" id="C8W-xB-N4C"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ifi-m9-ETl" secondAttribute="bottom" constant="10" id="XVh-WF-mnG"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ifi-m9-ETl" secondAttribute="trailing" constant="16" id="sq8-YN-o6x"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -696,6 +717,7 @@
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="cancelButton" destination="JvH-uF-xmB" id="vrQ-hn-b5i"/>
+                        <outlet property="confirmPasswordTextField" destination="UM9-O4-n40" id="g8s-h8-M5o"/>
                         <outlet property="dateOfBirthLabel" destination="t1U-el-zF4" id="Wfv-rv-f1j"/>
                         <outlet property="dateOfBirthPicker" destination="LGy-2d-7kg" id="OEW-fS-tvu"/>
                         <outlet property="dateOfBirthTitle" destination="eyO-Al-VAZ" id="j4X-as-T0c"/>
