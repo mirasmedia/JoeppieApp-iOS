@@ -8,10 +8,16 @@
 
 "" = "";
 
+//Shahin: Error
+"connection_error_title" = "Connection failed!";
+"connection_error_msg"   = "Something went wrong with your connection.";
+
 //Shahin: LoginView
 "username_placeholder" = "Username";
 "password_placeholder" = "Password";
-"log_in_button" = "Log in";
+"log_in_button" = "Login";
+"login_error_msg" = "Wrong password or username!";
+"login_error_title" = "Login failed";
 
 //Shahin: PatientsTableView
 "log_out_button" = "Log out";
