@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public class Errorpopup {
-    class func displayErrorMessage(vc: UIViewController, title: String, msg: String){
+    fileprivate static func displayMessage(_ title: String, _ msg: String, _ vc: UIViewController) {
         let alertView = UIAlertController(title: title,
                                           message: msg,
                                           preferredStyle: .alert)
@@ -19,12 +19,13 @@ public class Errorpopup {
         vc.present(alertView, animated: true)
     }
     
+    class func displayErrorMessage(vc: UIViewController, title: String, msg: String){
+        displayMessage(title, msg, vc)
+    }
+    
     class func displayConnectionErrorMessage(vc: UIViewController) {
-        let alertView = UIAlertController(title: NSLocalizedString("connection_error_title", comment: ""),
-                                          message: NSLocalizedString("connection_error_msg", comment: ""),
-                                          preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        alertView.addAction(okAction)
-        vc.present(alertView, animated: true)
+        let title = NSLocalizedString("connection_error_title", comment: "")
+        let msg = NSLocalizedString("connection_error_msg", comment: "")
+        displayMessage(title, msg, vc)
     }
 }

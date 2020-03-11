@@ -26,6 +26,7 @@ class PatientTableViewController: UITableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     //Shahin: - Properties
     var selected = false
@@ -42,6 +43,7 @@ class PatientTableViewController: UITableViewController {
     
     //Shahin: - Functions
     private func setup(){
+        
         cancelButton.title = NSLocalizedString("cancel_button", comment: "")
         doneButton.title = NSLocalizedString("done_button", comment: "")
         navigationTitle.title = NSLocalizedString("new_patient_title", comment: "")
@@ -63,11 +65,13 @@ class PatientTableViewController: UITableViewController {
         usernameTextField.placeholder = NSLocalizedString("username_placeholder", comment: "")
         emailTextField.placeholder = NSLocalizedString("email_placeholder", comment: "")
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
+        confirmPasswordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
+
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        textFields = [firstNameTextField, insertionTextField, lastNameTextField, usernameTextField, passwordTextField]
+        textFields = [firstNameTextField, insertionTextField, lastNameTextField, usernameTextField, passwordTextField, confirmPasswordTextField]
         
         for field in textFields {
             field.delegate = self
