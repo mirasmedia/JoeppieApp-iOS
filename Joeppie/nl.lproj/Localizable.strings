@@ -35,6 +35,21 @@
 "date_of_birth_title" = "Geboortedatum";
 
 "email_placeholder" = "Email";
+"confirm_password_placeholder" = "Wachtwoord bevestigen";
+
+// Shahin: Error messages
+"empty_fields_title" = "Leeg verplichte velden.";
+"empty_fields_msg" = "Niet alle verplichte velden zijn ingevuld.";
+
+"birthday_fields_title" = "Gebortedatum veld";
+"empty_birthday_fields_msg" = "Voer de juiste gebortedatum in.";
+
+"invalide_email_title" = "Ongeldig email";
+"invalide_email_msg" = "Ingevoerde email is ongeldig.";
+
+"invalide_pass_title" = "Ongeldig wachtwoord";
+"invalide_pass_msg" = "Ingevoerde wachtword is ongeldig. Minimaal acht karakters waarvan minstens een letter, een nummer en een speciale teken.";
+"invalide_conf_pass_msg" = "Ingevoerde wachtworden komen niet overeen.";
 
 //ERCAN
 "time_medicine_text" = "Tijd voor je medicijn ";
