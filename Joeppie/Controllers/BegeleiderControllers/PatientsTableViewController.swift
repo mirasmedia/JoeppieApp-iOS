@@ -36,24 +36,24 @@ class PatientsTableViewController: UITableViewController {
     private func getPatients() {
         UserService.getCoachInstance(withCompletionHandler: { coach in
             guard let coach = coach else {
-                //TODO log user out, throw message
+                UserService.logOut()
                 return
             }
             
             ApiService.getPatients(forCoachId: coach.id).responseData(completionHandler: { (response) in
-            guard let jsonData = response.data else { return }
-            //print(String(decoding: jsonData, as: UTF8.self))
-            let decoder = JSONDecoder()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale.current
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
-            self.patients = patients
-            print(patients)
-            self.patientsTableView.reloadData()
+                guard let jsonData = response.data else { return }
+                //print(String(decoding: jsonData, as: UTF8.self))
+                let decoder = JSONDecoder()
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale.current
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                
+                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
+                self.patients = patients
+                print(patients)
+                self.patientsTableView.reloadData()
             })
         })
     }
@@ -98,7 +98,8 @@ class PatientsTableViewController: UITableViewController {
         } else {
             cell.patientNameLabel.text = "\(patient.firstName) \(patient.lastName)"
         }
-        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
+        
+//        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
 
         return cell
     }

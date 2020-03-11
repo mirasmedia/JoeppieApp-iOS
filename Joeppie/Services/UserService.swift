@@ -38,7 +38,6 @@ class UserService {
         userInstance = instance
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(instance) else {
-            //print("encoding failed")
             return
         }
         UserDefaults.standard.set(data, forKey: Constants.userKey)
