@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
             loginFrontView.isHidden = true
             return
         }
-        
+        print(token)
         
         self.touchMe.authenticateUser() { [weak self] message in
             DispatchQueue.main.async {
