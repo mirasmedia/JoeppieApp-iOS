@@ -11,10 +11,6 @@ import UIKit
 class PatientTableViewController: UITableViewController {
     
     //Shahin: - Outlets
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var doneButton: UIBarButtonItem!
-    @IBOutlet weak var navigationTitle: UINavigationItem!
-    
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var insertionTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -32,6 +28,7 @@ class PatientTableViewController: UITableViewController {
     var selected = false
     var textFields = [UITextField]()
     let dateFormatter = DateFormatter()
+    var patient: Patient?
     
     
     //Shahin: - Lifecycle
@@ -43,19 +40,12 @@ class PatientTableViewController: UITableViewController {
     }
     
     //Shahin: - Functions
-    private func setup(){
-        
-        cancelButton.title = NSLocalizedString("cancel_button", comment: "")
-        doneButton.title = NSLocalizedString("done_button", comment: "")
-        navigationTitle.title = NSLocalizedString("new_patient_title", comment: "")
+    fileprivate func initNewPatient() {
+//        navigationTitle.title = NSLocalizedString("new_patient_title", comment: "")
         
         firstNameTextField.placeholder = NSLocalizedString("first_name_placeholder", comment: "")
         insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("last_name_placeholder", comment: "")
-        
-        dateOfBirthPicker.minimumDate = Calendar.current.date(byAdding: .year, value: -99, to: Date())
-        dateOfBirthPicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
-
         
         dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
         
@@ -67,10 +57,49 @@ class PatientTableViewController: UITableViewController {
         emailTextField.placeholder = NSLocalizedString("email_placeholder", comment: "")
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         confirmPasswordTextField.placeholder = NSLocalizedString("confirm_password_placeholder", comment: "")
-
+    }
+    
+    fileprivate func initEditPatient() {
+//        navigationTitle.title = NSLocalizedString("edit_patient_title", comment: "")
+        
+        firstNameTextField.text = patient?.firstName
+        if patient?.insertion != nil{
+            insertionTextField.text = patient?.insertion
+        }else{
+            insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
+        }
+        lastNameTextField.text = patient?.lastName
+        
+        dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
+        
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateOfBirthLabel.text = dateFormatter.string(from: patient?.dateOfBirth ?? dateOfBirthPicker.date)
+        guard let ddd = patient?.dateOfBirth else{return}
+        dateOfBirthPicker.setDate(ddd, animated: false)
+        
+        usernameTextField.text = patient?.user.username
+        emailTextField.text = patient?.user.email
+        passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
+        confirmPasswordTextField.placeholder = NSLocalizedString("confirm_password_placeholder", comment: "")
+    }
+    
+    private func setup(){
+//        cancelButton.title = NSLocalizedString("cancel_button", comment: "")
+//        doneButton.title = NSLocalizedString("done_button", comment: "")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        if patient != nil{
+            initEditPatient()
+        }else{
+            initNewPatient()
+        }
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        dateOfBirthPicker.minimumDate = Calendar.current.date(byAdding: .year, value: -99, to: Date())
+        dateOfBirthPicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         
         textFields = [firstNameTextField, insertionTextField, lastNameTextField, usernameTextField, passwordTextField, confirmPasswordTextField]
         
@@ -80,7 +109,7 @@ class PatientTableViewController: UITableViewController {
     }
     
     //Shahin: - Actions
-    @IBAction func cancelButtonTapped(_ sender: Any) {
+    @objc private func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -133,7 +162,7 @@ class PatientTableViewController: UITableViewController {
     }
 
     
-    @IBAction func doneButtonTapped(_ sender: Any) {
+    @objc private func doneButtonTapped(_ sender: Any) {
         guard let firstName = firstNameTextField.text else { return }
         guard let insertion = insertionTextField.text else { return }
         guard let lastName = lastNameTextField.text else { return }
@@ -161,11 +190,13 @@ class PatientTableViewController: UITableViewController {
             checkEmail(email){
             
             // TODO: Register user before dismiss
+            // IF patient UPDATE else {make new}
             self.dismiss(animated: true, completion: nil)
         }
         
     }
     
+    // Change birthday label when picker is changed
     @IBAction func dateOfBirthChanged(_ sender: Any) {
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "dd MMMM yyyy"

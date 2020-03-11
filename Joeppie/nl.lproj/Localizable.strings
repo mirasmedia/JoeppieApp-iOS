@@ -27,6 +27,7 @@
 "cancel_button" = "Annuleren";
 "done_button" = "Klaar";
 "new_patient_title" = "Nieuwe Client";
+"edit_patient_title" = "Bewerk Client";
 
 "first_name_placeholder" = "Voornaam";
 "insertion_placeholder" = "Tussenoegsel (optioneel)";

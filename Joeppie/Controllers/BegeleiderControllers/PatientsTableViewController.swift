@@ -99,11 +99,19 @@ class PatientsTableViewController: UITableViewController {
         } else {
             cell.patientNameLabel.text = "\(patient.firstName) \(patient.lastName)"
         }
-        cell.badgeImageView.isHidden = true
         
-        //Shahin : TODO Find a way to enable the badge for users
+        // Shahin : TODO Find a way to enable the badge for users
+        // Exmaple isHidden = function(user.Id) {Calculte, return true}
 //        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
 
         return cell
+    }
+    
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let patientVc = storyboard.instantiateViewController(withIdentifier:
+            "PatientViewController") as! PatientViewController
+        patientVc.patient = patients[indexPath.row]
+        navigationController?.pushViewController(patientVc, animated: true)
     }
 }
