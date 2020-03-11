@@ -612,6 +612,11 @@ class MedicineViewController: UIViewController {
         let maxEndTime = calendar.date(byAdding: .minute, value: 15, to: intakeTime)!
         let lateEndtime = calendar.date(byAdding: .minute, value: 45, to: intakeTime)!
         
+        var date = Date()
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let formatedDate = dateFormatter.string(from: date)
         
         
         if timeNow >= maxStartTime && timeNow <= maxEndTime
@@ -619,11 +624,7 @@ class MedicineViewController: UIViewController {
             print("The time is between the range")
             let ingenomen = UIContextualAction(style: .destructive, title: "Medicatie ingenomen") { (action, sourceView, completionHandler) in
                 
-                var date = Date()
-                let dateFormatter : DateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-                let formatedDate = dateFormatter.string(from: date)
+      
                 print(formatedDate)
                 
                 self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
@@ -640,6 +641,15 @@ class MedicineViewController: UIViewController {
         }
         else if(timeNow<maxStartTime){
             let ingenomen = UIContextualAction(style: .destructive, title: "Je bent te vroeg!") { (action, sourceView, completionHandler) in
+                let alert = UIAlertController(title: "Weet u dit zeker?", message: "U neemt uw medicijn te vroeg in. Het is aanbevolen om op tijd in te nemen", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
+                    self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.ON_TIME.rawValue))
+                    self.getBaxters()
+                }))
+                
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
                 
             }
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
