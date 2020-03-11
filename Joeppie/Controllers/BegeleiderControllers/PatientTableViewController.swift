@@ -31,6 +31,7 @@ class PatientTableViewController: UITableViewController {
     //Shahin: - Properties
     var selected = false
     var textFields = [UITextField]()
+    let dateFormatter = DateFormatter()
     
     
     //Shahin: - Lifecycle
@@ -57,7 +58,7 @@ class PatientTableViewController: UITableViewController {
 
         
         dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
-        let dateFormatter = DateFormatter()
+        
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "dd MMMM yyyy"
         dateOfBirthLabel.text = dateFormatter.string(from: dateOfBirthPicker.date)
@@ -65,7 +66,7 @@ class PatientTableViewController: UITableViewController {
         usernameTextField.placeholder = NSLocalizedString("username_placeholder", comment: "")
         emailTextField.placeholder = NSLocalizedString("email_placeholder", comment: "")
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
-        confirmPasswordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
+        confirmPasswordTextField.placeholder = NSLocalizedString("confirm_password_placeholder", comment: "")
 
         
         tableView.dataSource = self
@@ -84,6 +85,54 @@ class PatientTableViewController: UITableViewController {
     }
     
     
+    fileprivate func checkBirthday(_ dateOfBirth: Date) -> Bool{
+        //Todo : check geborte datum is ingevuld
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let setBirthay = dateFormatter.string(from: dateOfBirth)
+        let dateToday = dateFormatter.string(from: Date())
+        
+        if (setBirthay == dateToday){
+            Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("birthday_fields_title", comment: ""), msg: NSLocalizedString("empty_birthday_fields_msg", comment: ""))
+            return false
+        }
+        
+        return true
+    }
+    
+    fileprivate func checkEmptyFields(_ fields: [String]) -> Bool {
+        for value in fields{
+            if value.isEmpty{
+                Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("empty_fields_title", comment: ""), msg: NSLocalizedString("empty_fields_msg", comment: ""))
+                return false
+            }
+        }
+        return true
+    }
+    
+    fileprivate func checkEmail(_ email: String) -> Bool {
+        if !InputValidator.isValidEmail(email){
+            Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("invalide_email_title", comment: ""), msg: NSLocalizedString("invalide_email_msg", comment: ""))
+            return false
+        }
+        return true
+    }
+    
+    fileprivate func checkPassword(_ pass: String, conf: String) -> Bool{
+        if pass != conf{
+            Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("invalide_pass_title", comment: ""), msg: NSLocalizedString("invalide_conf_pass_msg", comment: ""))
+            return false
+        }
+        
+        if !InputValidator.validatePassword(input: pass){
+            Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("invalide_pass_title", comment: ""), msg: NSLocalizedString("invalide_pass_msg", comment: ""))
+            return false
+        }
+        
+        return true
+    }
+
+    
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let firstName = firstNameTextField.text else { return }
         guard let insertion = insertionTextField.text else { return }
@@ -94,25 +143,30 @@ class PatientTableViewController: UITableViewController {
         guard let username = usernameTextField.text else { return }
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
+        guard let confirmPassword = confirmPasswordTextField.text else { return }
         
-        print("First name: \(firstName)")
-        print("Insertion: \(insertion)")
-        print("Last name: \(lastName)")
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        // Shahin: We were not able to change this in our back-end,
+        // so we needed to add HH:mm:ss to birthday
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         print("Birthday: \(dateFormatter.string(from: dateOfBirth))")
+        print("Birthday: \(dateOfBirth)")
         
-        print("Username: \(username)")
-        print("Email: \(email)")
-        print("Password: \(password)")
         
-        self.dismiss(animated: true, completion: nil)
+        //Shahin: Check for birthday field
+        //Shahin: Check for empty fields
+        let fields = [firstName, lastName, username, email, password, confirmPassword]
+        if checkEmptyFields(fields) &&
+            checkBirthday(dateOfBirth) &&
+            checkPassword(password, conf: confirmPassword) &&
+            checkEmail(email){
+            
+            // TODO: Register user before dismiss
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func dateOfBirthChanged(_ sender: Any) {
-        let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "dd MMMM yyyy"
         dateOfBirthLabel.text = dateFormatter.string(from: dateOfBirthPicker.date)
@@ -120,7 +174,6 @@ class PatientTableViewController: UITableViewController {
     
     
     // Shahin: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 3
@@ -137,7 +190,7 @@ class PatientTableViewController: UITableViewController {
                 return 1
             }
         case 2:
-            return 3
+            return 4
         default:
             return 0
         }

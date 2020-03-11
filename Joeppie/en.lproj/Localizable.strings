@@ -35,6 +35,21 @@
 "date_of_birth_title" = "Birthday";
 
 "email_placeholder" = "Email";
+"confirm_password_placeholder" = "Confirm password";
+
+// Shahin: Error messages
+"empty_fields_title" = "Empty required fields";
+"empty_fields_msg" = "Please fill in all required fields.";
+
+"birthday_fields_title" = "Birthday field";
+"empty_birthday_fields_msg" = "Please set the patient birthday.";
+
+"invalide_email_title" = "Invalid email";
+"invalide_email_msg" = "Entered email address is invalid.";
+
+"invalide_pass_title" = "Invalid password";
+"invalide_pass_msg" = "Please make sure minimum eight characters, at least one letter, one number and one special character.";
+"invalide_conf_pass_msg" = "Your passwords do not match.";
 
 
 "time_medicine_text" = "Time for your medicine ";

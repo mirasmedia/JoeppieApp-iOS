@@ -52,6 +52,7 @@ class PatientsTableViewController: UITableViewController {
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
             guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
             self.patients = patients
+            print(patients)
             self.patientsTableView.reloadData()
             })
         })
