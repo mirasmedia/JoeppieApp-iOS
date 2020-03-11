@@ -464,6 +464,7 @@
         <scene sceneID="as8-bC-uxf">
             <objects>
                 <navigationController id="Rpn-gv-c94" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="pCa-Kx-G93"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0EL-nl-5SL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -474,7 +475,38 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoo-NN-m3q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="1779"/>
+            <point key="canvasLocation" x="1007" y="1711"/>
+        </scene>
+        <!--Patient View Controller-->
+        <scene sceneID="q2Y-C9-92p">
+            <objects>
+                <viewController storyboardIdentifier="PatientViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uom-EZ-VrV" userLabel="Patient View Controller" customClass="PatientViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OdX-m4-TR5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4B-iY-wCl">
+                                <rect key="frame" x="166.5" y="323.5" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="t4B-iY-wCl" firstAttribute="centerX" secondItem="md1-gv-yby" secondAttribute="centerX" id="bzX-Un-nvF"/>
+                            <constraint firstItem="t4B-iY-wCl" firstAttribute="centerY" secondItem="md1-gv-yby" secondAttribute="centerY" id="wDp-ZB-eVf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="md1-gv-yby"/>
+                    </view>
+                    <connections>
+                        <outlet property="patientName" destination="t4B-iY-wCl" id="qo3-NZ-pCo"/>
+                        <segue destination="Rpn-gv-c94" kind="presentation" id="fgE-4U-tBK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jdg-fg-zfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1338" y="904"/>
         </scene>
         <!--PatientInformation-->
         <scene sceneID="Kl5-Yn-l1f">
@@ -701,32 +733,18 @@
                             <outlet property="delegate" destination="FG9-d5-2Ue" id="aPI-KV-pa4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="H1T-ly-bgj">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="JvH-uF-xmB">
-                            <connections>
-                                <action selector="cancelButtonTapped:" destination="FG9-d5-2Ue" id="TL4-fp-ebD"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="2ea-vG-6Lk">
-                            <connections>
-                                <action selector="doneButtonTapped:" destination="FG9-d5-2Ue" id="23l-T7-f6C"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="H1T-ly-bgj"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="cancelButton" destination="JvH-uF-xmB" id="vrQ-hn-b5i"/>
                         <outlet property="confirmPasswordTextField" destination="JOe-ml-FYI" id="Fjv-cZ-WQM"/>
                         <outlet property="dateOfBirthLabel" destination="t1U-el-zF4" id="Wfv-rv-f1j"/>
                         <outlet property="dateOfBirthPicker" destination="LGy-2d-7kg" id="OEW-fS-tvu"/>
                         <outlet property="dateOfBirthTitle" destination="eyO-Al-VAZ" id="j4X-as-T0c"/>
-                        <outlet property="doneButton" destination="2ea-vG-6Lk" id="oDJ-wd-jeh"/>
                         <outlet property="emailTextField" destination="sUN-TS-aeA" id="aLJ-Vz-9cy"/>
                         <outlet property="firstNameTextField" destination="nhS-u2-FVU" id="vEd-Eq-0Xt"/>
                         <outlet property="insertionTextField" destination="kmC-EK-Ifh" id="Vnm-En-CfQ"/>
                         <outlet property="lastNameTextField" destination="29w-ge-JxI" id="Oig-zL-JTd"/>
-                        <outlet property="navigationTitle" destination="H1T-ly-bgj" id="H30-CS-iX0"/>
                         <outlet property="passwordTextField" destination="RqR-Ah-VnM" id="duI-Ru-x9R"/>
                         <outlet property="tableView" destination="cE8-PW-lRX" id="qaB-wN-2W4"/>
                         <outlet property="usernameTextField" destination="997-ac-hXV" id="bXj-ky-KTR"/>
@@ -734,7 +752,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hri-H4-o5y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="829"/>
+            <point key="canvasLocation" x="1006" y="2450"/>
         </scene>
     </scenes>
     <resources>
@@ -745,5 +763,8 @@
         <image name="plus" catalog="system" width="64" height="56"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xT4-5v-tNd"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.3803921569" green="0.32549019610000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
