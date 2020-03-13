@@ -41,7 +41,7 @@ class ChartsViewController: UIViewController {
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
     let enddayofweek = df.string(from: endofweek)
-    self.labeldate.text = startdayofWeek+" tot "+enddayofweek
+    self.labeldate.text = startdayofWeek+" "+NSLocalizedString("till", comment: "")+" "+enddayofweek
     print(startdayofWeek)
     print(enddayofweek)
         
@@ -71,7 +71,7 @@ class ChartsViewController: UIViewController {
     }
     
     func generateGeneralObject(){
-        self.chartsArray.append(Charts(naam:"Algemeen",laat: 0, optijd: 0, vroeg: 0, nietIngenomen: 0))
+        self.chartsArray.append(Charts(naam:NSLocalizedString("chart_general", comment: ""),laat: 0, optijd: 0, vroeg: 0, nietIngenomen: 0))
         self.parent!.navigationItem.leftBarButtonItem = nil
     }
     
@@ -153,16 +153,16 @@ extension ChartsViewController:UITableViewDataSource{
         var nr = [PieChartDataEntry]()
         
         let opTijd = PieChartDataEntry(value:0)
-        opTijd.label = "Op tijd"
+        opTijd.label = NSLocalizedString("on_time_text", comment: "")
         opTijd.value = Double(chartsArray[indexPath.row].optijd!)
         let teLaat = PieChartDataEntry(value:0)
-        teLaat.label = "Te laat"
+        teLaat.label = NSLocalizedString("to_late_text", comment: "")
         teLaat.value = Double(chartsArray[indexPath.row].laat!)
         let niet = PieChartDataEntry(value:0)
-        niet.label = "Niet"
+        niet.label = NSLocalizedString("not_text", comment: "")
         niet.value = Double(chartsArray[indexPath.row].nietIngenomen!)
         let vroeg = PieChartDataEntry(value:0)
-        vroeg.label = "Vroeg"
+        vroeg.label = NSLocalizedString("to_early_text", comment: "")
         vroeg.value = Double(chartsArray[indexPath.row].vroeg!)
         
         
@@ -170,16 +170,16 @@ extension ChartsViewController:UITableViewDataSource{
         
         let chartDataSet = PieChartDataSet(entries: nr, label: nil)
         let chartData = PieChartData(dataSet:chartDataSet)
-        let colors = [UIColor(red:0.44, green:0.76, blue:0.52, alpha:1.0),UIColor(red:0.94, green:0.78, blue:0.09, alpha:1.0),UIColor(red:0.94, green:0.47, blue:0.35, alpha:1.0)]
+        let colors = [UIColor(red:0.44, green:0.76, blue:0.52, alpha:1.0),UIColor(red:0.94, green:0.78, blue:0.09, alpha:1.0),UIColor(red:0.94, green:0.47, blue:0.35, alpha:1.0),UIColor(red:0.88, green:0.58, blue:0.15, alpha:1.0)]
         chartDataSet.colors = colors
         cell.chart.data = chartData
 //        if(indexPath.row == 0){
 //            cell.labelChart.font = UIFont.boldSystemFont(ofSize: 28.0)
 //        }
-        cell.toLate.text = "Te laat: "+String(chartsArray[indexPath.row].laat!)
-        cell.not.text = "Niet: "+String(chartsArray[indexPath.row].nietIngenomen!)
-        cell.onTime.text = "Op tijd: "+String(chartsArray[indexPath.row].optijd!)
-        cell.early.text = "Te vroeg: "+String(chartsArray[indexPath.row].vroeg!)
+        cell.toLate.text = NSLocalizedString("to_late_text", comment: "")+": "+String(chartsArray[indexPath.row].laat!)
+        cell.not.text = NSLocalizedString("not_text", comment: "")+": "+String(chartsArray[indexPath.row].nietIngenomen!)
+        cell.onTime.text = NSLocalizedString("on_time_text", comment: "")+": "+String(chartsArray[indexPath.row].optijd!)
+        cell.early.text = NSLocalizedString("to_early_text", comment: "")+": "+String(chartsArray[indexPath.row].vroeg!)
         cell.labelChart.text = chartsArray[indexPath.row].naam
         cell.chart.legend.enabled = false
         cell.chart.data?.setValueFont(UIFont.systemFont(ofSize: 8))

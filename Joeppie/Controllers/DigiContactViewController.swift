@@ -22,7 +22,7 @@ class DigiContactViewController: UIViewController {
         imgDigicontact.image = UIImage(named:"Digicontact_icon")
         digiContactJoeppieImage.contentMode = .scaleAspectFit
         digiContactJoeppieImage.image = UIImage(named: "Joeppie_conversation")
-        callButton_digicontact.text = "Bellen"
+        callButton_digicontact.text = NSLocalizedString("Call", comment: "")
         labelCallButton.image = UIImage(named: "phone_icon")
         let tapaction = UITapGestureRecognizer(target: self, action: #selector(callDigiContact))
         callView.addGestureRecognizer(tapaction)

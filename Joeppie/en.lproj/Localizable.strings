@@ -38,9 +38,27 @@
 "goed_zo" = "Nice!";
 "take_now" = "Take now!";
 "take_next_medicine" = "Take also your next medicine";
-"till" = "Till ";
 "hour"=" hour";
 "we_want_see_you_back" = "We want see you back!";
 "was_on_time_text" = "You was on time!";
 "today_we_finish" = "We finish today!";
 "get_next_medicine" = "Take also your next medicine";
+"can_better_text"="Can better!";
+"you_are_to_early" = "You are to early";
+"are_you_sure" = "Are you sure?";
+"yes"="yes";
+"no"="no";
+"you_are_to_late" = "You are to late";
+"hour"="hour";
+"you_take_medicine_to_early"="You take your medicine to early. Are you sure to take this early?";
+"hope_next_time_better"="Hope next time better";
+"thank_you"="Thank you!";
+
+"till" = "Till";
+"chart_general"="General";
+"to_late_text"="Late";
+"not_text"="Not";
+"on_time_text"="On time";
+"to_early_text"="To early";
+
+"Call"="Call";
