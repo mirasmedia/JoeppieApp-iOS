@@ -18,6 +18,7 @@
 		EA1B0F32239DBA9C006094BF /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F31239DBA9C006094BF /* TapBarController.swift */; };
 		EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */; };
 		EA25BCD223C51B60001F049F /* DoseTakenTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA25BCD123C51B60001F049F /* DoseTakenTime.swift */; };
+		EA5D4D41241AB3DD0005F1F2 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5D4D40241AB3DD0005F1F2 /* Charts.swift */; };
 		EA60EF5A239FE89800270B2C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA60EF59239FE89800270B2C /* AlertViewController.swift */; };
 		EA61616F239E9FD000076091 /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA61616E239E9FD000076091 /* Medicine.swift */; };
 		EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7912C423A1375F0003BD6A /* TapbarUI.swift */; };
@@ -66,6 +67,7 @@
 		EA1B0F31239DBA9C006094BF /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigiContactViewController.swift; sourceTree = "<group>"; };
 		EA25BCD123C51B60001F049F /* DoseTakenTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTakenTime.swift; sourceTree = "<group>"; };
+		EA5D4D40241AB3DD0005F1F2 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		EA60EF59239FE89800270B2C /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		EA61616E239E9FD000076091 /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
 		EA7912C423A1375F0003BD6A /* TapbarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapbarUI.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				F9137BE823ACE79C00BCA7E1 /* LoginResponse.swift */,
 				F9137BEC23AD0C6800BCA7E1 /* Dose.swift */,
 				F9137BEE23AD142A00BCA7E1 /* Intake.swift */,
+				EA5D4D40241AB3DD0005F1F2 /* Charts.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				F9137BE923ACE79C00BCA7E1 /* LoginResponse.swift in Sources */,
 				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
 				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
+				EA5D4D41241AB3DD0005F1F2 /* Charts.swift in Sources */,
 				EA61616F239E9FD000076091 /* Medicine.swift in Sources */,
 				F9BED61D239E920300E938D5 /* PatientTableViewController.swift in Sources */,
 				F916CB3E239E5DD7000A051E /* Baxter.swift in Sources */,

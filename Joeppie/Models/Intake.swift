@@ -11,9 +11,11 @@ import Foundation
 struct Intake : Codable {
     let id : Int
     let medicine : Medicine
-    let patient : Patient
+    let patient : NestedPatient
     let timeTakenIn : Date
     let state : String
+    let createdAt : Date
+    let updatedAt : Date
     
     enum CodingKeys : String, CodingKey {
         case id
@@ -21,5 +23,7 @@ struct Intake : Codable {
         case patient
         case timeTakenIn = "time_taken_in"
         case state
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
