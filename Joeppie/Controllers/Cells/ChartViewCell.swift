@@ -15,6 +15,7 @@ class ChartViewCell: UITableViewCell {
     @IBOutlet weak var onTime: UILabel!
     @IBOutlet weak var toLate: UILabel!
     @IBOutlet weak var not: UILabel!
+    @IBOutlet weak var early: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

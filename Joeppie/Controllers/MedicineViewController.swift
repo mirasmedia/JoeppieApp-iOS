@@ -586,6 +586,37 @@ class MedicineViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
     }
     
+    func showAlertEarly(indexpath:IndexPath){
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          alertvc = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+          
+          // Add the child's View as a subview
+          alertvc.modalPresentationStyle = .fullScreen
+          self.present(alertvc, animated: true, completion: nil)
+          alertvc.imageAlertView.image = UIImage(named:"Joeppie_surprised")
+          alertvc.titleAlertView.text = "Kan beter!"
+          alertvc.nameAlertView.text = patient?.firstName
+          alertvc.stateAlertView.text = "Je bent te vroeg!"
+        
+         if (baxterlist.indices.contains(indexpath.section+1)){
+              let calendar = Calendar.current
+              let dateTime:Date = baxterlist[indexpath.section+1].intakeTime
+              let hour = calendar.component(.hour, from: dateTime)
+              let minutes = calendar.component(.minute, from: dateTime)
+              
+              let time:String = String.init(format: "%02d:%02d", hour, minutes)
+              alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+              alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
+          }
+          else{
+              alertvc.timeNextMedicine.text = NSLocalizedString("today_we_finish", comment: "")
+              alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
+              alertvc.view.frame = view.bounds
+              alertvc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          }
+          Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
+      }
+    
     func setIntake(dose:NestedDose, patient:Patient, timeNow:String, state:String){
         ApiService.setIntake(dose:dose, patient: patient, timeNow: timeNow, state: state)
             .responseData(completionHandler: { [weak self] (response) in
@@ -621,6 +652,11 @@ class MedicineViewController: UIViewController {
         let maxEndTime = calendar.date(byAdding: .minute, value: 15, to: intakeTime)!
         let lateEndtime = calendar.date(byAdding: .minute, value: 45, to: intakeTime)!
         
+        var date = Date()
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let formatedDate = dateFormatter.string(from: date)
         
         
         if timeNow >= maxStartTime && timeNow <= maxEndTime
@@ -628,11 +664,7 @@ class MedicineViewController: UIViewController {
             print("The time is between the range")
             let ingenomen = UIContextualAction(style: .destructive, title: "Medicatie ingenomen") { (action, sourceView, completionHandler) in
                 
-                var date = Date()
-                let dateFormatter : DateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-                let formatedDate = dateFormatter.string(from: date)
+      
                 print(formatedDate)
                 
                 self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
@@ -649,6 +681,16 @@ class MedicineViewController: UIViewController {
         }
         else if(timeNow<maxStartTime){
             let ingenomen = UIContextualAction(style: .destructive, title: "Je bent te vroeg!") { (action, sourceView, completionHandler) in
+                let alert = UIAlertController(title: "Weet u dit zeker?", message: "U neemt uw medicijn te vroeg in. Het is aanbevolen om op tijd in te nemen", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
+                    self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.EARLY.rawValue))
+                    self.showAlertEarly(indexpath: indexPath)
+                    self.getBaxters()
+                }))
+                
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
                 
             }
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
