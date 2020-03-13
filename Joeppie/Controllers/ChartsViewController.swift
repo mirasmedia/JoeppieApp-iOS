@@ -11,6 +11,7 @@ import UIKit
 import Charts
 
 class ChartsViewController: UIViewController {
+    @IBOutlet weak var labeldate: UILabel!
     var chartsArray: [Charts] = []
     @IBOutlet weak var tableview: UITableView!
     
@@ -20,49 +21,10 @@ class ChartsViewController: UIViewController {
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
         tableview.register(nib, forCellReuseIdentifier: "ChartViewCell")
         tableview.allowsSelection = false;
-        
-        
-        self.chartsArray.append(Charts(naam:"Algemeen",laat: 0, optijd: 0, vroeg: 0, nietIngenomen: 0))
-        self.parent!.navigationItem.leftBarButtonItem = nil
-        
-        
+
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        getChartsDataGeneral(dosetakentime: DoseTakenTime.ON_TIME)
-        getChartsDataGeneral(dosetakentime: DoseTakenTime.LATE)
-        getChartsDataGeneral(dosetakentime: DoseTakenTime.NOT_TAKEN)
-        getAllChartMedicine()
-    }
-    
-    func getChartsDataGeneral(dosetakentime:DoseTakenTime){
-        var count:Int = 5
-        
-        ApiService.getIntakesCount(takenTime: dosetakentime)
-            .responseData(completionHandler: { [weak self] (response) in
-                
-                guard response.data != nil else { return }
-                print(String(decoding: response.data!, as: UTF8.self))
-                let decoder = JSONDecoder()
-                let rs = try? decoder.decode(Int.self, from: response.data!)
-                print(rs)
-                count = rs!
-                
-                if dosetakentime == DoseTakenTime.LATE{
-                    self!.chartsArray[0].laat = rs!
-                }
-                else if dosetakentime == DoseTakenTime.EARLY{
-                    self!.chartsArray[0].vroeg = rs!
-                }
-                else if dosetakentime == DoseTakenTime.NOT_TAKEN{
-                    self!.chartsArray[0].nietIngenomen = rs!
-                }
-                else{
-                    self!.chartsArray[0].optijd = rs!
-                }
-                self!.tableview.reloadData()
-            })
-    }
+
     
     var mondaysDate: Date {
         return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
@@ -79,6 +41,7 @@ class ChartsViewController: UIViewController {
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
     let enddayofweek = df.string(from: endofweek)
+    self.labeldate.text = startdayofWeek+" tot "+enddayofweek
     print(startdayofWeek)
     print(enddayofweek)
         
@@ -107,34 +70,70 @@ class ChartsViewController: UIViewController {
         
     }
     
+    func generateGeneralObject(){
+        self.chartsArray.append(Charts(naam:"Algemeen",laat: 0, optijd: 0, vroeg: 0, nietIngenomen: 0))
+        self.parent!.navigationItem.leftBarButtonItem = nil
+    }
+    
     func handleintake(rs:[Intake]){
         
-        for item in rs {
-            for chartobject in chartsArray{
-                if(chartobject.naam==item.medicine.name){
+        for var item in rs {
+            var check=true;
+            for var indexchartobject in chartsArray.indices{
+                if(chartsArray[indexchartobject].naam==item.medicine.name){
+                    check=false;
                     if(item.state=="0"){
-                        chartobject.optijd=chartobject.optijd+1
+                        chartsArray[indexchartobject].optijd!+=1
+                        chartsArray[0].optijd!+=1
                     }
                     else if(item.state=="1"){
-                        chartobject.laat=chartobject.laat+1
+                        chartsArray[indexchartobject].laat!+=1
+                        chartsArray[0].laat!+=1
         
                     }
                     else if(item.state=="2"){
-                        chartobject.nietIngenomen=chartobject.nietIngenomen+1
+                        chartsArray[indexchartobject].nietIngenomen!+=1
+                        chartsArray[0].nietIngenomen!+=1
                     }
                     else if(item.state=="3")
                     {
-                        chartobject.vroeg=chartobject.vroeg+1
+                        chartsArray[indexchartobject].vroeg!+=1
+                        chartsArray[0].vroeg!+=1
                     }
                 }
             }
+            if(check){
+                var cs=Charts()
+                cs.naam=item.medicine.name
+                if(item.state=="0"){
+                    cs.optijd=1
+                    chartsArray[0].optijd!+=1
+                }
+                else if(item.state=="1"){
+                    cs.laat=1
+                    chartsArray[0].laat!+=1
+                }
+                else if(item.state=="2"){
+                    cs.nietIngenomen=1
+                    chartsArray[0].nietIngenomen!+=1
+                }
+                else if(item.state=="3"){
+                    cs.vroeg=1
+                    chartsArray[0].vroeg!+=1
+                }
+                chartsArray.append(cs)
+            }
         }
+        self.tableview.reloadData()
         
     }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
+        self.chartsArray.removeAll()
+        generateGeneralObject()
+        getAllChartMedicine()
         super.viewWillAppear(animated)
         self.parent!.navigationItem.leftBarButtonItem = nil
         self.parent!.navigationItem.setHidesBackButton(true,animated: true)
@@ -155,16 +154,19 @@ extension ChartsViewController:UITableViewDataSource{
         
         let opTijd = PieChartDataEntry(value:0)
         opTijd.label = "Op tijd"
-        opTijd.value = Double(chartsArray[indexPath.row].optijd)
+        opTijd.value = Double(chartsArray[indexPath.row].optijd!)
         let teLaat = PieChartDataEntry(value:0)
         teLaat.label = "Te laat"
-        teLaat.value = Double(chartsArray[indexPath.row].laat)
+        teLaat.value = Double(chartsArray[indexPath.row].laat!)
         let niet = PieChartDataEntry(value:0)
         niet.label = "Niet"
-        niet.value = Double(chartsArray[indexPath.row].nietIngenomen)
+        niet.value = Double(chartsArray[indexPath.row].nietIngenomen!)
+        let vroeg = PieChartDataEntry(value:0)
+        vroeg.label = "Vroeg"
+        vroeg.value = Double(chartsArray[indexPath.row].vroeg!)
         
         
-        nr = [opTijd,teLaat,niet]
+        nr = [opTijd,teLaat,niet,vroeg]
         
         let chartDataSet = PieChartDataSet(entries: nr, label: nil)
         let chartData = PieChartData(dataSet:chartDataSet)
@@ -174,9 +176,10 @@ extension ChartsViewController:UITableViewDataSource{
 //        if(indexPath.row == 0){
 //            cell.labelChart.font = UIFont.boldSystemFont(ofSize: 28.0)
 //        }
-        cell.toLate.text = "Te laat: "+String(chartsArray[indexPath.row].laat)
-        cell.not.text = "Niet: "+String(chartsArray[indexPath.row].nietIngenomen)
-        cell.onTime.text = "Op tijd: "+String(chartsArray[indexPath.row].optijd)
+        cell.toLate.text = "Te laat: "+String(chartsArray[indexPath.row].laat!)
+        cell.not.text = "Niet: "+String(chartsArray[indexPath.row].nietIngenomen!)
+        cell.onTime.text = "Op tijd: "+String(chartsArray[indexPath.row].optijd!)
+        cell.early.text = "Te vroeg: "+String(chartsArray[indexPath.row].vroeg!)
         cell.labelChart.text = chartsArray[indexPath.row].naam
         cell.chart.legend.enabled = false
         cell.chart.data?.setValueFont(UIFont.systemFont(ofSize: 8))

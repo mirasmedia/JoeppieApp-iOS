@@ -9,9 +9,9 @@
 import Foundation
 
 struct Charts {
-    var naam:String
-    var laat:Int
-    var optijd:Int
-    var vroeg:Int
-    var nietIngenomen:Int
+    var naam:String?=""
+    var laat:Int?=0
+    var optijd:Int?=0
+    var vroeg:Int?=0
+    var nietIngenomen:Int?=0
 }
