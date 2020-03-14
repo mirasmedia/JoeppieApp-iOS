@@ -34,19 +34,17 @@ class PatientTableViewController: UITableViewController {
     var coach: Coach?
     var newUser: NewUser?
     
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     //Shahin: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         setup()
     }
     
     //Shahin: - Functions
     fileprivate func initNewPatient() {
-//        navigationTitle.title = NSLocalizedString("new_patient_title", comment: "")
-        
         firstNameTextField.placeholder = NSLocalizedString("first_name_placeholder", comment: "")
         insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("last_name_placeholder", comment: "")
@@ -64,8 +62,6 @@ class PatientTableViewController: UITableViewController {
     }
     
     fileprivate func initEditPatient() {
-//        navigationTitle.title = NSLocalizedString("edit_patient_title", comment: "")
-        
         firstNameTextField.text = patient?.firstName
         if patient?.insertion != nil{
             insertionTextField.text = patient?.insertion
@@ -86,13 +82,24 @@ class PatientTableViewController: UITableViewController {
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         confirmPasswordTextField.placeholder = NSLocalizedString("confirm_password_placeholder", comment: "")
     }
+    @IBAction func saveTapped(_ sender: UIButton) {
+        savePatientData()
+    }
+    
+    @IBAction func cancelTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     private func setup(){
-//        cancelButton.title = NSLocalizedString("cancel_button", comment: "")
-//        doneButton.title = NSLocalizedString("done_button", comment: "")
+        saveButton.setTitle(NSLocalizedString("done_button", comment: ""), for: .normal)
+        cancelButton.setTitle(NSLocalizedString("cancel_button", comment: ""), for: .normal)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        saveButton.layer.cornerRadius = 4
+        cancelButton.layer.cornerRadius = 4
+        
+        
+        
         if patient != nil{
             initEditPatient()
         }else{
@@ -111,12 +118,6 @@ class PatientTableViewController: UITableViewController {
             field.delegate = self
         }
     }
-    
-    //Shahin: - Actions
-    @objc private func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     fileprivate func checkBirthday(_ dateOfBirth: Date) -> Bool{
         dateFormatter.locale = Locale.current
@@ -208,7 +209,7 @@ class PatientTableViewController: UITableViewController {
         return false
     }
     
-    @objc private func doneButtonTapped(_ sender: Any) {
+    private func savePatientData() {
         guard let firstName = firstNameTextField.text else { return }
         guard let insertion = insertionTextField.text else { return }
         guard let lastName = lastNameTextField.text else { return }
@@ -239,10 +240,18 @@ class PatientTableViewController: UITableViewController {
                 self.coach = coach
             })
             
-            if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
-                self.dismiss(animated: true, completion: nil)
-                self.patientsView?.reloadPatients()
+            if patient != nil{
+                //UPDATE PATIENT
+                print("Edir patient")
+            }else{
+                if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
+                    self.dismiss(animated: true, completion: {
+                        self.patientsView?.reloadPatients()
+                    })
+                }
             }
+            
+            
         }
         
     }
@@ -254,11 +263,10 @@ class PatientTableViewController: UITableViewController {
         dateOfBirthLabel.text = dateFormatter.string(from: dateOfBirthPicker.date)
     }
     
-    
     // Shahin: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -273,6 +281,8 @@ class PatientTableViewController: UITableViewController {
             }
         case 2:
             return 4
+        case 3:
+            return 2
         default:
             return 0
         }
