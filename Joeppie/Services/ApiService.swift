@@ -36,7 +36,7 @@ class ApiService {
             headers["Authorization"] = "Bearer \(token)"
         }
         
-        return Alamofire.request(baseURL + "/auth/local/register", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: nil)
+        return Alamofire.request(baseURL + "/auth/local/register", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
     //ERCAN:
@@ -61,7 +61,7 @@ class ApiService {
             headers["Authorization"] = "Bearer \(token)"
         }
         
-        return Alamofire.request(baseURL + "/medicines", method: .get, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/medicines", method: .get, parameters: parameters, headers: headers)
     }
     
     //(update)/dose
@@ -131,16 +131,23 @@ class ApiService {
     }
     
     //(POST)/patients
-    static func createPatient() -> (DataRequest) {
-        var parameters : [String:String] = [:]
-        parameters["user"] = ""
-        parameters["first_name"] = ""
-        parameters["insertion"] = ""
-        parameters["last_name"] = ""
-        parameters["date_of_birth"] = ""
-        parameters["coachId"] = ""
+    static func createPatient(user: Int, first_name: String, insertion: String?, last_name: String, date_of_birth: String, coach_id: Int) -> (DataRequest) {
+        var parameters : [String:Any] = [:]
+        parameters["user"] = user
+        parameters["first_name"] = first_name
+        parameters["insertion"] = insertion ?? ""
+        parameters["last_name"] = last_name
+        parameters["date_of_birth"] = date_of_birth
+        parameters["coach_id"] = coach_id
         
-        return Alamofire.request(baseURL + "/patients", method: .get, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: nil)
+        var headers : [String : String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        print(parameters)
+        return Alamofire.request(baseURL + "/patients", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+            print("JSON:\(response.result.value)")}
     }
     
     //(GET)/patients

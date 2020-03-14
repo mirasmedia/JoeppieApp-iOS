@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class PatientTableViewController: UITableViewController {
     
@@ -25,10 +26,13 @@ class PatientTableViewController: UITableViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     //Shahin: - Properties
+    var patientsView: PatientsTableViewController?
     var selected = false
     var textFields = [UITextField]()
     let dateFormatter = DateFormatter()
     var patient: Patient?
+    var coach: Coach?
+    var newUser: NewUser?
     
     
     //Shahin: - Lifecycle
@@ -115,7 +119,6 @@ class PatientTableViewController: UITableViewController {
     
     
     fileprivate func checkBirthday(_ dateOfBirth: Date) -> Bool{
-        //Todo : check geborte datum is ingevuld
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let setBirthay = dateFormatter.string(from: dateOfBirth)
@@ -160,7 +163,53 @@ class PatientTableViewController: UITableViewController {
         
         return true
     }
-
+    
+    
+    fileprivate func createNewPatient(_ username: String, _ email: String, _ password: String, _ dateOfBirth: Date, _ firstName: String, _ insertion: String, _ lastName: String) -> Bool {
+        if Reachability.isConnectedToNetwork(){
+            ApiService.createUser(withUsername: username, email: email, andPassword: password)
+                .responseData(completionHandler: { (response) in
+                    guard let jsonData = response.data else { return }
+                    switch(response.result) {
+                    case .success(_):
+                        if let data = response.result.value{
+                            let decoder = JSONDecoder()
+                            guard let addedUser = try? decoder.decode(NewUser.self, from: jsonData) else { return }
+                            self.newUser = addedUser
+                            
+                            guard let coachId = self.coach?.id else { return }
+                            guard let userId = self.newUser?.user.id else { return }
+                            
+                            self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            print(self.dateFormatter.string(from: dateOfBirth))
+                            print("Git it: \(coachId) AND \(userId)")
+                            
+                            ApiService.createPatient(user: userId,
+                                                     first_name: firstName,
+                                                     insertion: insertion,
+                                                     last_name: lastName,
+                                                     date_of_birth: self.dateFormatter.string(from: dateOfBirth),
+                                                     coach_id: coachId)
+                                .responseData(completionHandler: { (response) in
+                                    guard let jsonData = response.data else { return }
+                                    let decoder = JSONDecoder()
+                                    guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
+                                    self.patient = pat
+                                })
+                        }
+                        
+                    case .failure(_):
+                        print("Error Zart message:\(response.result.error)")
+                    }
+                })
+            return true
+            
+        }else{
+            Errorpopup.displayConnectionErrorMessage(vc: self)
+        }
+        
+        return false
+    }
     
     @objc private func doneButtonTapped(_ sender: Any) {
         guard let firstName = firstNameTextField.text else { return }
@@ -174,12 +223,6 @@ class PatientTableViewController: UITableViewController {
         guard let password = passwordTextField.text else { return }
         guard let confirmPassword = confirmPasswordTextField.text else { return }
         
-        // Shahin: We were not able to change this in our back-end,
-        // so we needed to add HH:mm:ss to birthday
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        print("Birthday: \(dateFormatter.string(from: dateOfBirth))")
-        print("Birthday: \(dateOfBirth)")
-        
         
         //Shahin: Check for birthday field
         //Shahin: Check for empty fields
@@ -189,9 +232,20 @@ class PatientTableViewController: UITableViewController {
             checkPassword(password, conf: confirmPassword) &&
             checkEmail(email){
             
-            // TODO: Register user before dismiss
-            // IF patient UPDATE else {make new}
-            self.dismiss(animated: true, completion: nil)
+            //Get Coach instance
+            UserService.getCoachInstance(withCompletionHandler: { coach in
+                guard let coach = coach else {
+                    UserService.logOut()
+                    return
+                }
+                
+                self.coach = coach
+            })
+            
+            if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
+                self.dismiss(animated: true, completion: nil)
+                self.patientsView?.reloadPatients()
+            }
         }
         
     }

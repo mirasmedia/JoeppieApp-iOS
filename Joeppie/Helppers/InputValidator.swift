@@ -18,7 +18,7 @@ class InputValidator {
     
     class func validatePassword(input: String) -> Bool {
         // Minimum eight characters, at least one letter, one number and one special character:
-        let passRegEx = "^(?=.*[a-z])(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$"
+        let passRegEx = "^(?=.*[a-z])(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"
         let trimmedString = input.trimmingCharacters(in: .whitespaces)
         let validatePassord = NSPredicate(format: "SELF MATCHES %@", passRegEx)
         let isvalidatePass = validatePassord.evaluate(with: trimmedString)

@@ -101,7 +101,6 @@ class UserService {
                 cH(nil)
                 return
             }
-            //print("CoachId: \(coach.id)")
             self.setCoachInstance(instance: coach)
             cH(coach)
         })

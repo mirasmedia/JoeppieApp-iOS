@@ -28,8 +28,16 @@ class PatientsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
+        self.refreshControl = refreshControl
+        
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
+        getPatients()
+    }
+    
+    @objc func realoadPtientsList() {
         getPatients()
     }
     
@@ -39,24 +47,27 @@ class PatientsTableViewController: UITableViewController {
                 UserService.logOut()
                 return
             }
-            
+
             ApiService.getPatients(forCoachId: coach.id).responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-                //print(String(decoding: jsonData, as: UTF8.self))
+//                print(String(decoding: jsonData, as: UTF8.self))
+
                 let decoder = JSONDecoder()
-                
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale.current
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                
+
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
                 self.patients = patients.sorted(by: {$0.firstName < $1.firstName})
-                // TODO : Delete print
-                print(patients)
                 self.patientsTableView.reloadData()
+                self.refreshControl?.endRefreshing()
             })
         })
+    }
+    
+    public func reloadPatients(){
+        getPatients()
     }
     
     
@@ -71,6 +82,7 @@ class PatientsTableViewController: UITableViewController {
             "PatientTableViewController") as? PatientTableViewController else {
                 fatalError("Unexpected destination:")
         }
+        patientViewController.patientsView = self
         self.navigationController?.present(patientViewController, animated: true)
     }
     
