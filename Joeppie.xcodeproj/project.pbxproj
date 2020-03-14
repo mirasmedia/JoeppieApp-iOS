@@ -11,6 +11,8 @@
 		106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4F241660950097B0E1 /* ErrorMessage.swift */; };
 		106B5E55241925290097B0E1 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E54241925290097B0E1 /* InputValidator.swift */; };
 		106B5E57241948B90097B0E1 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E56241948B90097B0E1 /* PatientViewController.swift */; };
+		10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A240241C0BC700ED1B84 /* NewUser.swift */; };
+		10D6A244241CEE3600ED1B84 /* CreatePatientHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A243241CEE3600ED1B84 /* CreatePatientHandler.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
 		EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */; };
 		EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1B0F2B239D82C6006094BF /* MedicineCell.xib */; };
@@ -58,6 +60,8 @@
 		106B5E4F241660950097B0E1 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		106B5E54241925290097B0E1 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		106B5E56241948B90097B0E1 /* PatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
+		10D6A240241C0BC700ED1B84 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
+		10D6A243241CEE3600ED1B84 /* CreatePatientHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientHandler.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.release.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.release.xcconfig"; sourceTree = "<group>"; };
 		CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.debug.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +141,14 @@
 			path = BegeleiderControllers;
 			sourceTree = "<group>";
 		};
+		10D6A242241CEE1C00ED1B84 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				10D6A243241CEE3600ED1B84 /* CreatePatientHandler.swift */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
 		B807F34D5E4AB4EC5105962C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +212,7 @@
 				F9137BEC23AD0C6800BCA7E1 /* Dose.swift */,
 				F9137BEE23AD142A00BCA7E1 /* Intake.swift */,
 				EA5D4D40241AB3DD0005F1F2 /* Charts.swift */,
+				10D6A240241C0BC700ED1B84 /* NewUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +278,7 @@
 		F9F4826C238BF69100299F21 /* Joeppie */ = {
 			isa = PBXGroup;
 			children = (
+				10D6A242241CEE1C00ED1B84 /* Handler */,
 				106B5E4C24165FF60097B0E1 /* Helppers */,
 				EA25BCD023C51B49001F049F /* Enum */,
 				F9E8DD83238D6FEA0055460A /* Models */,
@@ -429,6 +443,7 @@
 				F9137BE723ACD12A00BCA7E1 /* Role.swift in Sources */,
 				F9EEF8E8239C030C00C2C714 /* PatientTableViewCell.swift in Sources */,
 				F9137BE923ACE79C00BCA7E1 /* LoginResponse.swift in Sources */,
+				10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */,
 				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
 				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
 				EA5D4D41241AB3DD0005F1F2 /* Charts.swift in Sources */,
@@ -436,6 +451,7 @@
 				F9BED61D239E920300E938D5 /* PatientTableViewController.swift in Sources */,
 				F916CB3E239E5DD7000A051E /* Baxter.swift in Sources */,
 				F9F2B95C239DB6C700AC46FC /* Patient.swift in Sources */,
+				10D6A244241CEE3600ED1B84 /* CreatePatientHandler.swift in Sources */,
 				F9F48270238BF69100299F21 /* SceneDelegate.swift in Sources */,
 				EA1B0F32239DBA9C006094BF /* TapBarController.swift in Sources */,
 				EA25BCD223C51B60001F049F /* DoseTakenTime.swift in Sources */,
