@@ -66,4 +66,20 @@
 "was_on_time_text" = "Je was op tijd!";
 "today_we_finish" = "Voor vandaag zijn we klaar!";
 "get_next_medicine" = "Neem direct je andere medicijn ook in";
-
+"till" = "Tot";
+"chart_general"="Algemeen";
+"to_late_text"="Te laat";
+"not_text"="Niet";
+"on_time_text"="Op tijd";
+"to_early_text"="Te vroeg";
+"can_better_text"="Kan beter!";
+"you_are_to_early" = "Je bent te vroeg";
+"you_are_to_late" = "Je bent te laat";
+"are_you_sure" = "Weet u zeker?";
+"you_take_medicine_to_early"="U neemt uw medicijn te vroeg in. Het is aanbevolen om op tijd in te nemen";
+"yes"="ja";
+"no"="nee";
+"hour"="uur";
+"Call"="Bellen";
+"hope_next_time_better"="Hoop in de toekomst beter";
+"thank_you"="Dankje!";
