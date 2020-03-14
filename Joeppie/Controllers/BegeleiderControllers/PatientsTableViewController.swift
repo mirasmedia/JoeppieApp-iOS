@@ -22,12 +22,6 @@ class PatientsTableViewController: UITableViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         logOutButton.title = NSLocalizedString("log_out_button", comment: "")
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
         self.refreshControl = refreshControl
@@ -83,7 +77,7 @@ class PatientsTableViewController: UITableViewController {
                 fatalError("Unexpected destination:")
         }
         patientViewController.patientsView = self
-        self.navigationController?.present(patientViewController, animated: true)
+        self.navigationController?.present(patientViewController, animated: true, completion: nil)
     }
     
     // Shahin: - Table view data source
