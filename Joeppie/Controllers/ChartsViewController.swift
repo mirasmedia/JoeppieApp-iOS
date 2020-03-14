@@ -105,19 +105,19 @@ class ChartsViewController: UIViewController {
             if(check){
                 var cs=Charts()
                 cs.naam=item.medicine.name
-                if(item.state=="0"){
+                if(item.state==String(DoseTakenTime.ON_TIME.rawValue)){
                     cs.optijd=1
                     chartsArray[0].optijd!+=1
                 }
-                else if(item.state=="1"){
+                else if(item.state==String(DoseTakenTime.LATE.rawValue)){
                     cs.laat=1
                     chartsArray[0].laat!+=1
                 }
-                else if(item.state=="2"){
+                else if(item.state==String(DoseTakenTime.NOT_TAKEN.rawValue)){
                     cs.nietIngenomen=1
                     chartsArray[0].nietIngenomen!+=1
                 }
-                else if(item.state=="3"){
+                else if(item.state==String(DoseTakenTime.EARLY.rawValue)){
                     cs.vroeg=1
                     chartsArray[0].vroeg!+=1
                 }
