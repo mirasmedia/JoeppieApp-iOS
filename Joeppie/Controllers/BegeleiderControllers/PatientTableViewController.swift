@@ -181,9 +181,6 @@ class PatientTableViewController: UITableViewController {
                             guard let userId = self.newUser?.user.id else { return }
                             
                             self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            print(self.dateFormatter.string(from: dateOfBirth))
-                            print("Git it: \(coachId) AND \(userId)")
-                            
                             ApiService.createPatient(user: userId,
                                                      first_name: firstName,
                                                      insertion: insertion,
@@ -199,7 +196,7 @@ class PatientTableViewController: UITableViewController {
                         }
                         
                     case .failure(_):
-                        print("Error Zart message:\(response.result.error)")
+                        print("Error message:\(response.result.error)")
                     }
                 })
             return true
