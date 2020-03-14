@@ -44,7 +44,7 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
         calcMinMaxY(entry: e)
     }
 
-    // MARK: - Styling functions and accessors
+    // Shahin: - Styling functions and accessors
 
     private var _sliceSpace = CGFloat(0.0)
 
@@ -111,7 +111,7 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     /// the color for the highlighted sector
     open var highlightColor: NSUIColor? = nil
 
-    // MARK: - NSCopying
+    // Shahin: - NSCopying
 
     open override func copy(with zone: NSZone? = nil) -> Any
     {

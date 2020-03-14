@@ -72,7 +72,7 @@ open class KeychainWrapper {
         self.accessGroup = accessGroup
     }
 
-    // MARK:- Public Methods
+    // Shahin:- Public Methods
     
     /// Checks if keychain data exists for a specified key.
     ///
@@ -143,7 +143,7 @@ open class KeychainWrapper {
         return keys
     }
     
-    // MARK: Public Getters
+    // Shahin: Public Getters
     
     open func integer(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Int? {
         guard let numberValue = object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
@@ -247,7 +247,7 @@ open class KeychainWrapper {
         return status == noErr ? result as? Data : nil
     }
     
-    // MARK: Public Setters
+    // Shahin: Public Setters
     
     @discardableResult open func set(_ value: Int, forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Bool {
         return set(NSNumber(value: value), forKey: key, withAccessibility: accessibility)
@@ -377,7 +377,7 @@ open class KeychainWrapper {
         deleteKeychainSecClass(kSecClassIdentity) // Identity items
     }
 
-    // MARK:- Private Methods
+    // Shahin:- Private Methods
     
     /// Remove all items for a given Keychain Item Class
     ///

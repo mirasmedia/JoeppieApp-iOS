@@ -31,9 +31,14 @@ class MedicineViewController: UIViewController {
     @IBOutlet weak var tapBarItem_home: UITabBarItem!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setup()
+    }
+    
+    private func setup(){
         setIndicator()
 
-        
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.38, green:0.33, blue:0.46, alpha:1.0)
         self.tableview.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0);
         tableview.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
@@ -85,7 +90,7 @@ class MedicineViewController: UIViewController {
         //        print(nextDay)
         
         
-        var date = Date()
+        let date = Date()
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
             if baxterlist[indexbaxter].doses!.count>0{
                 let content = UNMutableNotificationContent()
@@ -122,6 +127,8 @@ class MedicineViewController: UIViewController {
             }
             
         }
+        
+        // TODO : hardcoded id ?!?!? add connection checker, move additional func to an helper
         var baxters:[Baxter]?
         ApiService.getBaxterClient(dayOfWeek: nextdayString, patientId: "2")
             .responseData(completionHandler: { [weak self] (response) in
@@ -184,10 +191,11 @@ class MedicineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("will apear")
         getBaxters()
         setNavigation()
     }
+    
+    // TODO : make all func private
     
     func setIndicator(){
         indicator = UIActivityIndicatorView()
@@ -499,6 +507,7 @@ class MedicineViewController: UIViewController {
         return 35
     }
     
+    //TODO: move this to an helper - MOVE
     func showAlertOntime(indexpath:IndexPath){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         alertvc = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
@@ -753,8 +762,3 @@ extension MedicineViewController:UITableViewDataSource{
     }
     
 }
-
-
-
-
-

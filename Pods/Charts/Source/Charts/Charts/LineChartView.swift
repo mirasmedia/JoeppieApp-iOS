@@ -22,7 +22,7 @@ open class LineChartView: BarLineChartViewBase, LineChartDataProvider
         renderer = LineChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
     }
     
-    // MARK: - LineChartDataProvider
+    // Shahin: - LineChartDataProvider
     
     open var lineData: LineChartData? { return _data as? LineChartData }
 }

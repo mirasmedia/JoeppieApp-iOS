@@ -393,7 +393,7 @@ open class Legend: ComponentBase
         neededHeight += yOffset
     }
     
-    /// MARK: - Custom legend
+    /// Shahin: - Custom legend
     
     /// Sets a custom legend's entries array.
     /// * A nil label will start a group.

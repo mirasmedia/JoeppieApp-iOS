@@ -22,39 +22,46 @@ class PatientsTableViewController: UITableViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         logOutButton.title = NSLocalizedString("log_out_button", comment: "")
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
+        self.refreshControl = refreshControl
         
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
         getPatients()
     }
     
+    @objc func realoadPtientsList() {
+        getPatients()
+    }
+    
     private func getPatients() {
         UserService.getCoachInstance(withCompletionHandler: { coach in
             guard let coach = coach else {
-                //TODO log user out, throw message
+                UserService.logOut()
                 return
             }
-            
+
             ApiService.getPatients(forCoachId: coach.id).responseData(completionHandler: { (response) in
-            guard let jsonData = response.data else { return }
-            //print(String(decoding: jsonData, as: UTF8.self))
-            let decoder = JSONDecoder()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale.current
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
-            self.patients = patients
-            self.patientsTableView.reloadData()
+                guard let jsonData = response.data else { return }
+//                print(String(decoding: jsonData, as: UTF8.self))
+
+                let decoder = JSONDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale.current
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
+                self.patients = patients.sorted(by: {$0.firstName < $1.firstName})
+                self.patientsTableView.reloadData()
+                self.refreshControl?.endRefreshing()
             })
         })
+    }
+    
+    public func reloadPatients(){
+        getPatients()
     }
     
     
@@ -69,10 +76,11 @@ class PatientsTableViewController: UITableViewController {
             "PatientTableViewController") as? PatientTableViewController else {
                 fatalError("Unexpected destination:")
         }
-        self.navigationController?.present(patientViewController, animated: true)
+        patientViewController.patientsView = self
+        self.navigationController?.present(patientViewController, animated: true, completion: nil)
     }
     
-    // MARK: - Table view data source
+    // Shahin: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -97,54 +105,19 @@ class PatientsTableViewController: UITableViewController {
         } else {
             cell.patientNameLabel.text = "\(patient.firstName) \(patient.lastName)"
         }
-        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
+        
+        // Shahin : TODO Find a way to enable the badge for users
+        // Exmaple isHidden = function(user.Id) {Calculte, return true}
+//        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let patientVc = storyboard.instantiateViewController(withIdentifier:
+            "PatientViewController") as! PatientViewController
+        patientVc.patient = patients[indexPath.row]
+        navigationController?.pushViewController(patientVc, animated: true)
     }
-    */
-
 }

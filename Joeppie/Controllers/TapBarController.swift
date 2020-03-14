@@ -19,7 +19,7 @@ class TapBarController: UITabBarController {
         
         //Copy this bit to wherever you need the user
         UserService.getPatientInstance(withCompletionHandler: { patient in
-            guard let patient = patient else {
+            guard patient != nil else {
                 //TODO log out, throw message
                 return
             }
@@ -42,7 +42,7 @@ class TapBarController: UITabBarController {
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         // find index if the selected tab bar item, then find the corresponding view and get its image, the view position is offset by 1 because the first item is the background (at least in this case)
-        guard let idx = tabBar.items?.index(of: item), tabBar.subviews.count > idx + 1, let imageView = tabBar.subviews[idx + 1].subviews.first as? UIImageView else {
+        guard let idx = tabBar.items?.firstIndex(of: item), tabBar.subviews.count > idx + 1, let imageView = tabBar.subviews[idx + 1].subviews.first as? UIImageView else {
             return
         }
 

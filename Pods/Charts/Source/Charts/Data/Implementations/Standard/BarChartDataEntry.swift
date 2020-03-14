@@ -172,7 +172,7 @@ open class BarChartDataEntry: ChartDataEntry
         }
     }
     
-    // MARK: Accessors
+    // Shahin: Accessors
     
     /// the values the stacked barchart holds
     @objc open var isStacked: Bool { return _yVals != nil }
@@ -196,7 +196,7 @@ open class BarChartDataEntry: ChartDataEntry
         return _ranges
     }
     
-    // MARK: NSCopying
+    // Shahin: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

@@ -25,7 +25,7 @@ open class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider
         self.xAxis.spaceMax = 0.5
     }
     
-    // MARK: - CandleChartDataProvider
+    // Shahin: - CandleChartDataProvider
     
     open var candleData: CandleChartData?
     {
