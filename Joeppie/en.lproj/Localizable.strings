@@ -26,7 +26,7 @@
 //Shahin: PatientView
 "cancel_button" = "Cancel";
 "done_button" = "Done";
-"new_patient_title" = "New Patient";
+"new_patient_title" = "Add New Patient";
 "edit_patient_title" = "Edit Client";
 
 "first_name_placeholder" = "First name";
