@@ -146,6 +146,39 @@ class ApiService {
         }
         print(parameters)
         return Alamofire.request(baseURL + "/patients", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+    }
+    
+    //(PUT)/users
+    static func updateUser(userId: Int, username: String, email : String, password : String) -> (DataRequest) {
+        var parameters : [String:String] = [:]
+        parameters["username"] = username
+        parameters["email"] = email
+        parameters["password"] = password
+        
+        var headers : [String : String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        return Alamofire.request(baseURL + "/users/\(userId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
+    }
+    
+    //(PUT)/patients
+    static func updatePatient(patinetId: Int, first_name: String, insertion: String?, last_name: String, date_of_birth: String) -> (DataRequest) {
+        var parameters : [String: String] = [:]
+        parameters["first_name"] = first_name
+        parameters["insertion"] = insertion ?? ""
+        parameters["last_name"] = last_name
+        parameters["date_of_birth"] = date_of_birth
+        
+        var headers : [String : String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        print(parameters)
+        return Alamofire.request(baseURL + "/patients/\(patinetId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
         .responseJSON { response in
             print("JSON:\(response.result.value)")}
     }

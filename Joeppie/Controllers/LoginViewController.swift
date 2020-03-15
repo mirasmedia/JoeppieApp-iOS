@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
         self.poweredby.text = "Powered by"
         self.frontViewLabelJoeppie.text = "Bever Apps"
         loginFrontView.isHidden = false
+        
+        logInButton.layer.cornerRadius = 5
        
         
         
