@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class PatientTableViewController: UITableViewController {
+class PatientTableViewController: UIViewController {
     
     //Shahin: - Outlets
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -17,13 +17,16 @@ class PatientTableViewController: UITableViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     
     @IBOutlet weak var dateOfBirthTitle: UILabel!
-    @IBOutlet weak var dateOfBirthLabel: UILabel!
-    @IBOutlet weak var dateOfBirthPicker: UIDatePicker!
+    @IBOutlet weak var dateOfBirth: UITextField!
+    
+    @IBOutlet weak var titleLbl: UILabel!
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
+    @IBOutlet weak var test: UITextField!
     
     //Shahin: - Properties
     var patientsView: PatientsTableViewController?
@@ -33,6 +36,7 @@ class PatientTableViewController: UITableViewController {
     var patient: Patient?
     var coach: Coach?
     var newUser: NewUser?
+    let dateOfBirthPicker = UIDatePicker()
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -40,11 +44,40 @@ class PatientTableViewController: UITableViewController {
     //Shahin: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dateOfBirthPicker.datePickerMode = .date
+        dateOfBirthPicker.addTarget(self, action: #selector(self.dateOfBirthChanged(datePicker:)), for: .valueChanged)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureReconizer:)))
+        view.addGestureRecognizer(tapGesture)
+        dateOfBirth.inputView = dateOfBirthPicker
+        
         setup()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.cyan.cgColor
+        textField.layer.borderWidth = 2.0
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+           textField.layer.borderWidth = 0.0
+       }
+    
+    @objc func viewTapped(gestureReconizer: UIGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    // Change birthday label when picker is changed
+    @objc func dateOfBirthChanged(datePicker: UIDatePicker) {
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateOfBirth.text = dateFormatter.string(from: dateOfBirthPicker.date)
     }
     
     //Shahin: - Functions
     fileprivate func initNewPatient() {
+        titleLbl.text = NSLocalizedString("new_patient_title", comment: "")
         firstNameTextField.placeholder = NSLocalizedString("first_name_placeholder", comment: "")
         insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("last_name_placeholder", comment: "")
@@ -53,7 +86,7 @@ class PatientTableViewController: UITableViewController {
         
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirthLabel.text = dateFormatter.string(from: dateOfBirthPicker.date)
+        dateOfBirth.text = dateFormatter.string(from: dateOfBirthPicker.date)
         
         usernameTextField.placeholder = NSLocalizedString("username_placeholder", comment: "")
         emailTextField.placeholder = NSLocalizedString("email_placeholder", comment: "")
@@ -62,6 +95,7 @@ class PatientTableViewController: UITableViewController {
     }
     
     fileprivate func initEditPatient() {
+        titleLbl.text = NSLocalizedString("edit_patient_title", comment: "")
         firstNameTextField.text = patient?.firstName
         if patient?.insertion != nil{
             insertionTextField.text = patient?.insertion
@@ -73,7 +107,7 @@ class PatientTableViewController: UITableViewController {
         dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
         
         dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirthLabel.text = dateFormatter.string(from: patient?.dateOfBirth ?? dateOfBirthPicker.date)
+        dateOfBirth.text = dateFormatter.string(from: patient?.dateOfBirth ?? dateOfBirthPicker.date)
         guard let ddd = patient?.dateOfBirth else{return}
         dateOfBirthPicker.setDate(ddd, animated: false)
         
@@ -105,10 +139,7 @@ class PatientTableViewController: UITableViewController {
         }else{
             initNewPatient()
         }
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
+      
         dateOfBirthPicker.minimumDate = Calendar.current.date(byAdding: .year, value: -99, to: Date())
         dateOfBirthPicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         
@@ -256,57 +287,6 @@ class PatientTableViewController: UITableViewController {
         
     }
     
-    // Change birthday label when picker is changed
-    @IBAction func dateOfBirthChanged(_ sender: Any) {
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirthLabel.text = dateFormatter.string(from: dateOfBirthPicker.date)
-    }
-    
-    // Shahin: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 4
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 3
-        case 1:
-            if selected {
-                return 2
-            } else {
-                return 1
-            }
-        case 2:
-            return 4
-        case 3:
-            return 2
-        default:
-            return 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //do something
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section != 1 || indexPath.row != 0 { return }
-        
-        tableView.beginUpdates()
-        
-        var path = indexPath
-        path.row = path.row + 1
-        
-        if !selected {
-            tableView.insertRows(at: [path], with: .fade)
-            self.view.endEditing(true)
-        } else {
-            tableView.deleteRows(at: [path], with: .fade)
-        }
-        selected = !selected
-        tableView.endUpdates()
-    }
 }
 
 extension PatientTableViewController : UITextFieldDelegate {

@@ -26,8 +26,8 @@
 //Shahin: PatientView
 "cancel_button" = "Annuleren";
 "done_button" = "Klaar";
-"new_patient_title" = "Nieuwe Client";
-"edit_patient_title" = "Bewerk Client";
+"new_patient_title" = "Nieuwe Client Toevoegen";
+"edit_patient_title" = "Client Bewerken";
 
 "first_name_placeholder" = "Voornaam";
 "insertion_placeholder" = "Tussenoegsel (optioneel)";
