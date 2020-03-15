@@ -61,7 +61,7 @@ class PatientsTableViewController: UITableViewController {
     }
     
     public func reloadPatients(){
-        getPatients()
+        self.getPatients()
     }
     
     

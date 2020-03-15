@@ -151,7 +151,6 @@ class PatientTableViewController: UIViewController {
     }
     
     fileprivate func checkBirthday(_ dateOfBirth: Date) -> Bool{
-        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let setBirthay = dateFormatter.string(from: dateOfBirth)
         let dateToday = dateFormatter.string(from: Date())
@@ -204,28 +203,26 @@ class PatientTableViewController: UIViewController {
                     guard let jsonData = response.data else { return }
                     switch(response.result) {
                     case .success(_):
-                        if let data = response.result.value{
-                            let decoder = JSONDecoder()
-                            guard let addedUser = try? decoder.decode(NewUser.self, from: jsonData) else { return }
-                            self.newUser = addedUser
-                            
-                            guard let coachId = self.coach?.id else { return }
-                            guard let userId = self.newUser?.user.id else { return }
-                            
-                            self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            ApiService.createPatient(user: userId,
-                                                     first_name: firstName,
-                                                     insertion: insertion,
-                                                     last_name: lastName,
-                                                     date_of_birth: self.dateFormatter.string(from: dateOfBirth),
-                                                     coach_id: coachId)
-                                .responseData(completionHandler: { (response) in
-                                    guard let jsonData = response.data else { return }
-                                    let decoder = JSONDecoder()
-                                    guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
-                                    self.patient = pat
-                                })
-                        }
+                        let decoder = JSONDecoder()
+                        guard let addedUser = try? decoder.decode(NewUser.self, from: jsonData) else { return }
+                        self.newUser = addedUser
+                        
+                        guard let coachId = self.coach?.id else { return }
+                        guard let userId = self.newUser?.user.id else { return }
+                        
+                        self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        ApiService.createPatient(user: userId,
+                                                 first_name: firstName,
+                                                 insertion: insertion,
+                                                 last_name: lastName,
+                                                 date_of_birth: self.dateFormatter.string(from: dateOfBirth),
+                                                 coach_id: coachId)
+                            .responseData(completionHandler: { (response) in
+                                guard let jsonData = response.data else { return }
+                                let decoder = JSONDecoder()
+                                guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
+                                self.patient = pat
+                            })
                         
                     case .failure(_):
                         print("Error message:\(response.result.error)")
@@ -239,6 +236,36 @@ class PatientTableViewController: UIViewController {
         
         return false
     }
+    
+    fileprivate func updatePatient(_ username: String, _ email: String, _ password: String, _ dateOfBirth: Date, _ firstName: String, _ insertion: String?, _ lastName: String) -> Bool {
+        guard let getPatient = self.patient else { return false}
+        
+        if Reachability.isConnectedToNetwork(){
+            ApiService.updateUser(userId: getPatient.user.id, username: username, email: email, password: password)
+                .responseData(completionHandler: { (response) in
+                    guard let jsonData = response.data else { return }
+                    
+                    self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    ApiService.updatePatient(patinetId: getPatient.id,
+                                             first_name: firstName,
+                                             insertion: insertion,
+                                             last_name: lastName,
+                                             date_of_birth: self.dateFormatter.string(from: dateOfBirth))
+                        .responseData(completionHandler: { (response) in
+                            guard let jsonData = response.data else { return }
+                            let decoder = JSONDecoder()
+                            guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
+                            self.patient = pat
+                        })
+                    })
+            return true
+                }else{
+            Errorpopup.displayConnectionErrorMessage(vc: self)
+        }
+
+        return false
+    }
+
     
     private func savePatientData() {
         guard let firstName = firstNameTextField.text else { return }
@@ -272,14 +299,11 @@ class PatientTableViewController: UIViewController {
             })
             
             if patient != nil{
-                //UPDATE PATIENT
-                print("Edir patient")
-            }else{
-                if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
-                    self.dismiss(animated: true, completion: {
-                        self.patientsView?.reloadPatients()
-                    })
+                if updatePatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
+                    jobFinished()
                 }
+            }else if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
+                    jobFinished()
             }
             
             
@@ -287,6 +311,13 @@ class PatientTableViewController: UIViewController {
         
     }
     
+    private func jobFinished(){
+        self.dismiss(animated: true, completion: {
+            self.patientsView?.reloadPatients()
+        })
+        
+        self.patientsView?.reloadPatients()
+    }
 }
 
 extension PatientTableViewController : UITextFieldDelegate {
