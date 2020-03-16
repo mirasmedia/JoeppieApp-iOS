@@ -36,7 +36,6 @@ class PatientViewController: UIViewController {
         getAllChartMedicineUser()
     }
     @IBAction func addMedicine(_ sender: Any) {
-        print("TAOOED")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let addMedicineVc = storyboard.instantiateViewController(withIdentifier:
             "MedicineAddViewController") as? MedicineAddViewController else {
