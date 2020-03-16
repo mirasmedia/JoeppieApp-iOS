@@ -106,7 +106,7 @@ class ApiService {
     
    
     
-    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String) -> (DataRequest) {
+    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String,patientId:Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         var parameters : [String:String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
@@ -114,6 +114,7 @@ class ApiService {
         }
         parameters["time_taken_in_gte"] = "\(greaterthandate)"
         parameters["time_taken_in_lte"] = "\(lowerthandate)"
+        parameters["patient.id"] = "\(patientId)"
         
         return Alamofire.request(baseURL + "/intakes", method: .get, parameters: parameters,headers: headers)
     }

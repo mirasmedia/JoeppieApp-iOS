@@ -532,7 +532,7 @@ class MedicineViewController: UIViewController {
             let minutes = calendar.component(.minute, from: dateTime)
             
             let time:String = String.init(format: "%02d:%02d", hour, minutes)
-            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + " "+time+" "+NSLocalizedString("hour", comment: "")
             alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
             alertvc.nameAlertView.text = self.patient?.firstName
             alertvc.stateAlertView.text = NSLocalizedString("was_on_time_text", comment: "")
