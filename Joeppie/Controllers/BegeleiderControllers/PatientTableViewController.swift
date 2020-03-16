@@ -37,6 +37,7 @@ class PatientTableViewController: UIViewController {
     var coach: Coach?
     var newUser: NewUser?
     let dateOfBirthPicker = UIDatePicker()
+    let decoder = JSONDecoder()
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -203,8 +204,7 @@ class PatientTableViewController: UIViewController {
                     guard let jsonData = response.data else { return }
                     switch(response.result) {
                     case .success(_):
-                        let decoder = JSONDecoder()
-                        guard let addedUser = try? decoder.decode(NewUser.self, from: jsonData) else { return }
+                        guard let addedUser = try? self.decoder.decode(NewUser.self, from: jsonData) else { return }
                         self.newUser = addedUser
                         
                         guard let coachId = self.coach?.id else { return }
@@ -219,8 +219,7 @@ class PatientTableViewController: UIViewController {
                                                  coach_id: coachId)
                             .responseData(completionHandler: { (response) in
                                 guard let jsonData = response.data else { return }
-                                let decoder = JSONDecoder()
-                                guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
+                                guard let pat = try? self.decoder.decode(Patient.self, from: jsonData) else { return }
                                 self.patient = pat
                             })
                         
@@ -253,9 +252,9 @@ class PatientTableViewController: UIViewController {
                                              date_of_birth: self.dateFormatter.string(from: dateOfBirth))
                         .responseData(completionHandler: { (response) in
                             guard let jsonData = response.data else { return }
-                            let decoder = JSONDecoder()
-                            guard let pat = try? decoder.decode(Patient.self, from: jsonData) else { return }
+                            guard let pat = try? self.decoder.decode(Patient.self, from: jsonData) else { return }
                             self.patient = pat
+                            self.reloadInputViews()
                         })
                     })
             return true
