@@ -35,6 +35,7 @@ class PatientViewController: UIViewController {
         generateGeneralObject()
         getAllChartMedicineUser()
     }
+    
     @IBAction func addMedicine(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let addMedicineVc = storyboard.instantiateViewController(withIdentifier:
@@ -78,9 +79,8 @@ class PatientViewController: UIViewController {
                .responseData(completionHandler: { [weak self] (response) in
                    
                    guard response.data != nil else { return }
-                   print(String(decoding: response.data!, as: UTF8.self))
+//                   print(String(decoding: response.data!, as: UTF8.self))
                    
-
                    let decoder = JSONDecoder()
                    let dateFormatter = DateFormatter()
                    dateFormatter.locale = Locale.current
