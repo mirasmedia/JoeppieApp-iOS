@@ -51,7 +51,7 @@
 "invalide_pass_title" = "Invalid password";
 "invalide_pass_msg" = "Please make sure minimum eight characters, at least one letter, one number and one special character.";
 "invalide_conf_pass_msg" = "Your passwords do not match.";
-
+"there_is_no_data"="There is no data for charts at the moment";
 
 "time_medicine_text" = "Time for your medicine ";
 "take_medicine" = "Take your medicine";
@@ -77,6 +77,7 @@
 "thank_you"="Thank you!";
 
 "till" = "Till";
+"till_small" = "tot";
 "chart_general"="General";
 "to_late_text"="Late";
 "not_text"="Not";

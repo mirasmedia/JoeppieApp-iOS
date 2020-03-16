@@ -67,6 +67,7 @@
 "today_we_finish" = "Voor vandaag zijn we klaar!";
 "get_next_medicine" = "Neem direct je andere medicijn ook in";
 "till" = "Tot";
+"till_small" = "tot";
 "chart_general"="Algemeen";
 "to_late_text"="Te laat";
 "not_text"="Niet";
@@ -83,3 +84,4 @@
 "Call"="Bellen";
 "hope_next_time_better"="Hoop in de toekomst beter";
 "thank_you"="Dankje!";
+"there_is_no_data"="Nog geen data voor grafieken beschikbaar";

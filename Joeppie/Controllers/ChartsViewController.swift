@@ -11,12 +11,15 @@ import UIKit
 import Charts
 
 class ChartsViewController: UIViewController {
+    @IBOutlet weak var bckimage: UIImageView!
     @IBOutlet weak var labeldate: UILabel!
     var chartsArray: [Charts] = []
+    var patient: Patient?
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var labelHiddenText: UILabel!
     
     override func viewDidLoad() {
-        
+        getUser()
         tableview.dataSource = self
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
         tableview.register(nib, forCellReuseIdentifier: "ChartViewCell")
@@ -41,13 +44,12 @@ class ChartsViewController: UIViewController {
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
     let enddayofweek = df.string(from: endofweek)
-    self.labeldate.text = startdayofWeek+" "+NSLocalizedString("till", comment: "")+" "+enddayofweek
+    self.labeldate.text = startdayofWeek+" "+NSLocalizedString("till_small", comment: "")+" "+enddayofweek
     print(startdayofWeek)
     print(enddayofweek)
+
         
-        
-        
-        ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek)
+        ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
             .responseData(completionHandler: { [weak self] (response) in
                 
                 guard response.data != nil else { return }
@@ -124,7 +126,16 @@ class ChartsViewController: UIViewController {
                 chartsArray.append(cs)
             }
         }
-        self.tableview.reloadData()
+        if(chartsArray.count==1){
+            tableview.isHidden=true;
+            bckimage.image=UIImage(named: "Parrot")
+            labelHiddenText.text=NSLocalizedString("there_is_no_data", comment: "")
+        }
+        else
+        {
+            self.tableview.reloadData()
+        }
+
         
     }
     
@@ -190,6 +201,15 @@ extension ChartsViewController:UITableViewDataSource{
         cell.chart.data?.setValueFormatter(DefaultValueFormatter(formatter:formatter))
         
         return cell
+    }
+    
+    func getUser(){
+            UserService.getPatientInstance(withCompletionHandler: { patient in
+                guard patient != nil else {
+                    return
+                }
+                self.patient=patient
+            })
     }
     
 }
