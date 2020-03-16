@@ -12,9 +12,7 @@ import SwiftKeychainWrapper
 
 class ApiService {
     private static let baseURL = "https://api.stider.space"
-    
-    //Shahin: - User
-    
+        
     //(POST)/login
     static func logUserIn(withIdentiefier identifier: String, andPassword password: String) -> (DataRequest) {
         var parameters : [String:String] = [:]
@@ -38,9 +36,7 @@ class ApiService {
         
         return Alamofire.request(baseURL + "/auth/local/register", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
-    
-    //ERCAN:
-    
+        
     //(GET)/baxters
     static func getBaxterClient(dayOfWeek:String,patientId:String) -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -120,8 +116,6 @@ class ApiService {
     }
     
     
-    //Shahin: - Patient
-    
     //(GET)/patients
     static func getPatients(forCoachId coachId : Int) -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -192,8 +186,6 @@ class ApiService {
         }
         return Alamofire.request(baseURL + "/patients?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
-    
-    //Shahin: - Coach
     
     //(GET)/coaches
     static func getCoach(withUserId userId : Int) -> (DataRequest) {
