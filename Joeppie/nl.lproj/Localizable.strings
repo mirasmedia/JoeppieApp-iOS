@@ -8,24 +8,25 @@
 
 "" = "";
 
-//Shahin: Error
+//Error
 "connection_error_title" = "Verbinding mislukt!";
 "connection_error_msg"   = "Er is iets mis gegaan met internet verbinding.";
 
-//Shahin: LoginView
+//LoginView
 "username_placeholder" = "Gebruikersnaam";
 "password_placeholder" = "Wachtwoord";
 "log_in_button" = "Aanmelden";
 "login_error_msg" = "Verkeerde wachtwoord of gebruiksnaam!";
 "login_error_title" = "Login mislukt";
 
-//Shahin: PatientsTableView
+//PatientsTableView
 "log_out_button" = "Uitloggen";
 "patients_title" = "Cliënten";
 
-//Shahin: PatientView
+//PatientView
 "cancel_button" = "Annuleren";
 "done_button" = "Klaar";
+"save_button" = "Opslaan";
 "new_patient_title" = "Nieuwe Client Toevoegen";
 "edit_patient_title" = "Client Bewerken";
 
@@ -38,7 +39,7 @@
 "email_placeholder" = "Email";
 "confirm_password_placeholder" = "Wachtwoord bevestigen";
 
-// Shahin: Error messages
+// Error messages
 "empty_fields_title" = "Leeg verplichte velden.";
 "empty_fields_msg" = "Niet alle verplichte velden zijn ingevuld.";
 
@@ -51,6 +52,14 @@
 "invalide_pass_title" = "Ongeldig wachtwoord";
 "invalide_pass_msg" = "Ingevoerde wachtword is ongeldig. Minimaal acht karakters waarvan minstens een letter, een nummer en een speciale teken.";
 "invalide_conf_pass_msg" = "Ingevoerde wachtworden komen niet overeen.";
+"invalide_input_title" = "Ongeldige invoer";
+"dose_amount_input_error" = "Kies een nummer tussen 1 en 9";
+
+// Add medicine
+"intake_time" = "Intake time";
+"select_medicine" = "Selecteer een medicijn";
+"add_doses" = "Dose medicijn toevoegen";
+"amount_lbl" = "Aantal";
 
 //ERCAN
 "time_medicine_text" = "Tijd voor je medicijn ";
