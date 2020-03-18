@@ -36,6 +36,32 @@ class ApiService {
         
         return Alamofire.request(baseURL + "/auth/local/register", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
+    
+    //Ercan:(delete)/dose
+     static func deleteBaxter(baxter:Baxter) -> (DataRequest) {
+         var headers : [String : String] = [:]
+         var parameters : [String:String] = [:]
+
+         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+             headers["Authorization"] = "Bearer \(token)"
+         }
+         
+        return Alamofire.request(baseURL + "/baxters/"+String(baxter.id), method: .delete, parameters: parameters,headers: headers)
+     }
+    
+    static func getAllBaxtersPatient(patientId:Int) -> (DataRequest){
+        
+        var headers : [String : String] = [:]
+        var parameters : [String:String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+
+        parameters["patient.id"] = "\(patientId)"
+        
+        return Alamofire.request(baseURL + "/baxters", method: .get, parameters: parameters,headers: headers)
+        
+    }
         
     //(GET)/baxters
     static func getBaxterClient(dayOfWeek:String,patientId:String) -> (DataRequest) {
@@ -70,6 +96,18 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/doses/"+id, method: .put, parameters: parameters,headers: headers)
+    }
+    
+    //Ercan:(delete)/dose
+    static func deleteDose(id:String) -> (DataRequest) {
+        var headers : [String : String] = [:]
+        var parameters : [String:String] = [:]
+
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        return Alamofire.request(baseURL + "/doses/"+id, method: .delete, parameters: parameters,headers: headers)
     }
     
     //(put)/intake
