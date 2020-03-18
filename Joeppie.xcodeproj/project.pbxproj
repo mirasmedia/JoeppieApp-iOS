@@ -12,6 +12,7 @@
 		106B5E55241925290097B0E1 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E54241925290097B0E1 /* InputValidator.swift */; };
 		106B5E57241948B90097B0E1 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E56241948B90097B0E1 /* PatientViewController.swift */; };
 		10887ED52422422100C28D3D /* AddDoseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887ED42422422100C28D3D /* AddDoseController.swift */; };
+		10887EDA2422A06B00C28D3D /* DoseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887ED92422A06B00C28D3D /* DoseCreate.swift */; };
 		10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A240241C0BC700ED1B84 /* NewUser.swift */; };
 		10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
@@ -62,6 +63,7 @@
 		106B5E54241925290097B0E1 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		106B5E56241948B90097B0E1 /* PatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
 		10887ED42422422100C28D3D /* AddDoseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDoseController.swift; sourceTree = "<group>"; };
+		10887ED92422A06B00C28D3D /* DoseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseCreate.swift; sourceTree = "<group>"; };
 		10D6A240241C0BC700ED1B84 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineAddViewController.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +211,7 @@
 				F9137BEE23AD142A00BCA7E1 /* Intake.swift */,
 				EA5D4D40241AB3DD0005F1F2 /* Charts.swift */,
 				10D6A240241C0BC700ED1B84 /* NewUser.swift */,
+				10887ED92422A06B00C28D3D /* DoseCreate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				106B5E55241925290097B0E1 /* InputValidator.swift in Sources */,
 				EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */,
 				EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */,
+				10887EDA2422A06B00C28D3D /* DoseCreate.swift in Sources */,
 				EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */,
 				F9A5455823C349B400AFCB2C /* UserService.swift in Sources */,
 				106B5E4E241660390097B0E1 /* Reachability.swift in Sources */,

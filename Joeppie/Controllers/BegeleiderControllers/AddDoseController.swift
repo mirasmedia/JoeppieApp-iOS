@@ -11,7 +11,7 @@ import UIKit
 class DropDownCell: UITableViewCell {
 }
 
-class AddDoseController: UIViewController {
+class AddDoseController: UIViewController{
     var listOfMedicines = [Medicine]()
     var selectedMedicine: Medicine?
     var frames = CGRect()
@@ -20,11 +20,14 @@ class AddDoseController: UIViewController {
     let transparantView = UIView()
     let mediListTblView = UITableView()
     var barHeight = CGFloat()
-    var addDosesToList: ((_ dose: String) -> ())?
+    var addDosesToList: ((_ dose: Int) -> ())?
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var selectMedicineBtn: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnSave: UIButton!
+    
+    var doseAmount = Int()
+    var medicineId = Int()
     
 
     @IBOutlet weak var amountInput: UITextField!
@@ -48,19 +51,33 @@ class AddDoseController: UIViewController {
         btnCancel.layer.cornerRadius = 5; btnSave.layer.cornerRadius = 5
         selectMedicineBtn.layer.borderWidth = 1
         selectMedicineBtn.layer.borderColor = UIColor(red: 11/255, green: 186/255, blue: 69/225, alpha: 1).cgColor
-        
                 
     }
     
     
-    @IBAction func displayDropDown(_ sender: Any) {
+    @IBAction func displayDropDown(_ sender: UIButton) {
         addTransparantView()
     }
     
-    @IBAction func saveDoses(_ sender: Any) {
-        addDosesToList?("\(self.selectedMedicine?.name ?? "EMPTY")")
-        //TODO SAVE DOSE IN DB
-        dismiss(animated: true)
+    @IBAction func saveDoses(_ sender: UIButton) {
+        var count = Int()
+        if let temp = amountInput.text?.count{
+            count = temp
+            if let x = Int(amountInput.text ?? "0"){
+                self.doseAmount = x
+            }
+        }
+        
+        if selectedMedicine == nil{
+            print("NO MEDICINE")
+        }else if count <= 0{
+                print("NO AMOUNT")
+            }
+        else{
+            saveNewDose()
+            dismiss(animated: true)
+        }
+
     }
     
     @IBAction func dissmissView(_ sender: UIButton) {
@@ -118,6 +135,31 @@ class AddDoseController: UIViewController {
         })
     }
     
+    private func saveNewDose() {
+        ApiService.createNewDose(amount: doseAmount, medicineId: medicineId)
+                .responseData(completionHandler: { (response) in
+                guard let jsonData = response.data else { return }
+//                print(String(decoding: jsonData, as: UTF8.self))
+                    
+                    switch(response.result) {
+                    case .success(_):
+                        self.dateFormatter.locale = Locale.current
+                        self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+                        self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+                        guard let dose = try? self.decoder.decode(DoseCreate.self, from: jsonData) else { return }
+                        
+                        if let temp = self.addDosesToList{
+                            temp(dose.id)
+                        }
+                        
+                    case .failure(_):
+                        print("EROOR MESSAGr\(response.result.error)")
+                    }
+            })
+        
+    }
+    
 }
 
 extension AddDoseController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
@@ -134,6 +176,7 @@ extension AddDoseController: UITableViewDelegate, UITableViewDataSource, UITextF
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedMedicine = listOfMedicines[indexPath.row]
         selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)
+        medicineId = listOfMedicines[indexPath.row].id
         removeTransparantView()
     }
     

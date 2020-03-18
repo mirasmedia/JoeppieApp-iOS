@@ -61,6 +61,18 @@
 "add_doses" = "Dose medicijn toevoegen";
 "amount_lbl" = "Aantal";
 
+
+// weekdays
+"day_monday" = "Maandag";
+"day_tuesday" = "Dinsdag";
+"day_wednesday" = "Woensdag";
+"day_thursday" = "Donderdag";
+"day_friday" = "Vrijdag";
+"day_saturday" = "Zaterdag";
+"day_sunday" = "Zondag";
+"day_all_week" = "Elke dag";
+
+
 //ERCAN
 "time_medicine_text" = "Tijd voor je medicijn ";
 "take_medicine" = "Neem je medicijn";
