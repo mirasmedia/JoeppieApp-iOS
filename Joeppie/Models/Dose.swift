@@ -4,7 +4,7 @@ struct Dose : Codable {
 
     let id : Int
     let amount : Int
-    let baxter : Baxter
+    let baxter : Baxter?
     let medicine : Medicine
     var lastTaken : Date
     let createdAt : Date

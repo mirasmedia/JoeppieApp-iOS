@@ -48,10 +48,10 @@ class PatientTableViewController: UIViewController {
         
         dateOfBirthPicker.datePickerMode = .date
         dateOfBirthPicker.addTarget(self, action: #selector(self.dateOfBirthChanged(datePicker:)), for: .valueChanged)
+        dateOfBirth.inputView = dateOfBirthPicker
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureReconizer:)))
         view.addGestureRecognizer(tapGesture)
-        dateOfBirth.inputView = dateOfBirthPicker
         
         setup()
     }
