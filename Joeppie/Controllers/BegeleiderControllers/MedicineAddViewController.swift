@@ -2,108 +2,270 @@
 //  MedicineAddViewController.swift
 //  Joeppie
 //
-//  Created by qa on 14/03/2020.
+//  Created by Shahin Mirza on 14/03/2020.
 //  Copyright © 2020 Bever-Apps. All rights reserved.
 //
 
 import UIKit
-import SwiftKeychainWrapper
-
-class DropDownCell: UITableViewCell {
-}
 
 class MedicineAddViewController: UIViewController {
     var patient: Patient?
-    var listOfMedicines = [Medicine]()
-    var selectedMedicine: Medicine?
-    let decoder = JSONDecoder()
+    var listOfCreatedDoses = [Dose]()
     let dateFormatter = DateFormatter()
-    let transparantView = UIView()
-    let mediListTblView = UITableView()
-    var barHeight = CGFloat()
+    let decoder = JSONDecoder()
+    let timePicker = UIDatePicker()
+    let pickerView = UIPickerView()
+    var weekDays = [String]()
+    var selectedDay: String?
+    var deletePlanetIndexPath: IndexPath? = nil
+    var deletePlantDose: Dose? = nil
+    var baxterTime = String()
+    @IBOutlet weak var inputTime: UITextField!
+    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var dayOfWeek: UITextField!
+    @IBOutlet weak var addedDosesTable: UITableView!
     
-    @IBOutlet weak var selectMedicineBtn: UIButton!
+    @IBOutlet weak var addNewDose: UIButton!
+    @IBOutlet weak var btnSaveData: UIButton!
     var frames = CGRect()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMedicines()
-        frames = selectMedicineBtn.frame
-        barHeight = UIApplication.shared.statusBarFrame.size.height +
-        (self.navigationController?.navigationBar.frame.height ?? 0.0)
-        mediListTblView.delegate = self
-        mediListTblView.dataSource = self
-        mediListTblView.register(DropDownCell.self, forCellReuseIdentifier: "dropDownCell")
         
+        initTimepicker()
+        
+        let dismessTimepicker = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureReconizer:)))
+        view.addGestureRecognizer(dismessTimepicker)
+        lblTime.text = NSLocalizedString("intake_time", comment: "")
+        addNewDose.setTitle(NSLocalizedString("add_doses", comment: ""), for: .normal)
+        
+        addedDosesTable.delegate = self
+        addedDosesTable.dataSource = self
+        addedDosesTable.register(UINib(nibName: "AddedDoseCell", bundle: nil), forCellReuseIdentifier: "AddedDoseCell")
+        addedDosesTable.isHidden = true
+        
+        weekDays = [NSLocalizedString("day_monday", comment: ""),
+        NSLocalizedString("day_tuesday", comment: ""),
+        NSLocalizedString("day_wednesday", comment: ""),
+        NSLocalizedString("day_thursday", comment: ""),
+        NSLocalizedString("day_friday", comment: ""),
+        NSLocalizedString("day_saturday", comment: ""),
+        NSLocalizedString("day_sunday", comment: "")]
+        
+        createPickerView()
         
     }
     
-    @IBAction func displayDropDown(_ sender: Any) {
-        addTransparantView()
+    @IBAction func saveDataTapped(_ sender: Any) {
+        // Check for input dayofWeek
+        if let txt = dayOfWeek.text, weekDays.contains(txt) {
+            print("the textfield'd value is from the array")
+            if listOfCreatedDoses.count > 0{
+                // TODO Save BAXTER into DB
+                saveBaxter()
+            }else{
+                Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")
+            }
+        }
+        
+        // TODO Throw Error
     }
     
-    
-    private func addTransparantView(){
-        let window = UIApplication.shared.keyWindow
-        transparantView.frame = window?.frame ?? self.view.frame
-        self.view.addSubview(transparantView)
+    private func saveBaxter(){
+        guard let patientId = patient?.id else { return }
+        guard let day = selectedDay else {return}
+        var doses = [Int]()
         
-        mediListTblView.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: 0)
-        self.view.addSubview(mediListTblView)
-        mediListTblView.layer.cornerRadius = 5
+        for x in listOfCreatedDoses{
+            doses.append(x.id)
+        }
         
-        transparantView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparantView))
-        transparantView.addGestureRecognizer(tapGesture)
-        print(self.frames.origin.y, self.frames.origin.x, self.frames.height, self.frames.width)
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0,
-        initialSpringVelocity:1.0,
-        options: .curveEaseInOut, animations: {
-            self.transparantView.alpha = 0.7
-            self.mediListTblView.frame = CGRect(x: self.frames.origin.x, y: self.frames.origin.y + self.frames.height + self.barHeight, width: (self.transparantView.frame.width - CGFloat(40)), height: 300)
-        }, completion: nil)
-    }
-    
-    @objc func removeTransparantView(){
-        let frames = selectMedicineBtn.frame
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0,
-                       initialSpringVelocity:1.0,
-                       options: .curveEaseInOut, animations: {
-            self.transparantView.alpha = 0
-            self.mediListTblView.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: 0)
-        }, completion: nil)
-    }
-    
-    private func getMedicines(){
-        ApiService.getAllMedicines().responseData(completionHandler: { (response) in
+        if Reachability.isConnectedToNetwork(){
+            ApiService.createNewBaxter(patientId: patientId, intakeTime: baxterTime, doses: doses, dayOfWeek: day)
+            .responseData(completionHandler: { (response) in
             guard let jsonData = response.data else { return }
-            self.dateFormatter.locale = Locale.current
-            self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                
+                switch(response.result) {
+                case .success(_):
+                        // TODO: Update baxters list of patient
+                    print("DONE MESSAGr\(response.result.description)")
+                    self.closeView()
+                case .failure(_):
+                    print("EROOR MESSAGr\(response.result.error)")
+                    Errorpopup.displayErrorMessage(vc: self, title: "Failed", msg: "Oeps! something went wrong!")
+                }
+            })
+        }
+        
+        
+    }
+    
+    private func closeView(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func addDosesToList (_ doseId: Int){
+        getJustAddedDose(doseId: doseId)
+    }
+    
+    private func getJustAddedDose(doseId: Int){
+        if Reachability.isConnectedToNetwork(){
+            ApiService.getOneDose(doseId: doseId)
+                    .responseData(completionHandler: { (response) in
+                    guard let jsonData = response.data else { return }
+                        
+                        switch(response.result) {
+                        case .success(_):
+                            self.dateFormatter.locale = Locale.current
+                            self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
-            self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
-            guard let medi = try? self.decoder.decode([Medicine].self, from: jsonData) else { print("here 2"); return }
-            self.listOfMedicines = medi.sorted(by: {$0.name < $1.name})
-        })
+                            self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+                            guard let dose = try? self.decoder.decode(Dose.self, from: jsonData) else { return }
+                            self.listOfCreatedDoses.append(dose)
+                            self.addedDosesTable.reloadData()
+                            
+                            if self.addedDosesTable.isHidden{
+                                self.addedDosesTable.isHidden = false
+                            }
+                            
+                        case .failure(_):
+                            print("EROOR MESSAGr\(response.result.error)")
+                        }
+                })
+        }
+    }
+    
+    private func initTimepicker(){
+        timePicker.datePickerMode = .time
+        inputTime.inputView = timePicker
+        timePicker.addTarget(self, action: #selector(self.timePickerChanged(datePicker:)), for: .valueChanged)
+    }
+    
+    func createPickerView() {
+        pickerView.delegate = self
+        dayOfWeek.inputView = pickerView
+    }
+    
+    @objc func viewTapped(gestureReconizer: UIGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    @objc func timePickerChanged(datePicker: UIDatePicker) {
+        dateFormatter.dateFormat = "HH : mm"
+        inputTime.text = dateFormatter.string(from: timePicker.date)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        baxterTime = dateFormatter.string(from: timePicker.date)
+    }
+    
+    
+    @IBAction func addDosePopUP(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let addDoseVc = storyboard.instantiateViewController(withIdentifier:
+            "AddDoseController") as? AddDoseController else {
+                fatalError("Unexpected destination:")
+        }
+        addDoseVc.addDosesToList = addDosesToList
+        self.navigationController?.present(addDoseVc, animated: true)
+    }
+    
+    private func confirmDelete(planet: String) {
+        // TODO REPLACE HARDCODED STRINGS
+        let alert = UIAlertController(title: "Delete DOSE", message: "Are you sure you want to permanently delete \(planet) dose?", preferredStyle: .actionSheet)
+        let DeleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: handleDeletePlanet)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelDeletePlanet)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func cancelDeletePlanet(alertAction: UIAlertAction!) {
+        deletePlanetIndexPath = nil
+    }
+    
+    private func handleDeletePlanet(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deletePlanetIndexPath {
+            listOfCreatedDoses.remove(at: indexPath.row)
+            addedDosesTable.deleteRows(at: [indexPath], with: .fade)
+            deletePlanetIndexPath = nil
+            addedDosesTable.reloadData()
+            
+            // Delete Dose from DB
+            if let dose = self.deletePlantDose{
+                print("DELETING DOSE: \(String(dose.id))")
+                self.deleteDose(doseId: dose.id)
+                
+                self.deletePlantDose = nil
+            }
+            
+            
+            if listOfCreatedDoses.count <= 0{
+                addedDosesTable.isHidden = true
+            }
+        }
+    }
+    
+    private func deleteDose(doseId: Int){
+        if Reachability.isConnectedToNetwork(){
+            ApiService.deleteOneDose(doseId: doseId)
+        }
     }
     
 }
 
-extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfMedicines.count
+extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dropDownCell", for: indexPath)
-        cell.textLabel?.text = listOfMedicines[indexPath.row].name
-        return cell
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return weekDays.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedMedicine = listOfMedicines[indexPath.row]
-        selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)
-        removeTransparantView()
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return weekDays[row]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedDay = weekDays[row]
+        dayOfWeek.text = selectedDay
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            listOfCreatedDoses.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            deletePlanetIndexPath = indexPath
+            let planetToDelete = listOfCreatedDoses[indexPath.row]
+            deletePlantDose = planetToDelete
+            self.confirmDelete(planet: planetToDelete.medicine.name)
+        }
+    }
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return listOfCreatedDoses.count
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddedDoseCell", for: indexPath) as? AddedDoseCell else {
+                fatalError("The dequeued cell is not an instance of AddedDoseCell")
+            }
+            
+            let x = listOfCreatedDoses[indexPath.row]
+            cell.lblAmountValue.text = String(x.amount)
+            cell.lblMedicineName.text = x.medicine.name
+            cell.lblReasonValue.text = x.medicine.reason
+            return cell
+        }
+    
+        
+//        TODO: EDIT ADDED DOSE
+//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//            self.selectedMedicine = listOfMedicines[indexPath.row]
+//            selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)
+//            medicineId = listOfMedicines[indexPath.row].id
+//            removeTransparantView()
+//        }
 }

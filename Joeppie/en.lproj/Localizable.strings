@@ -26,6 +26,7 @@
 //Shahin: PatientView
 "cancel_button" = "Cancel";
 "done_button" = "Done";
+"save_button" = "Save";
 "new_patient_title" = "Add New Patient";
 "edit_patient_title" = "Edit Client";
 
@@ -37,6 +38,8 @@
 
 "email_placeholder" = "Email";
 "confirm_password_placeholder" = "Confirm password";
+"invalide_input_title" = "Invalid input";
+"dose_amount_input_error" = "Choose a number between 1 and 9";
 
 // Shahin: Error messages
 "empty_fields_title" = "Empty required fields";
@@ -52,6 +55,22 @@
 "invalide_pass_msg" = "Please make sure minimum eight characters, at least one letter, one number and one special character.";
 "invalide_conf_pass_msg" = "Your passwords do not match.";
 "there_is_no_data"="There is no data for charts at the moment";
+
+// Add medicine
+"intake_time" = "Inname tijd";
+"select_medicine" = "Select a medicine";
+"add_doses" = "Add dose of medicine";
+"amount_lbl" = "Amount";
+
+// weekdays
+"day_monday" = "Monday";
+"day_tuesday" = "Tuesday";
+"day_wednesday" = "Wednesday";
+"day_thursday" = "Thursday";
+"day_friday" = "Friday";
+"day_saturday" = "Saturday";
+"day_sunday" = "Sunday";
+"day_all_week" = "Everyday";
 
 "time_medicine_text" = "Time for your medicine ";
 "take_medicine" = "Take your medicine";
