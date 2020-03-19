@@ -22,8 +22,6 @@ class LoginViewController: UIViewController {
         loginFrontView.isHidden = false
         
         logInButton.layer.cornerRadius = 5
-       
-        
         
         usernameTextField.placeholder = NSLocalizedString("username_placeholder", comment: "")
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
@@ -128,7 +126,6 @@ class LoginViewController: UIViewController {
                 guard let jsonData = response.data else { return }
                 let decoder = JSONDecoder()
                 let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
-                print(loginResponse?.token)
                 if loginResponse == nil{
                     Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("login_error_title", comment: ""), msg: NSLocalizedString("login_error_msg", comment: ""))
                 }else{

@@ -389,16 +389,17 @@ class MedicineViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         let dayInWeek = dateFormatter.string(from: date)
-        var id = Int()
 
         //Copy this bit to wherever you need the user
         UserService.getPatientInstance(withCompletionHandler: { patient in
-            if let temp = patient{
-                id = temp.id
+            guard let patient = patient else {
+                UserService.logOut()
+                return
             }
-        })
         
-        ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: id)
+        print("TEESSSSTT: \(dayInWeek) \(patient.id)")
+        
+            ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: patient.id)
             .responseData(completionHandler: { [weak self] (response) in
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
@@ -432,6 +433,7 @@ class MedicineViewController: UIViewController {
                     
                 }
             })
+        })
     }
     
     func getMedicines(){
