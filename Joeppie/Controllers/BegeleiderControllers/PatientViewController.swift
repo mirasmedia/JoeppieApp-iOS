@@ -14,7 +14,11 @@ class PatientViewController: UIViewController {
     
 
     @IBOutlet weak var arrowImageBaxter: UIImageView!
+    @IBOutlet weak var arrowImageBaxterlist: UIImageView!
+    
     @IBOutlet weak var imageNoChartData: UIImageView!
+ 
+    @IBOutlet weak var showBaxterScreenButton: UIButton!
     @IBOutlet weak var patientName: UILabel!
     @IBOutlet weak var patientchartstableview: UITableView!
     @IBOutlet weak var labelNoChartData: UILabel!
@@ -31,13 +35,10 @@ class PatientViewController: UIViewController {
         }
         
         addMediButton.setTitle("Medicatie Toevoegen", for: .normal)
-<<<<<<< Updated upstream
-        patientName.text = patient!.firstName+" "+patient!.lastName
-=======
         showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
-       
->>>>>>> Stashed changes
+        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
         arrowImageBaxter.image=UIImage(named: "arrow_right")
+        arrowImageBaxterlist.image=UIImage(named: "arrow_right")
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
         patientchartstableview.register(nib, forCellReuseIdentifier: "ChartViewCell")
         patientchartstableview.allowsSelection = false;
@@ -53,6 +54,17 @@ class PatientViewController: UIViewController {
         }
         addMedicineVc.patient = patient
         self.navigationController?.pushViewController(addMedicineVc, animated: true)
+    }
+    
+    @IBAction func showBaxtersScreen(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+               guard let showPatientBaxtervc = storyboard.instantiateViewController(withIdentifier:
+                   "PatientBaxterViewController") as? PatientBaxterViewController else {
+                       fatalError("Unexpected destination:")
+               }
+               showPatientBaxtervc.patient = patient
+               self.navigationController?.pushViewController(showPatientBaxtervc, animated: true)
+        
     }
     
     @objc func showEditPatientView(){
@@ -222,3 +234,5 @@ extension PatientViewController:UITableViewDataSource{
         return cell
     }
 }
+
+

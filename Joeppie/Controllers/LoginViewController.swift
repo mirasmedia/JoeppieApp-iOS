@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+
+        //usernameTextField.text=""
+        //passwordTextField.text=""
         checkForUser()
     }
     
@@ -57,7 +61,6 @@ class LoginViewController: UIViewController {
     }
     
     @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
@@ -114,6 +117,8 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    
     @IBAction func logInButtonPressed(_ sender: Any) {
         guard let identiefier = usernameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
@@ -123,6 +128,7 @@ class LoginViewController: UIViewController {
                 guard let jsonData = response.data else { return }
                 let decoder = JSONDecoder()
                 let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
+                print(loginResponse?.token)
                 if loginResponse == nil{
                     Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("login_error_title", comment: ""), msg: NSLocalizedString("login_error_msg", comment: ""))
                 }else{
