@@ -84,6 +84,8 @@
 		EA5D4D40241AB3DD0005F1F2 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		EA60EF59239FE89800270B2C /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		EA61616E239E9FD000076091 /* Medicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
+		EA76DCDE2423DFDE001C3290 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA76DCE22423E02C001C3290 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7912C423A1375F0003BD6A /* TapbarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapbarUI.swift; sourceTree = "<group>"; };
 		EA7CA3D4242268A4009E698D /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7CA3D824226A87009E698D /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +157,6 @@
 				10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */,
 				EA93800B241FCEFA009D934B /* PatientBaxterViewController.swift */,
 				10887ED42422422100C28D3D /* AddDoseController.swift */,
-
 			);
 			path = BegeleiderControllers;
 			sourceTree = "<group>";
@@ -170,6 +171,8 @@
 		B807F34D5E4AB4EC5105962C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA76DCE22423E02C001C3290 /* Charts.framework */,
+				EA76DCDE2423DFDE001C3290 /* Charts.framework */,
 				EA7CA3DC24226C9A009E698D /* Charts.framework */,
 				EA7CA3D824226A87009E698D /* Charts.framework */,
 				EA7CA3D4242268A4009E698D /* Charts.framework */,
@@ -647,7 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8XSS3798PL;
+				DEVELOPMENT_TEAM = RGDXRVG3KD;
 				INFOPLIST_FILE = Joeppie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -675,7 +678,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8XSS3798PL;
+				DEVELOPMENT_TEAM = P36Q7AUH67;
 				INFOPLIST_FILE = Joeppie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -689,7 +692,7 @@
 					"-framework",
 					"\"SwiftKeychainWrapper\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zczcasd;
+				PRODUCT_BUNDLE_IDENTIFIER = wqwead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
