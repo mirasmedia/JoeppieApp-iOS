@@ -64,16 +64,16 @@ class ApiService {
     }
         
     //(GET)/baxters
-    static func getBaxterClient(dayOfWeek:String,patientId:String) -> (DataRequest) {
+    static func getBaxterClient(dayOfWeek: String, patientId: Int) -> (DataRequest) {
         var headers : [String : String] = [:]
-        var parameters : [String:String] = [:]
+        var parameters : [String : Any] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
             parameters["patient"] = "\(patientId)"
             parameters["day_of_week"] = "\(dayOfWeek)"
         }
         
-        return Alamofire.request(baseURL + "/baxters?_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/baxters??patient=\(patientId)&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
     }
     //(GET)/medicines
     static func getMedicines() -> (DataRequest) {

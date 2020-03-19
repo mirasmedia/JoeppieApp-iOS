@@ -130,7 +130,15 @@ class MedicineViewController: UIViewController {
         
         // TODO : hardcoded id ?!?!? add connection checker, move additional func to an helper
         var baxters:[Baxter]?
-        ApiService.getBaxterClient(dayOfWeek: nextdayString, patientId: "2")
+        
+        //Copy this bit to wherever you need the user
+        var id = Int()
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            if let temp = patient{
+                id = temp.id
+            }
+        })
+        ApiService.getBaxterClient(dayOfWeek: nextdayString, patientId: id)
             .responseData(completionHandler: { [weak self] (response) in
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
@@ -390,7 +398,7 @@ class MedicineViewController: UIViewController {
             }
         })
         
-        ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: String(id))
+        ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: id)
             .responseData(completionHandler: { [weak self] (response) in
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
