@@ -30,9 +30,13 @@ class PatientViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
         
+        if let temp = patient{
+            patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"
+        }
+        
         addMediButton.setTitle("Medicatie Toevoegen", for: .normal)
         showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
-        patientName.text = patient!.firstName+" "+patient!.lastName
+        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
         arrowImageBaxter.image=UIImage(named: "arrow_right")
         arrowImageBaxterlist.image=UIImage(named: "arrow_right")
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
