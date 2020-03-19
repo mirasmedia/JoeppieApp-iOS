@@ -225,6 +225,24 @@ class ApiService {
     }
     
     //(POST)/doses
+    static func createNewBaxter(patientId: Int, intakeTime: String, doses: [Int], dayOfWeek: String) -> (DataRequest) {
+        var headers : [String : String] = [:]
+        var parameters : [String: Any] = [:]
+        parameters["patient"] = patientId
+        parameters["intake_time"] = intakeTime
+        parameters["doses"] = doses
+        parameters["day_of_week"] = dayOfWeek
+        
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        return Alamofire.request(baseURL + "/baxters", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
+    }
+    
+    //(POST)/doses
     static func createNewDose(amount: Int, medicineId: Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         var parameters : [String: Int] = [:]

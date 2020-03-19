@@ -19,7 +19,7 @@ class MedicineAddViewController: UIViewController {
     var selectedDay: String?
     var deletePlanetIndexPath: IndexPath? = nil
     var deletePlantDose: Dose? = nil
-    var baxterTime = Date()
+    var baxterTime = String()
     @IBOutlet weak var inputTime: UITextField!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var dayOfWeek: UITextField!
@@ -44,8 +44,7 @@ class MedicineAddViewController: UIViewController {
         addedDosesTable.register(UINib(nibName: "AddedDoseCell", bundle: nil), forCellReuseIdentifier: "AddedDoseCell")
         addedDosesTable.isHidden = true
         
-        weekDays = [NSLocalizedString("day_all_week", comment: ""),
-        NSLocalizedString("day_monday", comment: ""),
+        weekDays = [NSLocalizedString("day_monday", comment: ""),
         NSLocalizedString("day_tuesday", comment: ""),
         NSLocalizedString("day_wednesday", comment: ""),
         NSLocalizedString("day_thursday", comment: ""),
@@ -63,12 +62,46 @@ class MedicineAddViewController: UIViewController {
             print("the textfield'd value is from the array")
             if listOfCreatedDoses.count > 0{
                 // TODO Save BAXTER into DB
+                saveBaxter()
             }else{
                 Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")
             }
         }
         
         // TODO Throw Error
+    }
+    
+    private func saveBaxter(){
+        guard let patientId = patient?.id else { return }
+        guard let day = selectedDay else {return}
+        var doses = [Int]()
+        
+        for x in listOfCreatedDoses{
+            doses.append(x.id)
+        }
+        
+        if Reachability.isConnectedToNetwork(){
+            ApiService.createNewBaxter(patientId: patientId, intakeTime: baxterTime, doses: doses, dayOfWeek: day)
+            .responseData(completionHandler: { (response) in
+            guard let jsonData = response.data else { return }
+                
+                switch(response.result) {
+                case .success(_):
+                        // TODO: Update baxters list of patient
+                    print("DONE MESSAGr\(response.result.description)")
+                    self.closeView()
+                case .failure(_):
+                    print("EROOR MESSAGr\(response.result.error)")
+                    Errorpopup.displayErrorMessage(vc: self, title: "Failed", msg: "Oeps! something went wrong!")
+                }
+            })
+        }
+        
+        
+    }
+    
+    private func closeView(){
+        navigationController?.popViewController(animated: true)
     }
     
     func addDosesToList (_ doseId: Int){
@@ -122,7 +155,7 @@ class MedicineAddViewController: UIViewController {
         inputTime.text = dateFormatter.string(from: timePicker.date)
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        baxterTime = timePicker.date
+        baxterTime = dateFormatter.string(from: timePicker.date)
     }
     
     
