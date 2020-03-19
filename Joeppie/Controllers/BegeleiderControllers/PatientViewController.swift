@@ -26,8 +26,17 @@ class PatientViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
         
+        if let temp = patient{
+            patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"
+        }
+        
         addMediButton.setTitle("Medicatie Toevoegen", for: .normal)
+<<<<<<< Updated upstream
         patientName.text = patient!.firstName+" "+patient!.lastName
+=======
+        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
+       
+>>>>>>> Stashed changes
         arrowImageBaxter.image=UIImage(named: "arrow_right")
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
         patientchartstableview.register(nib, forCellReuseIdentifier: "ChartViewCell")
