@@ -19,6 +19,7 @@ class MedicineAddViewController: UIViewController {
     var selectedDay: String?
     var deletePlanetIndexPath: IndexPath? = nil
     var deletePlantDose: Dose? = nil
+    var baxterTime = Date()
     @IBOutlet weak var inputTime: UITextField!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var dayOfWeek: UITextField!
@@ -61,11 +62,13 @@ class MedicineAddViewController: UIViewController {
         if let txt = dayOfWeek.text, weekDays.contains(txt) {
             print("the textfield'd value is from the array")
             if listOfCreatedDoses.count > 0{
-                
+                // TODO Save BAXTER into DB
             }else{
                 Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")
             }
         }
+        
+        // TODO Throw Error
     }
     
     func addDosesToList (_ doseId: Int){
@@ -117,6 +120,9 @@ class MedicineAddViewController: UIViewController {
     @objc func timePickerChanged(datePicker: UIDatePicker) {
         dateFormatter.dateFormat = "HH : mm"
         inputTime.text = dateFormatter.string(from: timePicker.date)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        baxterTime = timePicker.date
     }
     
     
@@ -194,9 +200,6 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource,
         dayOfWeek.text = selectedDay
     }
     
-    
-    ///// TABLEVIEW
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 //            listOfCreatedDoses.remove(at: indexPath.row)
@@ -214,7 +217,7 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource,
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddedDoseCell", for: indexPath) as? AddedDoseCell else {
-                fatalError("The dequeued cell is not an instance of PatientTableViewCell")
+                fatalError("The dequeued cell is not an instance of AddedDoseCell")
             }
             
             let x = listOfCreatedDoses[indexPath.row]
@@ -225,6 +228,7 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource,
         }
     
         
+//        TODO: EDIT ADDED DOSE
 //        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //            self.selectedMedicine = listOfMedicines[indexPath.row]
 //            selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)

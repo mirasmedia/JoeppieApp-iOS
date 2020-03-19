@@ -220,6 +220,8 @@ class ApiService {
             headers["Authorization"] = "Bearer \(token)"
         }
         return Alamofire.request(baseURL + "/doses/\(doseId)", method: .delete, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
     
     //(POST)/doses
@@ -234,7 +236,5 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/doses", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
 }

@@ -882,7 +882,136 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLC-IV-LN5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2181.5999999999999" y="1607.9460269865069"/>
+            <point key="canvasLocation" x="2006" y="1610"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Zwa-zy-XtI">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fe5-ff-vGD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6AB-Dw-d5a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4B-ba-aLg">
+                                <rect key="frame" x="20" y="203.5" width="335" height="260"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgE-U6-ZFL">
+                                        <rect key="frame" x="20" y="220" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="dissmissView:" destination="fe5-ff-vGD" eventType="touchUpInside" id="SIr-HP-XXK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93w-E8-dcx">
+                                        <rect key="frame" x="245" y="220" width="70" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="NHH-dc-157"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="SAVE"/>
+                                        <connections>
+                                            <action selector="saveDoses:" destination="fe5-ff-vGD" eventType="touchUpInside" id="LCE-Bq-tS6"/>
+                                        </connections>
+                                    </button>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="0Vt-aQ-qW0">
+                                        <rect key="frame" x="7.5" y="0.0" width="320" height="216"/>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="93w-E8-dcx" secondAttribute="bottom" constant="10" id="351-sa-qog"/>
+                                    <constraint firstAttribute="trailing" secondItem="93w-E8-dcx" secondAttribute="trailing" constant="20" id="78m-yM-Naa"/>
+                                    <constraint firstItem="0Vt-aQ-qW0" firstAttribute="top" secondItem="i4B-ba-aLg" secondAttribute="top" id="Cgb-g8-CGS"/>
+                                    <constraint firstAttribute="height" constant="260" id="eG7-l0-0ft"/>
+                                    <constraint firstItem="0Vt-aQ-qW0" firstAttribute="centerX" secondItem="i4B-ba-aLg" secondAttribute="centerX" id="iT3-zQ-29w"/>
+                                    <constraint firstItem="IgE-U6-ZFL" firstAttribute="leading" secondItem="i4B-ba-aLg" secondAttribute="leading" constant="20" id="n8x-fo-r0P"/>
+                                    <constraint firstAttribute="bottom" secondItem="IgE-U6-ZFL" secondAttribute="bottom" constant="10" id="sd9-aS-1T2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.58419212730000003" green="0.59162893790000004" blue="0.63571851499999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Tv0-ow-evG" firstAttribute="trailing" secondItem="i4B-ba-aLg" secondAttribute="trailing" constant="20" id="2kG-3o-1fZ"/>
+                            <constraint firstItem="i4B-ba-aLg" firstAttribute="centerX" secondItem="Tv0-ow-evG" secondAttribute="centerX" id="8i1-6L-0xw"/>
+                            <constraint firstItem="i4B-ba-aLg" firstAttribute="centerY" secondItem="Tv0-ow-evG" secondAttribute="centerY" id="CZ1-PC-EFL"/>
+                            <constraint firstItem="i4B-ba-aLg" firstAttribute="leading" secondItem="Tv0-ow-evG" secondAttribute="leading" constant="20" id="Nfl-R7-S0x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tv0-ow-evG"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCancel" destination="IgE-U6-ZFL" id="HFP-Tv-N5I"/>
+                        <outlet property="btnSave" destination="93w-E8-dcx" id="Lhr-of-kx1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMU-da-7zn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681" y="1612"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2kR-c1-xzZ">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ndC-Ww-NTc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4s7-eR-3tc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tv-w2-qoV">
+                                <rect key="frame" x="20" y="203.5" width="335" height="260"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bj7-yh-tOQ">
+                                        <rect key="frame" x="20" y="220" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="dissmissView:" destination="ndC-Ww-NTc" eventType="touchUpInside" id="fK2-Q5-f2t"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-BP-B24">
+                                        <rect key="frame" x="245" y="220" width="70" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="s36-Yu-MZY"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="SAVE"/>
+                                        <connections>
+                                            <action selector="saveDoses:" destination="ndC-Ww-NTc" eventType="touchUpInside" id="h7T-PS-mnA"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jk8-wE-Dsl">
+                                        <rect key="frame" x="0.0" y="10" width="335" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Jk8-wE-Dsl" firstAttribute="top" secondItem="1tv-w2-qoV" secondAttribute="top" constant="10" id="3PR-oD-jKB"/>
+                                    <constraint firstAttribute="height" constant="260" id="RO1-nv-Vy0"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bj7-yh-tOQ" secondAttribute="bottom" constant="10" id="WPv-jo-yN1"/>
+                                    <constraint firstItem="Bj7-yh-tOQ" firstAttribute="leading" secondItem="1tv-w2-qoV" secondAttribute="leading" constant="20" id="Xte-jd-4nb"/>
+                                    <constraint firstAttribute="trailing" secondItem="uKk-BP-B24" secondAttribute="trailing" constant="20" id="XvK-Nz-2Cn"/>
+                                    <constraint firstAttribute="bottom" secondItem="uKk-BP-B24" secondAttribute="bottom" constant="10" id="YVV-Eg-dVp"/>
+                                    <constraint firstItem="Jk8-wE-Dsl" firstAttribute="leading" secondItem="1tv-w2-qoV" secondAttribute="leading" id="aFc-bJ-5f4"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jk8-wE-Dsl" secondAttribute="trailing" id="djQ-bc-xmg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.58419212730000003" green="0.59162893790000004" blue="0.63571851499999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1tv-w2-qoV" firstAttribute="centerY" secondItem="LXF-UV-SBr" secondAttribute="centerY" id="0W9-Rl-NFC"/>
+                            <constraint firstItem="1tv-w2-qoV" firstAttribute="leading" secondItem="LXF-UV-SBr" secondAttribute="leading" constant="20" id="LdT-1y-30n"/>
+                            <constraint firstItem="LXF-UV-SBr" firstAttribute="trailing" secondItem="1tv-w2-qoV" secondAttribute="trailing" constant="20" id="QMP-Qs-kFb"/>
+                            <constraint firstItem="1tv-w2-qoV" firstAttribute="centerX" secondItem="LXF-UV-SBr" secondAttribute="centerX" id="YKA-ob-bA9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LXF-UV-SBr"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCancel" destination="Bj7-yh-tOQ" id="6lx-hW-FNt"/>
+                        <outlet property="btnSave" destination="uKk-BP-B24" id="lb3-tH-l53"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RzQ-Nx-6Sh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="1612"/>
         </scene>
     </scenes>
     <resources>
