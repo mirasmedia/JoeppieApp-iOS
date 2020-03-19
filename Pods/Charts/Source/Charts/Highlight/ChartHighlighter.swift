@@ -113,7 +113,7 @@ open class ChartHighlighter : NSObject, IHighlighter
         }
     }
 
-    // - Shahin: - Utilities
+    // - MARK: - Utilities
     
     /// - Returns: The `ChartHighlight` of the closest value on the x-y cartesian axes
     internal func closestSelectionDetailByPixel(

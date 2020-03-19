@@ -15,9 +15,9 @@ import CoreGraphics
 @objc
 public protocol ICandleChartDataSet: ILineScatterCandleRadarChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// the space that is left out on the left and right side of each candle,
     /// **default**: 0.1 (10%), max 0.45, min 0.0

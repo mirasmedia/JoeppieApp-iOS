@@ -26,7 +26,7 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet, ICandleChartD
         super.init(entries: entries, label: label)
     }
     
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
     open override func calcMinMax(entry e: ChartDataEntry)
     {
@@ -70,7 +70,7 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet, ICandleChartD
         }
     }
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// the space between the candle entries
     ///

@@ -127,6 +127,8 @@ class PatientBaxterViewController: UIViewController {
     
             }
         }
+        
+
         self.tableview.reloadData()
         
     }
@@ -209,8 +211,8 @@ class PatientBaxterViewController: UIViewController {
           let ingenomen = UIContextualAction(style: .destructive, title: "Verwijderen") { (action, sourceView, completionHandler) in
               let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: "Weet u zeker dat u dit wilt verwijderen?", preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
-                self.deleteDose(dose: self.baxterlist[indexPath.row].doses![indexPath.section])
-                self.baxterlist[indexPath.row].doses?.remove(at: indexPath.section)
+                self.deleteDose(dose: self.baxterlist[indexPath.section].doses![indexPath.row])
+                self.baxterlist[indexPath.section].doses?.remove(at: indexPath.row)
                 self.handleBaxters()
                   
               }))

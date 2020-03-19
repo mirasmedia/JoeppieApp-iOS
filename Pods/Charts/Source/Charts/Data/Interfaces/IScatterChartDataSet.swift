@@ -15,9 +15,9 @@ import CoreGraphics
 @objc
 public protocol IScatterChartDataSet: ILineScatterCandleRadarChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// The size the scatter shape will have
     var scatterShapeSize: CGFloat { get }

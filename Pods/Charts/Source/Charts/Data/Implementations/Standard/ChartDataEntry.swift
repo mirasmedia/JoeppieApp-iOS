@@ -73,14 +73,14 @@ open class ChartDataEntry: ChartDataEntryBase, NSCopying
         self.data = data
     }
         
-    // Shahin: NSObject
+    // MARK: NSObject
     
     open override var description: String
     {
         return "ChartDataEntry, x: \(x), y \(y)"
     }
     
-    // Shahin: NSCopying
+    // MARK: NSCopying
     
     open func copy(with zone: NSZone? = nil) -> Any
     {
@@ -94,7 +94,7 @@ open class ChartDataEntry: ChartDataEntryBase, NSCopying
     }
 }
 
-// Shahin: Equatable
+// MARK: Equatable
 extension ChartDataEntry/*: Equatable*/ {
     open override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? ChartDataEntry else { return false }

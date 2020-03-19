@@ -38,7 +38,7 @@ open class Fill: NSObject
     private var _image: CGImage?
     private var _layer: CGLayer?
     
-    // Shahin: Properties
+    // MARK: Properties
     
     @objc open var type: FillType
     {
@@ -90,7 +90,7 @@ open class Fill: NSObject
         return _layer
     }
     
-    // Shahin: Constructors
+    // MARK: Constructors
     
     public override init()
     {
@@ -168,7 +168,7 @@ open class Fill: NSObject
         _layer = CGLayer
     }
     
-    // Shahin: Constructors
+    // MARK: Constructors
     
     @objc open class func fillWithCGColor(_ CGColor: CGColor) -> Fill
     {
@@ -234,7 +234,7 @@ open class Fill: NSObject
         return Fill(CGLayer: CGLayer)
     }
     
-    // Shahin: Drawing code
+    // MARK: Drawing code
     
     /// Draws the provided path in filled mode with the provided area
     @objc open func fillPath(

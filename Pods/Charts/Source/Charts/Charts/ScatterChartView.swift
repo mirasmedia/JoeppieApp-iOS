@@ -25,7 +25,7 @@ open class ScatterChartView: BarLineChartViewBase, ScatterChartDataProvider
         xAxis.spaceMax = 0.5
     }
     
-    // Shahin: - ScatterChartDataProvider
+    // MARK: - ScatterChartDataProvider
     
     open var scatterData: ScatterChartData? { return _data as? ScatterChartData }
 }

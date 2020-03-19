@@ -507,7 +507,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
     
-    // Shahin: - Gestures
+    // MARK: - Gestures
     
     private enum GestureScaleAxis
     {
@@ -978,7 +978,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         return false
     }
     
-    /// Shahin: Viewport modifiers
+    /// MARK: Viewport modifiers
     
     /// Zooms in by 1.4, into the charts center.
     @objc open func zoomIn()
@@ -1519,7 +1519,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         calculateOffsets()
     }
 
-    // Shahin: - Accessors
+    // MARK: - Accessors
     
     /// - Returns: The range of the specified axis.
     @objc open func getAxisRange(axis: YAxis.AxisDependency) -> Double
@@ -1905,7 +1905,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
     
-    // Shahin: - BarLineScatterCandleBubbleChartDataProvider
+    // MARK: - BarLineScatterCandleBubbleChartDataProvider
     
     /// - Returns: The Transformer class that contains all matrices and is
     /// responsible for transforming values into pixels on the screen and

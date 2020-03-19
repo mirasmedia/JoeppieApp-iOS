@@ -35,7 +35,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying
         self.label = label
     }
     
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
     /// Use this method to tell the data set that the underlying data has changed
     open func notifyDataSetChanged()
@@ -183,7 +183,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying
         fatalError("clear is not implemented in ChartBaseDataSet")
     }
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// All the colors that are used for this DataSet.
     /// Colors are reused as soon as the number of Entries the DataSet represents is higher than the size of the colors array.
@@ -393,7 +393,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying
         return visible
     }
     
-    // Shahin: - NSObject
+    // MARK: - NSObject
     
     open override var description: String
     {
@@ -407,7 +407,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying
         }
     }
     
-    // Shahin: - NSCopying
+    // MARK: - NSCopying
     
     open func copy(with zone: NSZone? = nil) -> Any 
     {

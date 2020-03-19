@@ -42,9 +42,9 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         initialize()
     }
     
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// The drawing mode for this line dataset
     ///
@@ -151,7 +151,7 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         }
     }
     
-    // Shahin: NSCopying
+    // MARK: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

@@ -15,9 +15,9 @@ import CoreGraphics
 @objc
 public protocol IBarChartDataSet: IBarLineScatterCandleBubbleChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// `true` if this DataSet is stacked (stacksize > 1) or not.
     var isStacked: Bool { get }
