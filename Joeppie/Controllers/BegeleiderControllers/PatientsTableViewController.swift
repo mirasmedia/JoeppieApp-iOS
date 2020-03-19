@@ -27,6 +27,8 @@ class PatientsTableViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
         self.refreshControl = refreshControl
+
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         

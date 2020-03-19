@@ -28,6 +28,7 @@ class UserService {
         userInstance = nil
         coachInstance = nil
         patientInstance = nil
+    
     }
     
     
