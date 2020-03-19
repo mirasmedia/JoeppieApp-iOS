@@ -12,9 +12,7 @@ import SwiftKeychainWrapper
 
 class ApiService {
     private static let baseURL = "https://api.stider.space"
-    
-    //Shahin: - User
-    
+        
     //(POST)/login
     static func logUserIn(withIdentiefier identifier: String, andPassword password: String) -> (DataRequest) {
         var parameters : [String:String] = [:]
@@ -39,8 +37,32 @@ class ApiService {
         return Alamofire.request(baseURL + "/auth/local/register", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
-    //ERCAN:
+    //Ercan:(delete)/dose
+     static func deleteBaxter(baxter:Baxter) -> (DataRequest) {
+         var headers : [String : String] = [:]
+         var parameters : [String:String] = [:]
+
+         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+             headers["Authorization"] = "Bearer \(token)"
+         }
+         
+        return Alamofire.request(baseURL + "/baxters/"+String(baxter.id), method: .delete, parameters: parameters,headers: headers)
+     }
     
+    static func getAllBaxtersPatient(patientId:Int) -> (DataRequest){
+        
+        var headers : [String : String] = [:]
+        var parameters : [String:String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+
+        parameters["patient.id"] = "\(patientId)"
+        
+        return Alamofire.request(baseURL + "/baxters", method: .get, parameters: parameters,headers: headers)
+        
+    }
+        
     //(GET)/baxters
     static func getBaxterClient(dayOfWeek:String,patientId:String) -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -76,6 +98,18 @@ class ApiService {
         return Alamofire.request(baseURL + "/doses/"+id, method: .put, parameters: parameters,headers: headers)
     }
     
+    //Ercan:(delete)/dose
+    static func deleteDose(id:String) -> (DataRequest) {
+        var headers : [String : String] = [:]
+        var parameters : [String:String] = [:]
+
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        return Alamofire.request(baseURL + "/doses/"+id, method: .delete, parameters: parameters,headers: headers)
+    }
+    
     //(put)/intake
     static func setIntake(dose:NestedDose, patient:Patient, timeNow:String, state:String) -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -106,7 +140,7 @@ class ApiService {
     
    
     
-    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String) -> (DataRequest) {
+    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String,patientId:Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         var parameters : [String:String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
@@ -114,12 +148,11 @@ class ApiService {
         }
         parameters["time_taken_in_gte"] = "\(greaterthandate)"
         parameters["time_taken_in_lte"] = "\(lowerthandate)"
+        parameters["patient.id"] = "\(patientId)"
         
         return Alamofire.request(baseURL + "/intakes", method: .get, parameters: parameters,headers: headers)
     }
     
-    
-    //Shahin: - Patient
     
     //(GET)/patients
     static func getPatients(forCoachId coachId : Int) -> (DataRequest) {
@@ -161,8 +194,6 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/users/\(userId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
     
     //(PUT)/patients
@@ -179,8 +210,6 @@ class ApiService {
         }
         print(parameters)
         return Alamofire.request(baseURL + "/patients/\(patinetId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-            print("JSON:\(response.result.value)")}
     }
     
     //(GET)/patients
@@ -192,8 +221,6 @@ class ApiService {
         return Alamofire.request(baseURL + "/patients?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
-    //Shahin: - Coach
-    
     //(GET)/coaches
     static func getCoach(withUserId userId : Int) -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -202,6 +229,17 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/coaches?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+    }
+    
+    //(GET)/medicines
+    static func getAllMedicines() -> (DataRequest) {
+        var headers : [String : String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        return Alamofire.request(baseURL + "/medicines", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
     
 }

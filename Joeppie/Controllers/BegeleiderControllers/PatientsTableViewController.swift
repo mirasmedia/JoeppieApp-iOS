@@ -12,6 +12,8 @@ import SwiftKeychainWrapper
 class PatientsTableViewController: UITableViewController {
 
     var patients = [Patient]()
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
     
     @IBOutlet weak var logOutButton: UIBarButtonItem!
     @IBOutlet weak var addPatientButton: UIBarButtonItem!
@@ -25,6 +27,8 @@ class PatientsTableViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
         self.refreshControl = refreshControl
+
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
@@ -46,13 +50,12 @@ class PatientsTableViewController: UITableViewController {
                 guard let jsonData = response.data else { return }
 //                print(String(decoding: jsonData, as: UTF8.self))
 
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                
+                self.dateFormatter.locale = Locale.current
+                self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                guard let patients = try? decoder.decode([Patient].self, from: jsonData) else { return }
+                self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+                guard let patients = try? self.decoder.decode([Patient].self, from: jsonData) else { return }
                 self.patients = patients.sorted(by: {$0.firstName < $1.firstName})
                 self.patientsTableView.reloadData()
                 self.refreshControl?.endRefreshing()

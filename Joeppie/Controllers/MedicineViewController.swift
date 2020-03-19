@@ -32,7 +32,7 @@ class MedicineViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+           
         setup()
     }
     
@@ -532,7 +532,7 @@ class MedicineViewController: UIViewController {
             let minutes = calendar.component(.minute, from: dateTime)
             
             let time:String = String.init(format: "%02d:%02d", hour, minutes)
-            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + " "+time+" "+NSLocalizedString("hour", comment: "")
             alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
             alertvc.nameAlertView.text = self.patient?.firstName
             alertvc.stateAlertView.text = NSLocalizedString("was_on_time_text", comment: "")
@@ -574,7 +574,7 @@ class MedicineViewController: UIViewController {
             let minutes = calendar.component(.minute, from: dateTime)
             
             let time:String = String.init(format: "%02d:%02d", hour, minutes)
-            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "")+" "+time + NSLocalizedString("hour", comment: "")
             alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
         }
         else{
@@ -594,26 +594,12 @@ class MedicineViewController: UIViewController {
           alertvc.modalPresentationStyle = .fullScreen
           self.present(alertvc, animated: true, completion: nil)
           alertvc.imageAlertView.image = UIImage(named:"Joeppie_surprised")
-          alertvc.titleAlertView.text = "Kan beter!"
+          alertvc.titleAlertView.text = NSLocalizedString("can_better_text", comment: "")
           alertvc.nameAlertView.text = patient?.firstName
-          alertvc.stateAlertView.text = "Je bent te vroeg!"
+          alertvc.stateAlertView.text = NSLocalizedString("you_are_to_early", comment: "")
         
-         if (baxterlist.indices.contains(indexpath.section+1)){
-              let calendar = Calendar.current
-              let dateTime:Date = baxterlist[indexpath.section+1].intakeTime
-              let hour = calendar.component(.hour, from: dateTime)
-              let minutes = calendar.component(.minute, from: dateTime)
-              
-              let time:String = String.init(format: "%02d:%02d", hour, minutes)
-              alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
-              alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
-          }
-          else{
-              alertvc.timeNextMedicine.text = NSLocalizedString("today_we_finish", comment: "")
-              alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
-              alertvc.view.frame = view.bounds
-              alertvc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-          }
+          alertvc.timeNextMedicine.text = NSLocalizedString("hope_next_time_better", comment: "")
+          alertvc.titleNextMedicine.text = NSLocalizedString("thank_you", comment: "")
           Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
       }
     
@@ -680,16 +666,16 @@ class MedicineViewController: UIViewController {
             
         }
         else if(timeNow<maxStartTime){
-            let ingenomen = UIContextualAction(style: .destructive, title: "Je bent te vroeg!") { (action, sourceView, completionHandler) in
-                let alert = UIAlertController(title: "Weet u dit zeker?", message: "U neemt uw medicijn te vroeg in. Het is aanbevolen om op tijd in te nemen", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("you_are_to_early", comment: "")) { (action, sourceView, completionHandler) in
+                let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("you_take_medicine_to_early", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
                     self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
                     self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.EARLY.rawValue))
                     self.showAlertEarly(indexpath: indexPath)
                     self.getBaxters()
                 }))
                 
-                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .cancel, handler: nil))
                 self.present(alert, animated: true)
                 
             }
@@ -701,7 +687,7 @@ class MedicineViewController: UIViewController {
             
         }
         else{
-            let ingenomen = UIContextualAction(style: .destructive, title: "Je bent laat!") { (action, sourceView, completionHandler) in
+            let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("you_are_to_late", comment: "")) { (action, sourceView, completionHandler) in
                 
                 var date = Date()
                 let dateFormatter : DateFormatter = DateFormatter()
@@ -742,7 +728,7 @@ extension MedicineViewController:UITableViewDelegate{
         
         let time:String = String.init(format: "%02d:%02d", hour, minutes)
         
-        label.text = time + " uur"
+        label.text = time + " "+NSLocalizedString("hour", comment: "")
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)
