@@ -404,7 +404,8 @@ class MedicineViewController: UIViewController {
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
                 
-                if let json = try? JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers), let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+                if let json = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers),
+                    let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
                     //                    print(String(decoding: jsonData, as: UTF8.self))
                 } else {
                     print("json data malformed")
@@ -418,7 +419,7 @@ class MedicineViewController: UIViewController {
                 
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
-                let rs = try? decoder.decode([Baxter].self, from: response.data!)
+                let rs = try? decoder.decode([Baxter].self, from: jsonData)
                 self!.baxterlist = rs!
                 self!.setIntake()
                 self!.handleBaxters()
