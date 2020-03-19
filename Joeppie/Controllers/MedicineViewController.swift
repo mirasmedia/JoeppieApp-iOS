@@ -377,12 +377,20 @@ class MedicineViewController: UIViewController {
     
     
     func getBaxters(){
-        //        let date = Date()
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "EEEE"
-        //        let dayInWeek = dateFormatter.string(from: date)
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter.string(from: date)
+        var id = Int()
+
+        //Copy this bit to wherever you need the user
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            if let temp = patient{
+                id = temp.id
+            }
+        })
         
-        ApiService.getBaxterClient(dayOfWeek: "thursday", patientId: "2")
+        ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: String(id))
             .responseData(completionHandler: { [weak self] (response) in
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
