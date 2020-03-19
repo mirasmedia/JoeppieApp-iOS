@@ -729,7 +729,7 @@ class MedicineViewController: UIViewController {
     
 }
 
-extension MedicineViewController:UITableViewDelegate{
+extension MedicineViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         let label = UILabel(frame: CGRect(x: 0, y: 8, width: tableView.bounds.size.width, height: 21))
@@ -753,14 +753,10 @@ extension MedicineViewController:UITableViewDelegate{
         return headerView
         
     }
-    
-    
 }
 
 
-extension MedicineViewController:UITableViewDataSource{
-    
-    
+extension MedicineViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         var amount:Int = 0
         for baxter in baxterlist{
