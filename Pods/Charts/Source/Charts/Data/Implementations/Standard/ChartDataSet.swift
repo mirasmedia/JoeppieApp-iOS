@@ -50,7 +50,7 @@ open class ChartDataSet: ChartBaseDataSet
         self.init(entries: entries, label: "DataSet")
     }
     
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
 
     /// - Note: Calls `notifyDataSetChanged()` after setting a new value.
     /// - Returns: The array of y-values that this DataSet represents.
@@ -470,9 +470,9 @@ open class ChartDataSet: ChartBaseDataSet
         removeAll(keepingCapacity: true)
     }
     
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
 
-    // Shahin: - NSCopying
+    // MARK: - NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {
@@ -488,7 +488,7 @@ open class ChartDataSet: ChartBaseDataSet
     }
 }
 
-// Shahin: MutableCollection
+// MARK: MutableCollection
 extension ChartDataSet: MutableCollection {
     public typealias Index = Int
     public typealias Element = ChartDataEntry
@@ -519,14 +519,14 @@ extension ChartDataSet: MutableCollection {
     }
 }
 
-// Shahin: RandomAccessCollection
+// MARK: RandomAccessCollection
 extension ChartDataSet: RandomAccessCollection {
     public func index(before: Index) -> Index {
         return entries.index(before: before)
     }
 }
 
-// Shahin: RangeReplaceableCollection
+// MARK: RangeReplaceableCollection
 extension ChartDataSet: RangeReplaceableCollection {
     public func append(_ newElement: Element) {
         calcMinMax(entry: newElement)

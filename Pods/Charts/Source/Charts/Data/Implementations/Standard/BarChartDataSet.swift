@@ -35,7 +35,7 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
         initialize()
     }
 
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
     /// the maximum number of bars that are stacked upon each other, this value
     /// is calculated from the Entries that are added to the DataSet
@@ -135,7 +135,7 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
     /// array of labels used to describe the different values of the stacked bars
     open var stackLabels: [String] = []
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// the color used for drawing the bar-shadows. The bar shadows is a surface behind the bar that indicates the maximum value
     open var barShadowColor = NSUIColor(red: 215.0/255.0, green: 215.0/255.0, blue: 215.0/255.0, alpha: 1.0)
@@ -149,7 +149,7 @@ open class BarChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBarChartDat
     /// the alpha value (transparency) that is used for drawing the highlight indicator bar. min = 0.0 (fully transparent), max = 1.0 (fully opaque)
     open var highlightAlpha = CGFloat(120.0 / 255.0)
     
-    // Shahin: - NSCopying
+    // MARK: - NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

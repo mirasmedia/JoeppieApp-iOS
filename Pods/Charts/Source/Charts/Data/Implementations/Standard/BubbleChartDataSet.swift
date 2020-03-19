@@ -15,7 +15,7 @@ import CoreGraphics
 
 open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBubbleChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
     internal var _maxSize = CGFloat(0.0)
     
@@ -38,12 +38,12 @@ open class BubbleChartDataSet: BarLineScatterCandleBubbleChartDataSet, IBubbleCh
         }
     }
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// Sets/gets the width of the circle that surrounds the bubble when highlighted
     open var highlightCircleWidth: CGFloat = 2.5
     
-    // Shahin: - NSCopying
+    // MARK: - NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

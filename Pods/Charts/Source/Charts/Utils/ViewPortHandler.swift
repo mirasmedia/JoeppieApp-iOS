@@ -166,7 +166,7 @@ open class ViewPortHandler: NSObject
         return _chartWidth
     }
 
-    // Shahin: - Scaling/Panning etc.
+    // MARK: - Scaling/Panning etc.
     
     /// Zooms by the specified zoom factors.
     @objc open func zoom(scaleX: CGFloat, scaleY: CGFloat) -> CGAffineTransform
@@ -404,7 +404,7 @@ open class ViewPortHandler: NSObject
         return _touchMatrix
     }
     
-    // Shahin: - Boundaries Check
+    // MARK: - Boundaries Check
     
     @objc open func isInBoundsX(_ x: CGFloat) -> Bool
     {

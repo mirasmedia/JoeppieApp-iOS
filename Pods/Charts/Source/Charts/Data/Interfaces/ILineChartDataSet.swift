@@ -16,9 +16,9 @@ import CoreGraphics
 @objc
 public protocol ILineChartDataSet: ILineRadarChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// The drawing mode for this line dataset
     ///

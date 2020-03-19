@@ -49,7 +49,7 @@ public protocol ChartViewDelegate
 
 open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
 {
-    // Shahin: - Properties
+    // MARK: - Properties
     
     /// - Returns: The object representing all x-labels, this method can be used to
     /// acquire the XAxis object and modify it (e.g. change the position of the
@@ -155,7 +155,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         extraBottomOffset = bottom
     }
     
-    // Shahin: - Initializers
+    // MARK: - Initializers
     
     public override init(frame: CGRect)
     {
@@ -197,7 +197,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         self.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
     }
     
-    // Shahin: - ChartViewBase
+    // MARK: - ChartViewBase
     
     /// The data for the chart
     open var data: ChartData?
@@ -379,13 +379,13 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             attributes: attrs)
     }
     
-    // Shahin: - Accessibility
+    // MARK: - Accessibility
 
     open override func accessibilityChildren() -> [Any]? {
         return renderer?.accessibleChartElements
     }
 
-    // Shahin: - Highlighting
+    // MARK: - Highlighting
     
     /// The array of currently highlighted values. This might an empty if nothing is highlighted.
     @objc open var highlighted: [Highlight]
@@ -575,7 +575,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// The last value that was highlighted via touch.
     @objc open var lastHighlighted: Highlight?
   
-    // Shahin: - Markers
+    // MARK: - Markers
 
     /// draws all MarkerViews on the highlighted positions
     internal func drawMarkers(context: CGContext)
@@ -624,7 +624,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         return CGPoint(x: highlight.drawX, y: highlight.drawY)
     }
     
-    // Shahin: - Animation
+    // MARK: - Animation
     
     /// The animator responsible for animating chart values.
     @objc open var chartAnimator: Animator!
@@ -757,7 +757,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         _animator.animate(yAxisDuration: yAxisDuration)
     }
     
-    // Shahin: - Accessors
+    // MARK: - Accessors
 
     /// The current y-max value across all DataSets
     open var chartYMax: Double
@@ -994,7 +994,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         return Int(INT_MAX)
     }
     
-    // Shahin: - AnimatorDelegate
+    // MARK: - AnimatorDelegate
     
     open func animatorUpdated(_ chartAnimator: Animator)
     {
@@ -1006,7 +1006,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         delegate?.chartView?(self, animatorDidStop: chartAnimator)
     }
     
-    // Shahin: - Touches
+    // MARK: - Touches
     
     open override func nsuiTouchesBegan(_ touches: Set<NSUITouch>, withEvent event: NSUIEvent?)
     {

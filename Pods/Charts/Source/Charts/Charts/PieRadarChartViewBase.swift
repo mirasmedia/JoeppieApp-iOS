@@ -426,7 +426,7 @@ open class PieRadarChartViewBase: ChartViewBase
         return _rotationWithTwoFingers
     }
     
-    // Shahin: - Animation
+    // MARK: - Animation
     
     private var _spinAnimator: Animator!
     
@@ -465,7 +465,7 @@ open class PieRadarChartViewBase: ChartViewBase
         }
     }
     
-    // Shahin: - Gestures
+    // MARK: - Gestures
     
     private var _rotationGestureStartPoint: CGPoint!
     private var _isRotating = false

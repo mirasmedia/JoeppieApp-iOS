@@ -14,9 +14,9 @@ import Foundation
 @objc
 public protocol ILineScatterCandleRadarChartDataSet: IBarLineScatterCandleBubbleChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// Enables / disables the horizontal highlight-indicator. If disabled, the indicator is not drawn.
     var drawHorizontalHighlightIndicatorEnabled: Bool { get set }

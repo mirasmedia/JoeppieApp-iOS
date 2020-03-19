@@ -98,7 +98,7 @@ open class PieChartDataEntry: ChartDataEntry
         self.data = data
     }
     
-    // Shahin: Data property accessors
+    // MARK: Data property accessors
     
     @objc open var label: String?
     
@@ -108,7 +108,7 @@ open class PieChartDataEntry: ChartDataEntry
         set { y = newValue }
     }
         
-    // Shahin: NSCopying
+    // MARK: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

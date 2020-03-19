@@ -15,9 +15,9 @@ import CoreGraphics
 
 open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadarChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// The color that is used for filling the line surface area.
     private var _fillColor = NSUIColor(red: 140.0/255.0, green: 234.0/255.0, blue: 255.0/255.0, alpha: 1.0)
@@ -69,7 +69,7 @@ open class LineRadarChartDataSet: LineScatterCandleRadarChartDataSet, ILineRadar
         return drawFilledEnabled
     }
     
-    // Shahin: NSCopying
+    // MARK: NSCopying
     
     open override func copy(with zone: NSZone? = nil) -> Any
     {

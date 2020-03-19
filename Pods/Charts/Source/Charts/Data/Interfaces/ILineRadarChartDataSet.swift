@@ -15,9 +15,9 @@ import CoreGraphics
 @objc
 public protocol ILineRadarChartDataSet: ILineScatterCandleRadarChartDataSet
 {
-    // Shahin: - Data functions and accessors
+    // MARK: - Data functions and accessors
     
-    // Shahin: - Styling functions and accessors
+    // MARK: - Styling functions and accessors
     
     /// The color that is used for filling the line surface area.
     var fillColor: NSUIColor { get set }

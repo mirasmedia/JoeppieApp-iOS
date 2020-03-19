@@ -277,7 +277,7 @@ open class AxisBase: ComponentBase
         return _limitLines
     }
     
-    // Shahin: Custom axis ranges
+    // MARK: Custom axis ranges
     
     /// By calling this method, any custom minimum value that has been previously set is reseted, and the calculation is done automatically.
     @objc open func resetCustomAxisMin()
