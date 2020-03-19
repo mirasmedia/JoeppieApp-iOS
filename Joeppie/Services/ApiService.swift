@@ -213,6 +213,15 @@ class ApiService {
 
     }
     
+    //(DELETE)/Dose/{id}
+    static func deleteOneDose(doseId: Int) -> (DataRequest) {
+        var headers : [String : String] = [:]
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        return Alamofire.request(baseURL + "/doses/\(doseId)", method: .delete, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+    }
+    
     //(POST)/doses
     static func createNewDose(amount: Int, medicineId: Int) -> (DataRequest) {
         var headers : [String : String] = [:]

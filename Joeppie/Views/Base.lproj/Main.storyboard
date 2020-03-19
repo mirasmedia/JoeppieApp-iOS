@@ -753,7 +753,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9zZ-Ih-Sew">
-                                <rect key="frame" x="8" y="261" width="359" height="316"/>
+                                <rect key="frame" x="0.0" y="261" width="375" height="316"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -764,7 +764,7 @@
                             <constraint firstItem="ahl-jD-DL4" firstAttribute="leading" secondItem="8VO-Pc-7r3" secondAttribute="leading" constant="20" id="9VT-Ec-C5n"/>
                             <constraint firstItem="z9R-Xq-KzD" firstAttribute="top" secondItem="dDc-Gx-Tpr" secondAttribute="bottom" constant="20" id="HsD-ZA-GcT"/>
                             <constraint firstItem="dDc-Gx-Tpr" firstAttribute="leading" secondItem="LOo-fC-F7n" secondAttribute="trailing" constant="20" id="N0f-oN-neL"/>
-                            <constraint firstItem="9zZ-Ih-Sew" firstAttribute="leading" secondItem="8VO-Pc-7r3" secondAttribute="leading" constant="8" id="OsO-gl-Fb5"/>
+                            <constraint firstItem="9zZ-Ih-Sew" firstAttribute="leading" secondItem="8VO-Pc-7r3" secondAttribute="leading" id="OsO-gl-Fb5"/>
                             <constraint firstItem="8VO-Pc-7r3" firstAttribute="trailing" secondItem="z9R-Xq-KzD" secondAttribute="trailing" constant="20" id="Qpf-aG-nhV"/>
                             <constraint firstItem="ahl-jD-DL4" firstAttribute="top" secondItem="8VO-Pc-7r3" secondAttribute="top" constant="40" id="fSE-uB-Eld"/>
                             <constraint firstItem="LOo-fC-F7n" firstAttribute="top" secondItem="ahl-jD-DL4" secondAttribute="bottom" constant="73" id="gKr-oL-PRP"/>
@@ -775,7 +775,7 @@
                             <constraint firstItem="9zZ-Ih-Sew" firstAttribute="top" secondItem="z9R-Xq-KzD" secondAttribute="bottom" constant="20" id="ptT-XQ-643"/>
                             <constraint firstItem="8VO-Pc-7r3" firstAttribute="trailing" secondItem="dDc-Gx-Tpr" secondAttribute="trailing" constant="20" id="rBL-xV-ulB"/>
                             <constraint firstItem="8VO-Pc-7r3" firstAttribute="trailing" secondItem="AGh-LM-Y9t" secondAttribute="trailing" constant="20" id="sT7-0Y-gvW"/>
-                            <constraint firstItem="8VO-Pc-7r3" firstAttribute="trailing" secondItem="9zZ-Ih-Sew" secondAttribute="trailing" constant="8" id="whH-4R-5PK"/>
+                            <constraint firstItem="8VO-Pc-7r3" firstAttribute="trailing" secondItem="9zZ-Ih-Sew" secondAttribute="trailing" id="whH-4R-5PK"/>
                             <constraint firstItem="LOo-fC-F7n" firstAttribute="leading" secondItem="8VO-Pc-7r3" secondAttribute="leading" constant="20" id="zQ9-AG-yXJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8VO-Pc-7r3"/>

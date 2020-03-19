@@ -13,6 +13,8 @@
 		106B5E57241948B90097B0E1 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E56241948B90097B0E1 /* PatientViewController.swift */; };
 		10887ED52422422100C28D3D /* AddDoseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887ED42422422100C28D3D /* AddDoseController.swift */; };
 		10887EDA2422A06B00C28D3D /* DoseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887ED92422A06B00C28D3D /* DoseCreate.swift */; };
+		10887EDC242379F400C28D3D /* AddedDoseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10887EDB242379F400C28D3D /* AddedDoseCell.xib */; };
+		10887EDE24237B7100C28D3D /* AddedDoseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887EDD24237B7100C28D3D /* AddedDoseCell.swift */; };
 		10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A240241C0BC700ED1B84 /* NewUser.swift */; };
 		10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
@@ -64,6 +66,8 @@
 		106B5E56241948B90097B0E1 /* PatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
 		10887ED42422422100C28D3D /* AddDoseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDoseController.swift; sourceTree = "<group>"; };
 		10887ED92422A06B00C28D3D /* DoseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseCreate.swift; sourceTree = "<group>"; };
+		10887EDB242379F400C28D3D /* AddedDoseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddedDoseCell.xib; sourceTree = "<group>"; };
+		10887EDD24237B7100C28D3D /* AddedDoseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedDoseCell.swift; sourceTree = "<group>"; };
 		10D6A240241C0BC700ED1B84 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineAddViewController.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +245,7 @@
 				EAB719CC23A8026700211816 /* ChartViewCell.xib */,
 				EA1B0F2B239D82C6006094BF /* MedicineCell.xib */,
 				F9EEF8E7239C030C00C2C714 /* PatientTableViewCell.xib */,
+				10887EDB242379F400C28D3D /* AddedDoseCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				EA1B0F2D239D83EC006094BF /* MedicineCell.swift */,
 				F9EEF8E6239C030C00C2C714 /* PatientTableViewCell.swift */,
 				EAB719D023A8072000211816 /* ChartViewCell.swift */,
+				10887EDD24237B7100C28D3D /* AddedDoseCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 				F9F48277238BF69300299F21 /* Assets.xcassets in Resources */,
 				F9F48275238BF69100299F21 /* Main.storyboard in Resources */,
 				EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */,
+				10887EDC242379F400C28D3D /* AddedDoseCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +446,7 @@
 				F9137BEB23ACF1C600BCA7E1 /* Constants.swift in Sources */,
 				EAD1D7E023C6567F00863DD8 /* TouchIDAuthentication.swift in Sources */,
 				F9E8DD87238DDF1F0055460A /* ApiService.swift in Sources */,
+				10887EDE24237B7100C28D3D /* AddedDoseCell.swift in Sources */,
 				EA1B0F2E239D83EC006094BF /* MedicineCell.swift in Sources */,
 				F9137BE723ACD12A00BCA7E1 /* Role.swift in Sources */,
 				F9EEF8E8239C030C00C2C714 /* PatientTableViewCell.swift in Sources */,
