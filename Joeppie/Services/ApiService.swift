@@ -73,7 +73,9 @@ class ApiService {
             parameters["day_of_week"] = "\(dayOfWeek)"
         }
         
-        return Alamofire.request(baseURL + "/baxters??patient=\(patientId)&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/baxters?&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
     //(GET)/medicines
     static func getMedicines() -> (DataRequest) {
