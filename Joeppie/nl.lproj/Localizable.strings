@@ -56,7 +56,8 @@
 "dose_amount_input_error" = "Kies een nummer tussen 1 en 9";
 
 // Add medicine
-"intake_time" = "Intake time";
+"intake_time" = "Tijd selecteren";
+"intake_day" = "Dag selecteren";
 "select_medicine" = "Selecteer een medicijn";
 "add_doses" = "Dose medicijn toevoegen";
 "amount_lbl" = "Aantal";
