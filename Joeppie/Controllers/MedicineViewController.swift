@@ -356,11 +356,9 @@ class MedicineViewController: UIViewController {
                     
                     
                     let b = calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day)
-                    print(b)
                     if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month)&&calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
                         setIntake(dose: (baxterlist[indexbaxter].doses?[indexdose])! , patient: self.patient!, timeNow: dateString, state: String(DoseTakenTime.NOT_TAKEN.rawValue))
-                        print(baxterlist[indexbaxter].doses![indexdose].lastTaken)
-                        print(baxterlist[indexbaxter].intakeTime)
+
                         self.updateDose(id: String(self.baxterlist[indexbaxter].doses![indexdose].id), lasttaken: dateString)
                         baxterlist[indexbaxter].doses![indexdose].lastTaken = now
                     }
@@ -462,8 +460,6 @@ class MedicineViewController: UIViewController {
         let hour = calendar.component(.hour, from: dateTime)
         let minutes = calendar.component(.minute, from: dateTime)
         
-        print(String(hour) + ":" + String(minutes))
-        
         let curTime:String = String.init(format: "%02d:%02d", hour, minutes)
         
         
@@ -474,8 +470,6 @@ class MedicineViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         indicator?.stopAnimating()
-        print("row" + String(indexPath.row))
-        print ("sec" + String(indexPath.section))
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
         let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
@@ -530,7 +524,6 @@ class MedicineViewController: UIViewController {
         else if (baxterlist.indices.contains(indexpath.section+1)){
             let calendar = Calendar.current
             
-            print(indexpath.section)
             let dateTime:Date =  baxterlist[indexpath.section+1].intakeTime
             let hour = calendar.component(.hour, from: dateTime)
             let minutes = calendar.component(.minute, from: dateTime)
@@ -610,7 +603,7 @@ class MedicineViewController: UIViewController {
     func setIntake(dose:NestedDose, patient:Patient, timeNow:String, state:String){
         ApiService.setIntake(dose:dose, patient: patient, timeNow: timeNow, state: state)
             .responseData(completionHandler: { [weak self] (response) in
-                print(response)
+//                print(response)
             })
     }
     
@@ -651,11 +644,7 @@ class MedicineViewController: UIViewController {
         
         if timeNow >= maxStartTime && timeNow <= maxEndTime
         {
-            print("The time is between the range")
             let ingenomen = UIContextualAction(style: .destructive, title: "Medicatie ingenomen") { (action, sourceView, completionHandler) in
-                
-      
-                print(formatedDate)
                 
                 self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
                 self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.ON_TIME.rawValue))
@@ -686,7 +675,6 @@ class MedicineViewController: UIViewController {
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
             let swipeAction = UISwipeActionsConfiguration(actions: [ingenomen])
             swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
-            print(maxEndTime)
             return swipeAction
             
         }
@@ -727,8 +715,6 @@ extension MedicineViewController: UITableViewDelegate{
         let dateTime:Date =  baxterlist[section].intakeTime
         let hour = calendar.component(.hour, from: dateTime)
         let minutes = calendar.component(.minute, from: dateTime)
-        
-        print(String(hour) + ":" + String(minutes))
         
         let time:String = String.init(format: "%02d:%02d", hour, minutes)
         

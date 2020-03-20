@@ -27,11 +27,6 @@ class TapBarController: UITabBarController {
         })
     }
     
-    
-    @objc func handleTap() {
-       print("testeeee")
-    }
-    
     private var bounceAnimation: CAKeyframeAnimation = {
         let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
         bounceAnimation.values = [1.0, 1.1, 1.2, 0.9, 1.0]
@@ -48,11 +43,4 @@ class TapBarController: UITabBarController {
 
         imageView.layer.add(bounceAnimation, forKey: nil)
     }
-    
-    func testen(){
-   
-         NSLog("testeeeeeennnn")
-    }
-    
-    
 }

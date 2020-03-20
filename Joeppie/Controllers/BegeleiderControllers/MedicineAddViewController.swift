@@ -59,7 +59,6 @@ class MedicineAddViewController: UIViewController {
     @IBAction func saveDataTapped(_ sender: Any) {
         // Check for input dayofWeek
         if let txt = dayOfWeek.text, weekDays.contains(txt) {
-            print("the textfield'd value is from the array")
             if listOfCreatedDoses.count > 0{
                 // TODO Save BAXTER into DB
                 saveBaxter()
@@ -88,10 +87,8 @@ class MedicineAddViewController: UIViewController {
                 switch(response.result) {
                 case .success(_):
                         // TODO: Update baxters list of patient
-                    print("DONE MESSAGr\(response.result.description)")
                     self.closeView()
                 case .failure(_):
-                    print("EROOR MESSAGr\(response.result.error)")
                     Errorpopup.displayErrorMessage(vc: self, title: "Failed", msg: "Oeps! something went wrong!")
                 }
             })
@@ -194,7 +191,6 @@ class MedicineAddViewController: UIViewController {
             
             // Delete Dose from DB
             if let dose = self.deletePlantDose{
-                print("DELETING DOSE: \(String(dose.id))")
                 self.deleteDose(doseId: dose.id)
                 
                 self.deletePlantDose = nil
