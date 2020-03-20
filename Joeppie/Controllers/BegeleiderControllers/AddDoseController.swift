@@ -69,8 +69,10 @@ class AddDoseController: UIViewController{
         }
         
         if selectedMedicine == nil{
+            // TODO: Error popup
             print("NO MEDICINE")
         }else if count <= 0{
+            // TODO ERROR POPUP
                 print("NO AMOUNT")
             }
         else{

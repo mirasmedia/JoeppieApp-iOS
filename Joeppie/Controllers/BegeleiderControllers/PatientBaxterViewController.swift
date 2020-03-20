@@ -118,7 +118,6 @@ class PatientBaxterViewController: UIViewController {
 
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
             if(self.baxterlist[indexbaxter].doses?.count==0){
-                print(indexbaxter)
                 ApiService.deleteBaxter(baxter: baxterlist[indexbaxter])
                 .responseData(completionHandler: { [weak self] (response) in
                 })
@@ -170,8 +169,6 @@ class PatientBaxterViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         indicator?.stopAnimating()
-        print("row" + String(indexPath.row))
-        print ("sec" + String(indexPath.section))
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
         let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
@@ -244,8 +241,6 @@ extension PatientBaxterViewController:UITableViewDelegate{
         let dateTime:Date =  baxterlist[section].intakeTime
         let hour = calendar.component(.hour, from: dateTime)
         let minutes = calendar.component(.minute, from: dateTime)
-        
-        print(String(hour) + ":" + String(minutes))
         
         let time:String = String.init(format: "%02d:%02d", hour, minutes)
         label.text = baxterlist[section].dayOfWeek.capitalizingFirstLetter()+" "+time + " "+NSLocalizedString("hour", comment: "")
