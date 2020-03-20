@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import UserNotifications
 
-
-
-
 class PatientBaxterViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     

@@ -15,6 +15,8 @@
 		10887EDA2422A06B00C28D3D /* DoseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887ED92422A06B00C28D3D /* DoseCreate.swift */; };
 		10887EDC242379F400C28D3D /* AddedDoseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10887EDB242379F400C28D3D /* AddedDoseCell.xib */; };
 		10887EDE24237B7100C28D3D /* AddedDoseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887EDD24237B7100C28D3D /* AddedDoseCell.swift */; };
+		10887EE12424D26F00C28D3D /* DatepickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887EE02424D26F00C28D3D /* DatepickerViewController.swift */; };
+		10887EE32424E93200C28D3D /* DayPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887EE22424E93200C28D3D /* DayPickerViewController.swift */; };
 		10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A240241C0BC700ED1B84 /* NewUser.swift */; };
 		10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
@@ -70,6 +72,8 @@
 		10887ED92422A06B00C28D3D /* DoseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseCreate.swift; sourceTree = "<group>"; };
 		10887EDB242379F400C28D3D /* AddedDoseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddedDoseCell.xib; sourceTree = "<group>"; };
 		10887EDD24237B7100C28D3D /* AddedDoseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedDoseCell.swift; sourceTree = "<group>"; };
+		10887EE02424D26F00C28D3D /* DatepickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatepickerViewController.swift; sourceTree = "<group>"; };
+		10887EE22424E93200C28D3D /* DayPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerViewController.swift; sourceTree = "<group>"; };
 		10D6A240241C0BC700ED1B84 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineAddViewController.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +168,8 @@
 		10887EDF2423A02B00C28D3D /* PickerControllers */ = {
 			isa = PBXGroup;
 			children = (
+				10887EE02424D26F00C28D3D /* DatepickerViewController.swift */,
+				10887EE22424E93200C28D3D /* DayPickerViewController.swift */,
 			);
 			path = PickerControllers;
 			sourceTree = "<group>";
@@ -468,6 +474,7 @@
 				EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */,
 				F9A5455823C349B400AFCB2C /* UserService.swift in Sources */,
 				106B5E4E241660390097B0E1 /* Reachability.swift in Sources */,
+				10887EE12424D26F00C28D3D /* DatepickerViewController.swift in Sources */,
 				EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */,
 				F9137BEB23ACF1C600BCA7E1 /* Constants.swift in Sources */,
 				EAD1D7E023C6567F00863DD8 /* TouchIDAuthentication.swift in Sources */,
@@ -480,6 +487,7 @@
 				10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */,
 				10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */,
 				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
+				10887EE32424E93200C28D3D /* DayPickerViewController.swift in Sources */,
 				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
 				EA5D4D41241AB3DD0005F1F2 /* Charts.swift in Sources */,
 				EA61616F239E9FD000076091 /* Medicine.swift in Sources */,
@@ -657,7 +665,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -686,7 +693,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

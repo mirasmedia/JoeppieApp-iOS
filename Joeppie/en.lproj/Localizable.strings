@@ -57,7 +57,8 @@
 "there_is_no_data"="There is no data for charts at the moment";
 
 // Add medicine
-"intake_time" = "Inname tijd";
+"intake_time" = "Select Time";
+"intake_day" = "Select Day";
 "select_medicine" = "Select a medicine";
 "add_doses" = "Add dose of medicine";
 "amount_lbl" = "Amount";

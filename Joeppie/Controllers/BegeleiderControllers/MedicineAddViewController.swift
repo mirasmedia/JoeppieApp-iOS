@@ -15,58 +15,55 @@ class MedicineAddViewController: UIViewController {
     let decoder = JSONDecoder()
     let timePicker = UIDatePicker()
     let pickerView = UIPickerView()
-    var weekDays = [String]()
     var selectedDay: String?
     var deletePlanetIndexPath: IndexPath? = nil
     var deletePlantDose: Dose? = nil
     var baxterTime = String()
-    @IBOutlet weak var inputTime: UITextField!
-    @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var dayOfWeek: UITextField!
     @IBOutlet weak var addedDosesTable: UITableView!
     
     @IBOutlet weak var addNewDose: UIButton!
     @IBOutlet weak var btnSaveData: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnSelectTime: UIButton!
+    @IBOutlet weak var btnSelectDay: UIButton!
+    
     var frames = CGRect()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
+        // TODO change color and title string
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        self.navigationItem.title = "Add new baxter"
         
-        initTimepicker()
-        
-        let dismessTimepicker = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureReconizer:)))
-        view.addGestureRecognizer(dismessTimepicker)
-        lblTime.text = NSLocalizedString("intake_time", comment: "")
-        addNewDose.setTitle(NSLocalizedString("add_doses", comment: ""), for: .normal)
+        dateFormatter.locale = Locale.current
+
+        initButtonsAndLabel()
         
         addedDosesTable.delegate = self
         addedDosesTable.dataSource = self
         addedDosesTable.register(UINib(nibName: "AddedDoseCell", bundle: nil), forCellReuseIdentifier: "AddedDoseCell")
         addedDosesTable.isHidden = true
+
+    }
+    
+    @IBAction func cancelBaxterTapped(_ sender: Any) {
+        // TODO SHOW CONFIRM ALERT
+        // DELETE ALL CREATED DOSES
         
-        weekDays = [NSLocalizedString("day_monday", comment: ""),
-        NSLocalizedString("day_tuesday", comment: ""),
-        NSLocalizedString("day_wednesday", comment: ""),
-        NSLocalizedString("day_thursday", comment: ""),
-        NSLocalizedString("day_friday", comment: ""),
-        NSLocalizedString("day_saturday", comment: ""),
-        NSLocalizedString("day_sunday", comment: "")]
-        
-        createPickerView()
-        
+        self.closeView()
     }
     
     @IBAction func saveDataTapped(_ sender: Any) {
         // Check for input dayofWeek
-        if let txt = dayOfWeek.text, weekDays.contains(txt) {
-            if listOfCreatedDoses.count > 0{
+        if listOfCreatedDoses.count > 0{
                 // TODO Save BAXTER into DB
                 saveBaxter()
             }else{
                 Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")
             }
-        }
-        
         // TODO Throw Error
     }
     
@@ -93,8 +90,6 @@ class MedicineAddViewController: UIViewController {
                 }
             })
         }
-        
-        
     }
     
     private func closeView(){
@@ -132,29 +127,39 @@ class MedicineAddViewController: UIViewController {
         }
     }
     
-    private func initTimepicker(){
-        timePicker.datePickerMode = .time
-        inputTime.inputView = timePicker
-        timePicker.addTarget(self, action: #selector(self.timePickerChanged(datePicker:)), for: .valueChanged)
-    }
-    
-    func createPickerView() {
-        pickerView.delegate = self
-        dayOfWeek.inputView = pickerView
-    }
-    
-    @objc func viewTapped(gestureReconizer: UIGestureRecognizer){
-        view.endEditing(true)
-    }
-    
-    @objc func timePickerChanged(datePicker: UIDatePicker) {
+    func pickerChanged(time: Date) -> (){
         dateFormatter.dateFormat = "HH : mm"
-        inputTime.text = dateFormatter.string(from: timePicker.date)
+        btnSelectTime.setTitle(dateFormatter.string(from: time), for: .normal)
         
+        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        baxterTime = dateFormatter.string(from: timePicker.date)
+        baxterTime = dateFormatter.string(from: time)
     }
     
+    func setChoosenDay(day: String) -> (){
+        selectedDay = day
+        btnSelectDay.setTitle(day, for: .normal)
+    }
+    
+    @IBAction func selectTimePopUp(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let pickerVc = storyboard.instantiateViewController(withIdentifier:
+            "DatepickerViewController") as? DatepickerViewController else {
+                fatalError("Unexpected destination:")
+        }
+        pickerVc.setTimeFromDatepicker = pickerChanged
+        pickerVc.isTimePicker = true
+        self.navigationController?.present(pickerVc, animated: true)
+    }
+    @IBAction func selectDayPopUp(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let pickerVc = storyboard.instantiateViewController(withIdentifier:
+            "DayPickerViewController") as? DayPickerViewController else {
+                fatalError("Unexpected destination:")
+        }
+        pickerVc.setTimeFromDatepicker = setChoosenDay
+        self.navigationController?.present(pickerVc, animated: true)
+    }
     
     @IBAction func addDosePopUP(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -209,26 +214,24 @@ class MedicineAddViewController: UIViewController {
         }
     }
     
+    fileprivate func initButtonsAndLabel() {
+        addNewDose.setTitle(NSLocalizedString("add_doses", comment: ""), for: .normal)
+        btnSaveData.setTitle(NSLocalizedString("save_button", comment: ""), for: .normal)
+        btnCancel.setTitle(NSLocalizedString("cancel_button", comment: ""), for: .normal)
+        btnSelectTime.setTitle(NSLocalizedString("intake_time", comment: ""), for: .normal)
+        btnSelectDay.setTitle(NSLocalizedString("intake_day", comment: ""), for: .normal)
+        
+        
+        btnSaveData.layer.cornerRadius = 5
+        btnCancel.layer.cornerRadius = 5
+        addNewDose.layer.cornerRadius = 5
+        btnSelectTime.layer.cornerRadius = 5
+        btnSelectDay.layer.cornerRadius = 5
+    }
 }
 
-extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return weekDays.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return weekDays[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedDay = weekDays[row]
-        dayOfWeek.text = selectedDay
-    }
-    
+extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 //            listOfCreatedDoses.remove(at: indexPath.row)
