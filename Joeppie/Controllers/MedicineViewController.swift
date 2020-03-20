@@ -396,20 +396,10 @@ class MedicineViewController: UIViewController {
                 UserService.logOut()
                 return
             }
-        
-        print("TEESSSSTT: \(dayInWeek) \(patient.id)")
-        
+            
             ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: patient.id)
             .responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-                print(jsonData)
-                
-//                if let json = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers),
-//                    let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-//                    //                    print(String(decoding: jsonData, as: UTF8.self))
-//                } else {
-//                    print("json data malformed")
-//                }
                 
                 let decoder = JSONDecoder()
                 let dateFormatter = DateFormatter()
@@ -424,7 +414,6 @@ class MedicineViewController: UIViewController {
                     self.baxterlist = rs
                     self.setIntake()
                     self.handleBaxters()
-
                     
                 case .failure(_):
                     print("EROOR MESSAGr\(response.result.error)")
