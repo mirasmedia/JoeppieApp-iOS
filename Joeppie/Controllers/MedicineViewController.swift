@@ -387,7 +387,7 @@ class MedicineViewController: UIViewController {
     func getBaxters(){
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "eeee"
         let dayInWeek = dateFormatter.string(from: date)
 
         //Copy this bit to wherever you need the user
@@ -400,38 +400,34 @@ class MedicineViewController: UIViewController {
         print("TEESSSSTT: \(dayInWeek) \(patient.id)")
         
             ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: patient.id)
-            .responseData(completionHandler: { [weak self] (response) in
+            .responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-                //                print(jsonData)
+                print(jsonData)
                 
-                if let json = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers),
-                    let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                    //                    print(String(decoding: jsonData, as: UTF8.self))
-                } else {
-                    print("json data malformed")
-                }
+//                if let json = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers),
+//                    let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+//                    //                    print(String(decoding: jsonData, as: UTF8.self))
+//                } else {
+//                    print("json data malformed")
+//                }
                 
                 let decoder = JSONDecoder()
-                
                 let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
-                let rs = try? decoder.decode([Baxter].self, from: jsonData)
-                self!.baxterlist = rs!
-                self!.setIntake()
-                self!.handleBaxters()
-                
-                guard response.error == nil else {
-                    print("error")
+                switch(response.result) {
+                case .success(_):
+                    dateFormatter.locale = Locale.current
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                    guard let rs = try? decoder.decode([Baxter].self, from: jsonData) else { return }
+                    self.baxterlist = rs
+                    self.setIntake()
+                    self.handleBaxters()
+
                     
-                    if response.response?.statusCode == 409 {
-                        print("error")
-                    }
-                    return
-                    
+                case .failure(_):
+                    print("EROOR MESSAGr\(response.result.error)")
                 }
             })
         })
