@@ -19,7 +19,8 @@ class DayPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weekDays = [NSLocalizedString("day_monday", comment: ""),
+        weekDays = [NSLocalizedString("day_all_week", comment: ""),
+        NSLocalizedString("day_monday", comment: ""),
         NSLocalizedString("day_tuesday", comment: ""),
         NSLocalizedString("day_wednesday", comment: ""),
         NSLocalizedString("day_thursday", comment: ""),
