@@ -627,16 +627,17 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJu-3c-R5a">
                                 <rect key="frame" x="80" y="493" width="215" height="30"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.3803921569" green="0.32549019610000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="saveTapped:" destination="8g9-4p-SQu" eventType="touchUpInside" id="CcX-UF-bC5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vti-Db-wKg">
                                 <rect key="frame" x="80" y="531" width="215" height="30"/>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -774,7 +775,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-LM-Y9t">
                                 <rect key="frame" x="235" y="597" width="120" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.3803921569" green="0.32549019610000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="qjZ-fJ-akc"/>
                                 </constraints>
@@ -877,8 +878,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsH-Kd-OaD">
                                         <rect key="frame" x="20" y="40" width="295" height="30"/>
+                                        <color key="backgroundColor" red="0.47900897260000003" green="0.42045682670000001" blue="0.54511255030000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="displayDropDown:" destination="e8D-0r-9MI" eventType="touchUpInside" id="QbU-kW-1v6"/>
                                         </connections>
@@ -906,12 +910,14 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7U7-t9-Phz">
                                         <rect key="frame" x="245" y="160" width="70" height="30"/>
-                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.3803921569" green="0.32549019610000002" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="Ca5-w6-K0k"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="SAVE"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="saveDoses:" destination="e8D-0r-9MI" eventType="touchUpInside" id="8t6-oz-wk7"/>
                                         </connections>
@@ -1073,6 +1079,16 @@
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jk8-wE-Dsl">
                                         <rect key="frame" x="0.0" y="10" width="335" height="216"/>
                                     </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-F4-RoI">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                        <color key="backgroundColor" red="0.47900897260000003" green="0.42045682670000001" blue="0.54511255030000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="Cn5-nF-8vK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1083,7 +1099,10 @@
                                     <constraint firstAttribute="trailing" secondItem="uKk-BP-B24" secondAttribute="trailing" constant="20" id="XvK-Nz-2Cn"/>
                                     <constraint firstAttribute="bottom" secondItem="uKk-BP-B24" secondAttribute="bottom" constant="10" id="YVV-Eg-dVp"/>
                                     <constraint firstItem="Jk8-wE-Dsl" firstAttribute="leading" secondItem="1tv-w2-qoV" secondAttribute="leading" id="aFc-bJ-5f4"/>
+                                    <constraint firstItem="aqd-F4-RoI" firstAttribute="leading" secondItem="1tv-w2-qoV" secondAttribute="leading" id="aFo-O5-953"/>
+                                    <constraint firstAttribute="trailing" secondItem="aqd-F4-RoI" secondAttribute="trailing" id="bDX-3V-roS"/>
                                     <constraint firstAttribute="trailing" secondItem="Jk8-wE-Dsl" secondAttribute="trailing" id="djQ-bc-xmg"/>
+                                    <constraint firstItem="aqd-F4-RoI" firstAttribute="top" secondItem="1tv-w2-qoV" secondAttribute="top" id="ghR-jX-hyb"/>
                                 </constraints>
                             </view>
                         </subviews>

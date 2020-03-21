@@ -40,13 +40,12 @@ class ApiService {
     //Ercan:(delete)/dose
      static func deleteBaxter(baxter:Baxter) -> (DataRequest) {
          var headers : [String : String] = [:]
-         var parameters : [String:String] = [:]
 
          if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
              headers["Authorization"] = "Bearer \(token)"
          }
          
-        return Alamofire.request(baseURL + "/baxters/"+String(baxter.id), method: .delete, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/baxters/"+String(baxter.id), method: .delete,headers: headers)
      }
     
     static func getAllBaxtersPatient(patientId:Int) -> (DataRequest){
@@ -74,18 +73,15 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters?&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
     //(GET)/medicines
     static func getMedicines() -> (DataRequest) {
         var headers : [String : String] = [:]
-        var parameters : [String:String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
         
-        return Alamofire.request(baseURL + "/medicines", method: .get, parameters: parameters, headers: headers)
+        return Alamofire.request(baseURL + "/medicines", method: .get, headers: headers)
     }
     
     //(update)/dose
@@ -103,13 +99,12 @@ class ApiService {
     //Ercan:(delete)/dose
     static func deleteDose(id:String) -> (DataRequest) {
         var headers : [String : String] = [:]
-        var parameters : [String:String] = [:]
 
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
         
-        return Alamofire.request(baseURL + "/doses/"+id, method: .delete, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/doses/\(id)", method: .delete, headers: headers)
     }
     
     //(put)/intake
@@ -259,9 +254,7 @@ class ApiService {
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
-        return Alamofire.request(baseURL + "/doses/\(doseId)", method: .delete, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
+        return Alamofire.request(baseURL + "/doses/\(doseId)", method: .delete, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
     //(POST)/doses
@@ -278,21 +271,22 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
     
     //(POST)/doses
     static func createNewDose(amount: Int, medicineId: Int) -> (DataRequest) {
         var headers : [String : String] = [:]
-        var parameters : [String: Int] = [:]
+        var parameters : [String: Any] = [:]
         parameters["amount"] = amount
         parameters["medicine"] = medicineId
+        parameters["last_taken"] = "2010-01-01 12:00:00"
         
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
         
         return Alamofire.request(baseURL + "/doses", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
 }
