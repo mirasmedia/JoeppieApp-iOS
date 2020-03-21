@@ -47,10 +47,14 @@ class AddDoseController: UIViewController{
         btnSave.setTitle(NSLocalizedString("save_button", comment: ""), for: .normal)
         lblAmount.text = NSLocalizedString("amount_lbl", comment: "")
         amountInput.delegate = self
-        view.layer.cornerRadius = 5
-        btnCancel.layer.cornerRadius = 5; btnSave.layer.cornerRadius = 5
-        selectMedicineBtn.layer.borderWidth = 1
-        selectMedicineBtn.layer.borderColor = UIColor(red: 11/255, green: 186/255, blue: 69/225, alpha: 1).cgColor
+        self.view.layer.cornerRadius = 5
+        btnCancel.layer.cornerRadius = 5
+        btnSave.layer.cornerRadius = 5
+        
+        
+        //ADD BORDER AND COLOR
+//        selectMedicineBtn.layer.borderWidth = 1
+//        selectMedicineBtn.layer.borderColor = UIColor(red: 11/255, green: 186/255, blue: 69/225, alpha: 1).cgColor
                 
     }
     
@@ -60,22 +64,14 @@ class AddDoseController: UIViewController{
     }
     
     @IBAction func saveDoses(_ sender: UIButton) {
-        var count = Int()
-        if let temp = amountInput.text?.count{
-            count = temp
-            if let x = Int(amountInput.text ?? "0"){
+        if let x = Int(amountInput.text ?? "0"){
                 self.doseAmount = x
-            }
         }
         
-        if selectedMedicine == nil{
+        if selectedMedicine == nil || (doseAmount <= 0){
             // TODO: Error popup
-            print("NO MEDICINE")
-        }else if count <= 0{
-            // TODO ERROR POPUP
-                print("NO AMOUNT")
-            }
-        else{
+            print("NO MEDICINE or Empty Amount")
+        }else{
             saveNewDose()
             dismiss(animated: true)
         }
