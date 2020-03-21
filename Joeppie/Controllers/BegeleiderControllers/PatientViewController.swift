@@ -35,9 +35,8 @@ class PatientViewController: UIViewController {
             patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"
         }
         
-        addMediButton.setTitle("Medicatie Toevoegen", for: .normal)
-        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
-        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
+        addMediButton.setTitle(NSLocalizedString("add_baxters", comment: ""), for: .normal)
+        showBaxterScreenButton.setTitle(NSLocalizedString("show_baxters", comment: ""), for: .normal)
         arrowImageBaxter.image=UIImage(named: "arrow_right")
         arrowImageBaxterlist.image=UIImage(named: "arrow_right")
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)

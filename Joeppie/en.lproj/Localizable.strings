@@ -97,7 +97,7 @@
 "thank_you"="Thank you!";
 
 "till" = "Till";
-"till_small" = "tot";
+"till_small" = "till";
 "chart_general"="General";
 "to_late_text"="Late";
 "not_text"="Not";
@@ -105,3 +105,6 @@
 "to_early_text"="To early";
 
 "Call"="Call";
+
+"add_baxters" = "Add medication";
+"show_baxters" = "Baxter overview";
