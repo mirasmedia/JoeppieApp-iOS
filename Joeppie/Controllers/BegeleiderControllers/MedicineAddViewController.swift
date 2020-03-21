@@ -79,8 +79,6 @@ class MedicineAddViewController: UIViewController {
         if Reachability.isConnectedToNetwork(){
             ApiService.createNewBaxter(patientId: patientId, intakeTime: baxterTime, doses: doses, dayOfWeek: day)
             .responseData(completionHandler: { (response) in
-            guard let jsonData = response.data else { return }
-                
                 switch(response.result) {
                 case .success(_):
                         // TODO: Update baxters list of patient
@@ -131,9 +129,10 @@ class MedicineAddViewController: UIViewController {
         dateFormatter.dateFormat = "HH : mm"
         btnSelectTime.setTitle(dateFormatter.string(from: time), for: .normal)
         
-        dateFormatter.locale = Locale.current
+//        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         baxterTime = dateFormatter.string(from: time)
+        print("BaxterTime should be -1: \(baxterTime)")
     }
     
     func setChoosenDay(day: String) -> (){
