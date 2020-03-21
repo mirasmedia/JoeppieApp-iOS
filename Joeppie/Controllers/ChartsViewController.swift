@@ -95,7 +95,7 @@ class ChartsViewController: UIViewController {
                         chartsArray[indexchartobject].vroeg!+=1
                         chartsArray[0].vroeg!+=1
                     default:
-                        break
+                        continue
                     }
 
                 }
