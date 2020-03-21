@@ -35,16 +35,21 @@ class ChartsViewController: UIViewController {
     
     func getAllChartMedicine(){
         
-     let df = DateFormatter()
-     df.dateFormat = "yyyy-MM-dd"
-     let startdayofWeek = df.string(from: mondaysDate)
-        
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd"
+    let startdayofWeek = df.string(from: mondaysDate)
+    let formatterLabel = DateFormatter()
+    formatterLabel.dateFormat = "dd-MM-yyyy"
+    let startdateLabel = formatterLabel.string(from: mondaysDate)
+    
     let calendar = Calendar.current
     var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+    
    
     let enddayofweek = df.string(from: endofweek)
-    self.labeldate.text = "\(startdayofWeek) \(NSLocalizedString("till_small", comment: "")) \(enddayofweek)"
+    let enddayofweekLabel = formatterLabel.string(from: endofweek)
+    self.labeldate.text = "\(startdateLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
 
         
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
@@ -103,22 +108,26 @@ class ChartsViewController: UIViewController {
             if(check){
                 var cs=Charts()
                 cs.naam=item.medicine.name
-                if(item.state==String(DoseTakenTime.ON_TIME.rawValue)){
-                    cs.optijd=1
-                    chartsArray[0].optijd!+=1
-                }
-                else if(item.state==String(DoseTakenTime.LATE.rawValue)){
-                    cs.laat=1
-                    chartsArray[0].laat!+=1
-                }
-                else if(item.state==String(DoseTakenTime.NOT_TAKEN.rawValue)){
-                    cs.nietIngenomen=1
-                    chartsArray[0].nietIngenomen!+=1
-                }
-                else if(item.state==String(DoseTakenTime.EARLY.rawValue)){
-                    cs.vroeg=1
-                    chartsArray[0].vroeg!+=1
-                }
+                switch item.state {
+                case String(DoseTakenTime.ON_TIME.rawValue):
+                        cs.optijd=1
+                        chartsArray[0].optijd!+=1
+                    
+                    case String(DoseTakenTime.LATE.rawValue):
+                        cs.laat=1
+                        chartsArray[0].laat!+=1
+                    
+                
+                    case String(DoseTakenTime.NOT_TAKEN.rawValue):
+                        cs.nietIngenomen=1
+                        chartsArray[0].nietIngenomen!+=1
+                    
+                    case String(DoseTakenTime.EARLY.rawValue):
+                        cs.vroeg=1
+                        chartsArray[0].vroeg!+=1
+                default:
+                    continue
+            }
                 chartsArray.append(cs)
             }
         }

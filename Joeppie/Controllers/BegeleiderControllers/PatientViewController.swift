@@ -16,6 +16,7 @@ class PatientViewController: UIViewController {
     @IBOutlet weak var arrowImageBaxter: UIImageView!
     @IBOutlet weak var arrowImageBaxterlist: UIImageView!
     
+    @IBOutlet weak var chartsDateLabel: UILabel!
     @IBOutlet weak var imageNoChartData: UIImageView!
  
     @IBOutlet weak var showBaxterScreenButton: UIButton!
@@ -85,17 +86,23 @@ class PatientViewController: UIViewController {
     
        func getAllChartMedicineUser(){
            
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd"
-        let startdayofWeek = df.string(from: mondaysDate)
+        let formatterDB = DateFormatter()
+        formatterDB.dateFormat = "yyyy-MM-dd"
+        
+        let formatterLabel = DateFormatter()
+        formatterLabel.dateFormat = "dd-MM-yyyy"
+        
+        let startdayofweekLabel=formatterLabel.string(from: mondaysDate)
+        let startdayofWeek = formatterDB.string(from: mondaysDate)
            
        let calendar = Calendar.current
        var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
        let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
       
-       let enddayofweek = df.string(from: endofweek)
+       let enddayofweek = formatterDB.string(from: endofweek)
+       let enddayofweekLabel=formatterLabel.string(from: endofweek)
            
-           
+       self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
                .responseData(completionHandler: { [weak self] (response) in
                    

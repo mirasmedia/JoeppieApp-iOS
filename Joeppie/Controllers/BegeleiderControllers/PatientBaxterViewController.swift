@@ -18,7 +18,6 @@ class PatientBaxterViewController: UIViewController {
     var medicinelist: [Medicine] = []
     var popup:UIView!
     var alertvc:AlertViewController!
-    let notificationCenter = UNUserNotificationCenter.current()
     var indicator:UIActivityIndicatorView? = nil
     var checkinTested = false;
     
