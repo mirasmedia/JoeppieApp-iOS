@@ -44,9 +44,7 @@ class ChartsViewController: UIViewController {
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
     let enddayofweek = df.string(from: endofweek)
-    self.labeldate.text = startdayofWeek+" "+NSLocalizedString("till_small", comment: "")+" "+enddayofweek
-    print(startdayofWeek)
-    print(enddayofweek)
+    self.labeldate.text = "\(startdayofWeek) \(NSLocalizedString("till_small", comment: "")) \(enddayofweek)"
 
         
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
@@ -78,30 +76,28 @@ class ChartsViewController: UIViewController {
     }
     
     func handleintake(rs:[Intake]){
-        
         for var item in rs {
             var check=true;
             for var indexchartobject in chartsArray.indices{
-                if(chartsArray[indexchartobject].naam==item.medicine.name){
+                if(chartsArray[indexchartobject].naam == item.medicine.name){
                     check=false;
-                    if(item.state=="0"){
+                    switch item.state {
+                    case "0":
                         chartsArray[indexchartobject].optijd!+=1
                         chartsArray[0].optijd!+=1
-                    }
-                    else if(item.state=="1"){
+                    case "1":
                         chartsArray[indexchartobject].laat!+=1
                         chartsArray[0].laat!+=1
-        
-                    }
-                    else if(item.state=="2"){
+                    case "2":
                         chartsArray[indexchartobject].nietIngenomen!+=1
                         chartsArray[0].nietIngenomen!+=1
-                    }
-                    else if(item.state=="3")
-                    {
+                    case "3":
                         chartsArray[indexchartobject].vroeg!+=1
                         chartsArray[0].vroeg!+=1
+                    default:
+                        continue
                     }
+
                 }
             }
             if(check){

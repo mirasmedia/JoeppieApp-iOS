@@ -59,7 +59,7 @@ class MedicineAddViewController: UIViewController {
     @IBAction func saveDataTapped(_ sender: Any) {
         // Check for input dayofWeek
         if listOfCreatedDoses.count > 0{
-                // TODO Save BAXTER into DB
+            // Todo Everyday loop
                 saveBaxter()
             }else{
                 Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")

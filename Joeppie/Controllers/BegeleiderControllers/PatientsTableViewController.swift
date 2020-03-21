@@ -24,6 +24,7 @@ class PatientsTableViewController: UITableViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         logOutButton.title = NSLocalizedString("log_out_button", comment: "")
         
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(realoadPtientsList), for: .valueChanged)
         self.refreshControl = refreshControl
@@ -81,27 +82,30 @@ class PatientsTableViewController: UITableViewController {
         }
         patientViewController.patientsView = self
         self.navigationController?.present(patientViewController, animated: true, completion: nil)
+        
     }
     
-    // Shahin: - Table view data source
+    
+}
 
+extension PatientsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return patients.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "PatientTableViewCell"
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PatientTableViewCell else {
             fatalError("The dequeued cell is not an instance of PatientTableViewCell")
         }
-
+        
         let patient = patients[indexPath.row]
         if let insertion = patient.insertion {
             cell.patientNameLabel.text = "\(patient.firstName) \(insertion) \(patient.lastName)"
@@ -111,8 +115,8 @@ class PatientsTableViewController: UITableViewController {
         
         // Shahin : TODO Find a way to enable the badge for users
         // Exmaple isHidden = function(user.Id) {Calculte, return true}
-//        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
-
+        //        cell.badgeImageView.isHidden = indexPath.row % 2 == 0
+        
         return cell
     }
     

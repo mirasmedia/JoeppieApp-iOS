@@ -134,7 +134,6 @@ class PatientTableViewController: UIViewController {
         cancelButton.layer.cornerRadius = 4
         
         
-        
         if patient != nil{
             initEditPatient()
         }else{
