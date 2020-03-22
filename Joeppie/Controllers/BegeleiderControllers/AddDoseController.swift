@@ -128,7 +128,7 @@ class AddDoseController: UIViewController{
             self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
             self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
-            guard let medi = try? self.decoder.decode([Medicine].self, from: jsonData) else { print("here 2"); return }
+            guard let medi = try? self.decoder.decode([Medicine].self, from: jsonData) else { return }
             self.listOfMedicines = medi.sorted(by: {$0.name < $1.name})
         })
     }

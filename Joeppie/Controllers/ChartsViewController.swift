@@ -46,6 +46,10 @@ class ChartsViewController: UIViewController {
     var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
     let endofweekdb = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
     let endofweeklbl = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+
+//    var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
+//    let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+
    
     let enddayofweek = df.string(from: endofweekdb)
     let enddayofweekLabel = formatterLabel.string(from: endofweeklbl)
@@ -65,9 +69,7 @@ class ChartsViewController: UIViewController {
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 let rs = try! decoder.decode([Intake].self, from: response.data!)
-                self!.handleintake(rs: rs)
-                
-   
+                self!.handleintake(rs: rs) 
                 self!.tableview.reloadData()
             })
     

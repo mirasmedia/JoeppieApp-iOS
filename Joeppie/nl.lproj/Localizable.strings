@@ -64,14 +64,14 @@
 
 
 // weekdays
-"day_monday" = "Maandag";
-"day_tuesday" = "Dinsdag";
-"day_wednesday" = "Woensdag";
-"day_thursday" = "Donderdag";
-"day_friday" = "Vrijdag";
-"day_saturday" = "Zaterdag";
-"day_sunday" = "Zondag";
-"day_all_week" = "Elke dag";
+"monday" = "Maandag";
+"tuesday" = "Dinsdag";
+"wednesday" = "Woensdag";
+"thursday" = "Donderdag";
+"friday" = "Vrijdag";
+"saturday" = "Zaterdag";
+"sunday" = "Zondag";
+"all_week" = "Elke dag";
 
 
 //ERCAN

@@ -35,6 +35,8 @@ class PatientViewController: UIViewController {
             patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"
         }
         
+        showLoadingIndicator()
+        
         addMediButton.setTitle(NSLocalizedString("add_baxters", comment: ""), for: .normal)
         showBaxterScreenButton.setTitle(NSLocalizedString("show_baxters", comment: ""), for: .normal)
         arrowImageBaxter.image=UIImage(named: "arrow_right")
@@ -104,23 +106,38 @@ class PatientViewController: UIViewController {
            
        self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
-               .responseData(completionHandler: { [weak self] (response) in
-                   
-                   guard response.data != nil else { return }
-                //   print(String(decoding: response.data!, as: UTF8.self))
+               .responseData(completionHandler: { (response) in
+                guard let json = response.data else { return }
+    //                   print(String(decoding: response.data!, as: UTF8.self))
+
                    
                    let decoder = JSONDecoder()
                    let dateFormatter = DateFormatter()
                    dateFormatter.locale = Locale.current
                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                   let rs = try! decoder.decode([Intake].self, from: response.data!)
-                   self!.handleintake(rs: rs)
+                   let rs = try? decoder.decode([Intake].self, from: json)
+                    if let list = rs{
+                        self.handleintake(rs: list)
+                    }
+                   
+                    self.hideLoadingIndicator()
                    
                })
        
            
        }
+    
+    private func showLoadingIndicator(){
+        let blurLoader = ActivityIndicator(frame: UIScreen.main.bounds)
+        view.addSubview(blurLoader)
+    }
+    
+    private func hideLoadingIndicator(){
+        if let blurLoader = view.subviews.first(where: { $0 is ActivityIndicator }) {
+            blurLoader.removeFromSuperview()
+        }
+    }
     
     
     func handleintake(rs:[Intake]){
