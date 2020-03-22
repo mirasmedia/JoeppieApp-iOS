@@ -60,10 +60,9 @@ class MedicineAddViewController: UIViewController {
     @IBAction func saveDataTapped(_ sender: Any) {
         // Check for input dayofWeek
         if listOfCreatedDoses.count > 0 && selectedDay != nil && baxterTime.count > 5{
-            
             // Everyday loop
-            if let day = self.weekDaySelected{
-                if day == WeekDays.EVERYDAY{
+            guard let day = self.weekDaySelected else {return}
+            if day == WeekDays.EVERYDAY{
                     for everyDay in WeekDays.allValues{
                         if everyDay != WeekDays.EVERYDAY{
                             self.saveBaxterForSevenDays(day: everyDay.rawValue)
@@ -74,12 +73,10 @@ class MedicineAddViewController: UIViewController {
                         ApiService.deleteOneDose(doseId: x.id)
                     }
                     
-                    }
                 }else{
-                saveBaxter(listOfDoses: listOfCreatedDoses, listOfDoseId: nil)
+                    saveBaxter(listOfDoses: listOfCreatedDoses, listOfDoseId: nil)
                 }
-            
-            }else{
+        }else{
                 // TODO REMOVE HARDCODED STRINGS
                 Errorpopup.displayErrorMessage(vc: self, title: "Empty Valuw", msg: "Select all fields and add atleast one Dose in order to create a new Baxter.")
             }

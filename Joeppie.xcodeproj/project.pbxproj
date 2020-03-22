@@ -10,6 +10,7 @@
 		1045527924265D25001ABCC2 /* PatientForBegeleider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045527824265D25001ABCC2 /* PatientForBegeleider.swift */; };
 		1045527B2427816D001ABCC2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045527A2427816D001ABCC2 /* ActivityIndicator.swift */; };
 		1045527D24278D96001ABCC2 /* WeekDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045527C24278D96001ABCC2 /* WeekDays.swift */; };
+		1045527F2427C9DE001ABCC2 /* DayOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045527E2427C9DE001ABCC2 /* DayOrdering.swift */; };
 		106B5E4E241660390097B0E1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4D241660390097B0E1 /* Reachability.swift */; };
 		106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4F241660950097B0E1 /* ErrorMessage.swift */; };
 		106B5E55241925290097B0E1 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E54241925290097B0E1 /* InputValidator.swift */; };
@@ -69,6 +70,7 @@
 		1045527824265D25001ABCC2 /* PatientForBegeleider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientForBegeleider.swift; sourceTree = "<group>"; };
 		1045527A2427816D001ABCC2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		1045527C24278D96001ABCC2 /* WeekDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDays.swift; sourceTree = "<group>"; };
+		1045527E2427C9DE001ABCC2 /* DayOrdering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOrdering.swift; sourceTree = "<group>"; };
 		106B5E4D241660390097B0E1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		106B5E4F241660950097B0E1 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		106B5E54241925290097B0E1 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				106B5E4F241660950097B0E1 /* ErrorMessage.swift */,
 				106B5E54241925290097B0E1 /* InputValidator.swift */,
 				1045527A2427816D001ABCC2 /* ActivityIndicator.swift */,
+				1045527E2427C9DE001ABCC2 /* DayOrdering.swift */,
 			);
 			path = Helppers;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				F9137BE923ACE79C00BCA7E1 /* LoginResponse.swift in Sources */,
 				10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */,
 				10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */,
+				1045527F2427C9DE001ABCC2 /* DayOrdering.swift in Sources */,
 				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
 				10887EE32424E93200C28D3D /* DayPickerViewController.swift in Sources */,
 				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
