@@ -75,6 +75,7 @@ class PatientBaxterViewController: UIViewController {
 
 
     func getBaxters(){
+
         
         ApiService.getAllBaxtersPatient(patientId: self.patient!.id)
             .responseData(completionHandler: { [weak self] (response) in
@@ -96,7 +97,12 @@ class PatientBaxterViewController: UIViewController {
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
                 let rs = try? decoder.decode([Baxter].self, from: response.data!)
-                self!.baxterlist = rs!.sorted(by: {$0.dayOfWeek < $1.dayOfWeek})
+
+                self!.baxterlist = rs!.reordered()
+                
+                
+                
+                
                 self!.handleBaxters()
                 self!.tableview.dataSource = self
                 self!.tableview.delegate = self
