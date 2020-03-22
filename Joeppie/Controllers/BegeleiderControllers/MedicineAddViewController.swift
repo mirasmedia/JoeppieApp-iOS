@@ -66,13 +66,17 @@ class MedicineAddViewController: UIViewController {
                 if day == WeekDays.EVERYDAY{
                     for everyDay in WeekDays.allValues{
                         if everyDay != WeekDays.EVERYDAY{
-                            self.selectedDay = everyDay.rawValue
-                            saveBaxter()
+                            self.saveBaxterForSevenDays(day: everyDay.rawValue)
                             }
                         }
+                    // DELETE ORIGINAL DOSES
+                    for x in listOfCreatedDoses{
+                        ApiService.deleteOneDose(doseId: x.id)
+                    }
+                    
                     }
                 }else{
-                    saveBaxter()
+                saveBaxter(listOfDoses: listOfCreatedDoses, listOfDoseId: nil)
                 }
             
             }else{
@@ -81,13 +85,56 @@ class MedicineAddViewController: UIViewController {
             }
     }
     
-    private func saveBaxter(){
+    private func saveBaxterForSevenDays(day: String){
+        var tempList = [Int]()
+        var count = 0
+        for dose in listOfCreatedDoses{
+            saveNewDose(doseAmount: dose.amount, medicineId: dose.medicine.id, completionHandler: {doseId in
+                tempList.append(doseId)
+                count += 1
+                if count == self.listOfCreatedDoses.count{
+                    self.selectedDay = day
+                    self.saveBaxter(listOfDoses: nil, listOfDoseId: tempList)
+                }
+            })
+        }
+    }
+    
+    private func saveNewDose(doseAmount: Int, medicineId: Int, completionHandler cH : @escaping (Int) -> ()) {
+        ApiService.createNewDose(amount: doseAmount, medicineId: medicineId)
+                .responseData(completionHandler: { (response) in
+                guard let jsonData = response.data else { return }
+                    
+                    switch(response.result) {
+                    case .success(_):
+                        self.dateFormatter.locale = Locale.current
+                        self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+                        self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+                        guard let dose = try? self.decoder.decode(DoseCreate.self, from: jsonData) else { return }
+                        cH(dose.id)
+                        
+                        
+                    case .failure(_):
+                        print("EROOR MESSAGr\(response.result.error)")
+                    }
+            })
+            
+        }
+    
+    private func saveBaxter(listOfDoses:[Dose]?, listOfDoseId:[Int]?){
         guard let patientId = patient?.id else { return }
         guard let day = selectedDay else {return}
         var doses = [Int]()
         
-        for x in listOfCreatedDoses{
-            doses.append(x.id)
+        if let list = listOfDoses{
+            for x in list{
+                doses.append(x.id)
+            }
+        }
+        
+        if let list = listOfDoseId{
+            doses = list
         }
         
         if Reachability.isConnectedToNetwork(){
