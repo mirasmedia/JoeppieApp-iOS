@@ -124,25 +124,6 @@ class PatientBaxterViewController: UIViewController {
         var equipments = [[Int:Baxter]]()
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
             
-            switch baxterlist[indexbaxter].dayOfWeek {
-            case "Monday":
-               equipments.append([0: self.baxterlist[indexbaxter]])
-            case "Tuesday":
-                equipments.append([1: self.baxterlist[indexbaxter]])
-            case "Wednesday":
-                equipments.append([2: self.baxterlist[indexbaxter]])
-            case "Wednesday":
-                 equipments.append([3: self.baxterlist[indexbaxter]])
-            case "Friday":
-               equipments.append([4: self.baxterlist[indexbaxter]])
-            case "Saturday":
-               equipments.append([5: self.baxterlist[indexbaxter]])
-            case "Sunday":
-                equipments.append([6: self.baxterlist[indexbaxter]])
-            default:
-                continue
-            }
-            
             if(self.baxterlist[indexbaxter].doses?.count==0){
                 ApiService.deleteBaxter(baxter: baxterlist[indexbaxter])
                 .responseData(completionHandler: { [weak self] (response) in
@@ -153,12 +134,7 @@ class PatientBaxterViewController: UIViewController {
             
         }
         
-        
-        
-        let dict = ["Museum1":8785.8971799638,
-        "Museum2":34420.9643422388,
-        "Museum3":826.467789130732,
-        "Museum4":304120.342151219]
+
 
         self.tableview.reloadData()
         
