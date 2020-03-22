@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class PatientTableViewController: UIViewController {
+class PatientRegisterFormVc: UIViewController {
     
     //Shahin: - Outlets
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -318,7 +318,7 @@ class PatientTableViewController: UIViewController {
     }
 }
 
-extension PatientTableViewController : UITextFieldDelegate {
+extension PatientRegisterFormVc : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
          
         let nextTag = textField.tag + 1

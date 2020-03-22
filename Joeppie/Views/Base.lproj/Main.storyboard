@@ -594,10 +594,10 @@
             </objects>
             <point key="canvasLocation" x="1336.8" y="903.59820089955031"/>
         </scene>
-        <!--Patient Table View Controller-->
+        <!--Patient Register Form Vc-->
         <scene sceneID="zcz-hR-H6p">
             <objects>
-                <viewController storyboardIdentifier="PatientTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8g9-4p-SQu" customClass="PatientTableViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatientRegisterFormVc" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8g9-4p-SQu" customClass="PatientRegisterFormVc" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgT-nW-FHO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
