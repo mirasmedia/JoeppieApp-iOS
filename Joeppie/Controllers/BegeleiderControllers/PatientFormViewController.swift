@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class PatientTableViewController: UIViewController {
+class PatientFormViewController: UIViewController {
     
     //Shahin: - Outlets
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -29,7 +29,7 @@ class PatientTableViewController: UIViewController {
     @IBOutlet weak var test: UITextField!
     
     //Shahin: - Properties
-    var patientsView: PatientsTableViewController?
+    var patientsView: PatientsOverviewViewController?
     var selected = false
     var textFields = [UITextField]()
     let dateFormatter = DateFormatter()
@@ -318,7 +318,7 @@ class PatientTableViewController: UIViewController {
     }
 }
 
-extension PatientTableViewController : UITextFieldDelegate {
+extension PatientFormViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
          
         let nextTag = textField.tag + 1

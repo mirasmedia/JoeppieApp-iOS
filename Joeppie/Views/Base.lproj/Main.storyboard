@@ -132,10 +132,10 @@
             </objects>
             <point key="canvasLocation" x="-663" y="100"/>
         </scene>
-        <!--Patients Table View Controller-->
+        <!--Patients Overview View Controller-->
         <scene sceneID="UoF-hA-2PH">
             <objects>
-                <tableViewController storyboardIdentifier="PatientsTableViewController" id="1Xv-Hy-tFN" customClass="PatientsTableViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PatientsOverviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Xv-Hy-tFN" customClass="PatientsOverviewViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Y1m-px-6El">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -594,10 +594,10 @@
             </objects>
             <point key="canvasLocation" x="1336.8" y="903.59820089955031"/>
         </scene>
-        <!--Patient Table View Controller-->
+        <!--Patient Form View Controller-->
         <scene sceneID="zcz-hR-H6p">
             <objects>
-                <viewController storyboardIdentifier="PatientTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8g9-4p-SQu" customClass="PatientTableViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatientFormViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8g9-4p-SQu" customClass="PatientFormViewController" customModule="Joeppie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgT-nW-FHO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
