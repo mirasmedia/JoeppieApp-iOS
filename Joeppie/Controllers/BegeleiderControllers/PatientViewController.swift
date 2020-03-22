@@ -96,17 +96,18 @@ class PatientViewController: UIViewController {
            
        let calendar = Calendar.current
        var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
-       let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
-      
-       let enddayofweek = formatterDB.string(from: endofweek)
-       let enddayofweekLabel=formatterLabel.string(from: endofweek)
+       let endofweekDB = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
+       let endofweekLabel = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+        
+       let enddayofweek = formatterDB.string(from: endofweekDB)
+       let enddayofweekLabel=formatterLabel.string(from: endofweekLabel)
            
        self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
                .responseData(completionHandler: { [weak self] (response) in
                    
                    guard response.data != nil else { return }
-//                   print(String(decoding: response.data!, as: UTF8.self))
+                //   print(String(decoding: response.data!, as: UTF8.self))
                    
                    let decoder = JSONDecoder()
                    let dateFormatter = DateFormatter()

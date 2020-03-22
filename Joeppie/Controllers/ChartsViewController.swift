@@ -44,11 +44,11 @@ class ChartsViewController: UIViewController {
     
     let calendar = Calendar.current
     var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
-    let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
-    
+    let endofweekdb = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
+    let endofweeklbl = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
-    let enddayofweek = df.string(from: endofweek)
-    let enddayofweekLabel = formatterLabel.string(from: endofweek)
+    let enddayofweek = df.string(from: endofweekdb)
+    let enddayofweekLabel = formatterLabel.string(from: endofweeklbl)
     self.labeldate.text = "\(startdateLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
 
         
@@ -56,7 +56,7 @@ class ChartsViewController: UIViewController {
             .responseData(completionHandler: { [weak self] (response) in
                 
                 guard response.data != nil else { return }
-                print(String(decoding: response.data!, as: UTF8.self))
+                //print(String(decoding: response.data!, as: UTF8.self))
                 
 
                 let decoder = JSONDecoder()
@@ -67,7 +67,6 @@ class ChartsViewController: UIViewController {
                 let rs = try! decoder.decode([Intake].self, from: response.data!)
                 self!.handleintake(rs: rs)
                 
-                print(rs)
    
                 self!.tableview.reloadData()
             })
