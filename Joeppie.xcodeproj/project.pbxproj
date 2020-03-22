@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1045527924265D25001ABCC2 /* PatientForBegeleider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045527824265D25001ABCC2 /* PatientForBegeleider.swift */; };
 		106B5E4E241660390097B0E1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4D241660390097B0E1 /* Reachability.swift */; };
 		106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E4F241660950097B0E1 /* ErrorMessage.swift */; };
 		106B5E55241925290097B0E1 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106B5E54241925290097B0E1 /* InputValidator.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1045527824265D25001ABCC2 /* PatientForBegeleider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientForBegeleider.swift; sourceTree = "<group>"; };
 		106B5E4D241660390097B0E1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		106B5E4F241660950097B0E1 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		106B5E54241925290097B0E1 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				10D6A240241C0BC700ED1B84 /* NewUser.swift */,
 				EA93800D24203CA2009D934B /* DosesDataClass.swift */,
 				10887ED92422A06B00C28D3D /* DoseCreate.swift */,
+				1045527824265D25001ABCC2 /* PatientForBegeleider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				106B5E57241948B90097B0E1 /* PatientViewController.swift in Sources */,
 				10887ED52422422100C28D3D /* AddDoseController.swift in Sources */,
 				106B5E55241925290097B0E1 /* InputValidator.swift in Sources */,
+				1045527924265D25001ABCC2 /* PatientForBegeleider.swift in Sources */,
 				EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */,
 				EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */,
 				EA93800E24203CA2009D934B /* DosesDataClass.swift in Sources */,

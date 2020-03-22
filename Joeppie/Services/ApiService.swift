@@ -137,7 +137,7 @@ class ApiService {
     
    
     
-    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String,patientId:Int) -> (DataRequest) {
+    static func getIntakesCountAll(greaterthandate:String, lowerthandate:String, patientId:Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         var parameters : [String:String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
@@ -174,7 +174,6 @@ class ApiService {
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
-        print(parameters)
         return Alamofire.request(baseURL + "/patients", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
@@ -205,7 +204,6 @@ class ApiService {
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
-        print(parameters)
         return Alamofire.request(baseURL + "/patients/\(patinetId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     

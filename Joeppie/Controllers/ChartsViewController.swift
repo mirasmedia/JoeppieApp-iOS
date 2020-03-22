@@ -40,7 +40,7 @@ class ChartsViewController: UIViewController {
      let startdayofWeek = df.string(from: mondaysDate)
         
     let calendar = Calendar.current
-    var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
+//    var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
     let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
    
     let enddayofweek = df.string(from: endofweek)
@@ -61,8 +61,6 @@ class ChartsViewController: UIViewController {
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 let rs = try! decoder.decode([Intake].self, from: response.data!)
                 self!.handleintake(rs: rs)
-                
-                print(rs)
    
                 self!.tableview.reloadData()
             })
