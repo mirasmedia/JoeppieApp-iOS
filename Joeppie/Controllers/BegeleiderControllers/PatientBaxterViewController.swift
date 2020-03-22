@@ -96,7 +96,7 @@ class PatientBaxterViewController: UIViewController {
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
                 let rs = try? decoder.decode([Baxter].self, from: response.data!)
-                self!.baxterlist = rs!
+                self!.baxterlist = rs!.sorted(by: {$0.dayOfWeek < $1.dayOfWeek})
                 self!.handleBaxters()
                 self!.tableview.dataSource = self
                 self!.tableview.delegate = self

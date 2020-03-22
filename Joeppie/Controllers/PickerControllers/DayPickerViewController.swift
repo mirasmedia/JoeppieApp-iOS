@@ -9,9 +9,10 @@
 import UIKit
 
 class DayPickerViewController: UIViewController {
-    var weekDays = [String]()
+    var weekDays = [WeekDays]()
     var selectedDay: String?
-    var setTimeFromDatepicker: ((_ dose: String) -> ())?
+    var selectedDayWeekDays: WeekDays?
+    var setChoosenDay: ((_ day: WeekDays, _ dayTitle: String) -> ())?
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -19,14 +20,9 @@ class DayPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weekDays = [NSLocalizedString("day_all_week", comment: ""),
-        NSLocalizedString("day_monday", comment: ""),
-        NSLocalizedString("day_tuesday", comment: ""),
-        NSLocalizedString("day_wednesday", comment: ""),
-        NSLocalizedString("day_thursday", comment: ""),
-        NSLocalizedString("day_friday", comment: ""),
-        NSLocalizedString("day_saturday", comment: ""),
-        NSLocalizedString("day_sunday", comment: "")]
+        for day in WeekDays.allValues{
+            weekDays.append(day)
+        }
         
         pickerView.delegate = self
         
@@ -35,11 +31,14 @@ class DayPickerViewController: UIViewController {
         btnSave.layer.cornerRadius = 5
         btnCancel.layer.cornerRadius = 5
         
+        selectedDay = weekDays[0].rawValue
+        selectedDayWeekDays = weekDays[0]
+        
     }
     
     @IBAction func saveData(_ sender: UIButton) {
-        if let day = selectedDay{
-            setTimeFromDatepicker?(day)
+        if let dayTitle = selectedDay, let select = selectedDayWeekDays{
+            setChoosenDay?(select, dayTitle)
         }
         closeView()
     }
@@ -64,11 +63,12 @@ extension DayPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return weekDays[row]
+        let getDay = NSLocalizedString(weekDays[row].rawValue, comment: "")
+        return getDay
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedDay = weekDays[row]
-        print("Selected: \(selectedDay)")
+        selectedDay = weekDays[row].rawValue
+        selectedDayWeekDays = weekDays[row]
     }
 }
