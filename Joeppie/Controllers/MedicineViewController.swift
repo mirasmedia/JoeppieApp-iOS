@@ -22,6 +22,8 @@ class MedicineViewController: UIViewController {
     var baxterlist: [Baxter] = []
     var medicinelist: [Medicine] = []
     var popup:UIView!
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
     var alertvc:AlertViewController!
     let notificationCenter = UNUserNotificationCenter.current()
     var indicator:UIActivityIndicatorView? = nil
@@ -149,12 +151,11 @@ class MedicineViewController: UIViewController {
                     //                    print("json data malformed")
                 }
                 
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                let rs = try! decoder.decode([Baxter].self, from: response.data!)
+                
+                self?.dateFormatter.locale = Locale.current
+                self?.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                self?.decoder.dateDecodingStrategy = .formatted(self!.dateFormatter)
+                let rs = try? self!.decoder.decode([Baxter].self, from: response.data!)
                 baxters = rs
                 
                 for indexbaxter in stride(from: baxters!.count-1, to: -1, by: -1){
@@ -265,7 +266,13 @@ class MedicineViewController: UIViewController {
             dateComponents?.second = calendar.component(.second, from: lastTakeMoment)
             dateComponents?.nanosecond = calendar.component(.nanosecond, from: lastTakeMoment)
             
-            var intakeTime = calendar.date(from: dateComponents!)!
+            guard let dtcomponents = dateComponents else{
+                return
+            }
+            
+            guard let intakeTime = calendar.date(from: dtcomponents) else{
+                return
+            }
             
             if(intakeTime<now){
                 baxterlist.remove(at: indexbaxter)
@@ -332,8 +339,14 @@ class MedicineViewController: UIViewController {
         
         
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
-            let baxterTime:Date = baxterlist[indexbaxter].intakeTime
-            let lastTakeMoment = calendar.date(byAdding: .minute, value: +45, to: baxterTime)!
+            guard let baxterTime:Date = baxterlist[indexbaxter].intakeTime else{
+                return
+            }
+            
+             guard let lastTakeMoment = calendar.date(byAdding: .minute, value: +45, to: baxterTime) else
+             {
+                return
+            }
             
             var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: Date())
             
@@ -432,13 +445,15 @@ class MedicineViewController: UIViewController {
                     print("json data malformed")
                 }
                 
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+                self!.dateFormatter.locale = Locale.current
+                self!.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                self!.decoder.dateDecodingStrategy = .formatted(self!.dateFormatter)
                 
-                let rs = try! decoder.decode([Medicine].self, from: response.data!)
+                guard let rs = try? self?.decoder.decode([Medicine].self, from: response.data!) else {
+                    print("nodata")
+                    return
+                }
                 self!.medicinelist = rs
                 
                 guard response.error == nil else {
@@ -692,6 +707,7 @@ class MedicineViewController: UIViewController {
                 self.getBaxters()
                 self.showAlertLate(indexpath: indexPath)
             }
+            
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
             let swipeAction = UISwipeActionsConfiguration(actions: [ingenomen])
             swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
@@ -732,7 +748,7 @@ extension MedicineViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         var amount:Int = 0
         for baxter in baxterlist{
-            if baxter.doses!.count>0{
+            if baxter.doses?.count ?? 0>0{
                 amount = amount + 1
             }
         }
@@ -744,7 +760,8 @@ extension MedicineViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.baxterlist[section].doses!.count
+    
+        return self.baxterlist[section].doses?.count ?? 0
     }
     
 }

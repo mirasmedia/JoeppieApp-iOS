@@ -37,7 +37,7 @@ class DigiContactViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         self.parent!.navigationItem.leftBarButtonItems = nil
         self.parent!.navigationItem.setHidesBackButton(true,animated: true)
      }

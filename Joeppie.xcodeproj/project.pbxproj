@@ -35,7 +35,6 @@
 		EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7912C423A1375F0003BD6A /* TapbarUI.swift */; };
 		EA93800C241FCEFA009D934B /* PatientBaxterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93800B241FCEFA009D934B /* PatientBaxterViewController.swift */; };
 		EA93800E24203CA2009D934B /* DosesDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93800D24203CA2009D934B /* DosesDataClass.swift */; };
-		EAA7365A23BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */; };
 		EAB719CD23A8026700211816 /* ChartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB719CC23A8026700211816 /* ChartViewCell.xib */; };
 		EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719CE23A805AF00211816 /* ChartsViewController.swift */; };
 		EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719D023A8072000211816 /* ChartViewCell.swift */; };
@@ -102,7 +101,6 @@
 		EA7CA3DC24226C9A009E698D /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA93800B241FCEFA009D934B /* PatientBaxterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBaxterViewController.swift; sourceTree = "<group>"; };
 		EA93800D24203CA2009D934B /* DosesDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosesDataClass.swift; sourceTree = "<group>"; };
-		EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDMEDICINECONTROLLER.swift; sourceTree = "<group>"; };
 		EAB719CC23A8026700211816 /* ChartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewCell.xib; sourceTree = "<group>"; };
 		EAB719CE23A805AF00211816 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
 		EAB719D023A8072000211816 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 				EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */,
 				EA7912C423A1375F0003BD6A /* TapbarUI.swift */,
 				EAB719CE23A805AF00211816 /* ChartsViewController.swift */,
-				EAA7365923BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -470,7 +467,6 @@
 				F9137BED23AD0C6800BCA7E1 /* Dose.swift in Sources */,
 				F9F48272238BF69100299F21 /* LoginViewController.swift in Sources */,
 				F9F4826E238BF69100299F21 /* AppDelegate.swift in Sources */,
-				EAA7365A23BD4F3A00ACD97C /* OLDMEDICINECONTROLLER.swift in Sources */,
 				EA93800C241FCEFA009D934B /* PatientBaxterViewController.swift in Sources */,
 				106B5E50241660950097B0E1 /* ErrorMessage.swift in Sources */,
 				106B5E57241948B90097B0E1 /* PatientViewController.swift in Sources */,

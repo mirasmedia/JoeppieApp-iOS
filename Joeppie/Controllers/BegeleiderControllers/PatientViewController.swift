@@ -16,6 +16,7 @@ class PatientViewController: UIViewController {
     @IBOutlet weak var arrowImageBaxter: UIImageView!
     @IBOutlet weak var arrowImageBaxterlist: UIImageView!
     
+    @IBOutlet weak var chartsDateLabel: UILabel!
     @IBOutlet weak var imageNoChartData: UIImageView!
  
     @IBOutlet weak var showBaxterScreenButton: UIButton!
@@ -36,9 +37,8 @@ class PatientViewController: UIViewController {
         
         showLoadingIndicator()
         
-        addMediButton.setTitle("Medicatie Toevoegen", for: .normal)
-        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
-        showBaxterScreenButton.setTitle("Baxter overzicht", for: .normal)
+        addMediButton.setTitle(NSLocalizedString("add_baxters", comment: ""), for: .normal)
+        showBaxterScreenButton.setTitle(NSLocalizedString("show_baxters", comment: ""), for: .normal)
         arrowImageBaxter.image=UIImage(named: "arrow_right")
         arrowImageBaxterlist.image=UIImage(named: "arrow_right")
         let nib = UINib(nibName: "ChartViewCell", bundle: nil)
@@ -87,21 +87,29 @@ class PatientViewController: UIViewController {
     
        func getAllChartMedicineUser(){
            
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd"
-        let startdayofWeek = df.string(from: mondaysDate)
+        let formatterDB = DateFormatter()
+        formatterDB.dateFormat = "yyyy-MM-dd"
+        
+        let formatterLabel = DateFormatter()
+        formatterLabel.dateFormat = "dd-MM-yyyy"
+        
+        let startdayofweekLabel=formatterLabel.string(from: mondaysDate)
+        let startdayofWeek = formatterDB.string(from: mondaysDate)
            
        let calendar = Calendar.current
        var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
-       let endofweek = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
-      
-       let enddayofweek = df.string(from: endofweek)
+       let endofweekDB = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
+       let endofweekLabel = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+        
+       let enddayofweek = formatterDB.string(from: endofweekDB)
+       let enddayofweekLabel=formatterLabel.string(from: endofweekLabel)
            
-           
+       self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
                .responseData(completionHandler: { (response) in
                 guard let json = response.data else { return }
     //                   print(String(decoding: response.data!, as: UTF8.self))
+
                    
                    let decoder = JSONDecoder()
                    let dateFormatter = DateFormatter()
