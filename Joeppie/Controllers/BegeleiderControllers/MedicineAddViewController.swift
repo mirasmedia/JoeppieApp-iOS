@@ -16,6 +16,7 @@ class MedicineAddViewController: UIViewController {
     let timePicker = UIDatePicker()
     let pickerView = UIPickerView()
     var selectedDay: String?
+    var weekDaySelected: WeekDays?
     var deletePlanetIndexPath: IndexPath? = nil
     var deletePlantDose: Dose? = nil
     var baxterTime = String()
@@ -58,13 +59,26 @@ class MedicineAddViewController: UIViewController {
     
     @IBAction func saveDataTapped(_ sender: Any) {
         // Check for input dayofWeek
-        if listOfCreatedDoses.count > 0{
-            // Todo Everyday loop
-                saveBaxter()
+        if listOfCreatedDoses.count > 0 && selectedDay != nil && baxterTime.count > 5{
+            
+            // Everyday loop
+            if let day = self.weekDaySelected{
+                if day == WeekDays.EVERYDAY{
+                    for everyDay in WeekDays.allValues{
+                        if everyDay != WeekDays.EVERYDAY{
+                            self.selectedDay = everyDay.rawValue
+                            saveBaxter()
+                            }
+                        }
+                    }
+                }else{
+                    saveBaxter()
+                }
+            
             }else{
-                Errorpopup.displayErrorMessage(vc: self, title: "Empty Dose", msg: "You must at least add one dose to the baxter.")
+                // TODO REMOVE HARDCODED STRINGS
+                Errorpopup.displayErrorMessage(vc: self, title: "Empty Valuw", msg: "Select all fields and add atleast one Dose in order to create a new Baxter.")
             }
-        // TODO Throw Error
     }
     
     private func saveBaxter(){
@@ -132,12 +146,12 @@ class MedicineAddViewController: UIViewController {
 //        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         baxterTime = dateFormatter.string(from: time)
-        print("BaxterTime should be -1: \(baxterTime)")
     }
     
-    func setChoosenDay(day: String) -> (){
-        selectedDay = day
-        btnSelectDay.setTitle(day, for: .normal)
+    func setChoosenDay(day: WeekDays, dayTitle: String) -> (){
+        selectedDay = dayTitle
+        weekDaySelected = day
+        btnSelectDay.setTitle(NSLocalizedString(dayTitle, comment: ""), for: .normal)
     }
     
     @IBAction func selectTimePopUp(_ sender: UIButton) {
@@ -156,7 +170,7 @@ class MedicineAddViewController: UIViewController {
             "DayPickerViewController") as? DayPickerViewController else {
                 fatalError("Unexpected destination:")
         }
-        pickerVc.setTimeFromDatepicker = setChoosenDay
+        pickerVc.setChoosenDay = setChoosenDay
         self.navigationController?.present(pickerVc, animated: true)
     }
     

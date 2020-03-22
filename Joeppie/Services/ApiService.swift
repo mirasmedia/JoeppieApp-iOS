@@ -255,7 +255,7 @@ class ApiService {
         return Alamofire.request(baseURL + "/doses/\(doseId)", method: .delete, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
-    //(POST)/doses
+    //(POST)/baxter
     static func createNewBaxter(patientId: Int, intakeTime: String, doses: [Int], dayOfWeek: String) -> (DataRequest) {
         var headers : [String : String] = [:]
         var parameters : [String: Any] = [:]
@@ -269,6 +269,8 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
     
     //(POST)/doses

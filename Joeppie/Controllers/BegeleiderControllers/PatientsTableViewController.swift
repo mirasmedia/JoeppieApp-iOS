@@ -34,6 +34,7 @@ class PatientsTableViewController: UITableViewController {
         
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
+        showLoadingIndicator()
         getPatients()
     }
     
@@ -42,6 +43,7 @@ class PatientsTableViewController: UITableViewController {
     }
     
     private func getPatients() {
+        print("Get")
         UserService.getCoachInstance(withCompletionHandler: { coach in
             guard let coach = coach else {
                 UserService.logOut()
@@ -82,7 +84,6 @@ class PatientsTableViewController: UITableViewController {
     }
     
     private func reloadView(){
-        
         var arr = [PatientForBegeleider]()
         var arr2 = [PatientForBegeleider]()
 
@@ -99,6 +100,7 @@ class PatientsTableViewController: UITableViewController {
         
         self.patientsTableView.reloadData()
         self.refreshControl?.endRefreshing()
+        hideLoadingIndicator()
     }
     
     private func getPatientIntakes(patient: Patient, withCompletionHandler cH : @escaping ([Intake]) -> ()){
@@ -134,7 +136,6 @@ class PatientsTableViewController: UITableViewController {
     // value is nu hardcoded gezet op meer dan 5 keer in huidige week niet op tijd met med inname
     private func patientNeedsMoreAttention(intakes: [Intake], withCompletionHandler cH : @escaping (Bool) -> ()){
         var count = Int()
-        print("AMOUNt INTAKES: \(intakes.count)")
         for i in intakes{
             if i.state != "0" {
                 count += 1
@@ -169,6 +170,16 @@ class PatientsTableViewController: UITableViewController {
         
     }
     
+    private func showLoadingIndicator(){
+        let blurLoader = ActivityIndicator(frame: UIScreen.main.bounds)
+        view.addSubview(blurLoader)
+    }
+    
+    private func hideLoadingIndicator(){
+        if let blurLoader = view.subviews.first(where: { $0 is ActivityIndicator }) {
+            blurLoader.removeFromSuperview()
+        }
+    }
     
 }
 
