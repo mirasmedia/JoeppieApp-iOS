@@ -27,6 +27,7 @@ class TapBarController: UITabBarController {
         })
     }
     
+    
     private var bounceAnimation: CAKeyframeAnimation = {
         let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
         bounceAnimation.values = [1.0, 1.1, 1.2, 0.9, 1.0]
