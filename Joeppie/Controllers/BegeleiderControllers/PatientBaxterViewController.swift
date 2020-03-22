@@ -148,10 +148,11 @@ class PatientBaxterViewController: UIViewController {
         }
         
         
-        print(equipments[0])
         
-        
-
+        let dict = ["Museum1":8785.8971799638,
+        "Museum2":34420.9643422388,
+        "Museum3":826.467789130732,
+        "Museum4":304120.342151219]
 
         self.tableview.reloadData()
         
