@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import UserNotifications
 
+enum Weekday: Int {
+    case sunday = 0, monday, tuesday, wednesday, thursday, friday, saturday
+}
+
 class PatientBaxterViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     
@@ -111,18 +115,43 @@ class PatientBaxterViewController: UIViewController {
     }
     
     func handleBaxters(){
-
+        var equipments = [[Int:Baxter]]()
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
+            
+            switch baxterlist[indexbaxter].dayOfWeek {
+            case "Monday":
+               equipments.append([0: self.baxterlist[indexbaxter]])
+            case "Tuesday":
+                equipments.append([1: self.baxterlist[indexbaxter]])
+            case "Wednesday":
+                equipments.append([2: self.baxterlist[indexbaxter]])
+            case "Wednesday":
+                 equipments.append([3: self.baxterlist[indexbaxter]])
+            case "Friday":
+               equipments.append([4: self.baxterlist[indexbaxter]])
+            case "Saturday":
+               equipments.append([5: self.baxterlist[indexbaxter]])
+            case "Sunday":
+                equipments.append([6: self.baxterlist[indexbaxter]])
+            default:
+                continue
+            }
+            
             if(self.baxterlist[indexbaxter].doses?.count==0){
                 ApiService.deleteBaxter(baxter: baxterlist[indexbaxter])
                 .responseData(completionHandler: { [weak self] (response) in
                 })
                 self.baxterlist.remove(at: indexbaxter)
-
-    
+                
             }
+            
         }
         
+        
+        print(equipments[0])
+        
+        
+
 
         self.tableview.reloadData()
         

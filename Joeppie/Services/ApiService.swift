@@ -58,7 +58,7 @@ class ApiService {
 
         parameters["patient.id"] = "\(patientId)"
         
-        return Alamofire.request(baseURL + "/baxters", method: .get, parameters: parameters,headers: headers)
+        return Alamofire.request(baseURL + "/baxters?_sort=day_of_week:ASC", method: .get, parameters: parameters,headers: headers)
         
     }
         
