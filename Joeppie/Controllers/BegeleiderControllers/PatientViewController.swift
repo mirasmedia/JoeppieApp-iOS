@@ -72,7 +72,7 @@ class PatientViewController: UIViewController {
     @objc func showEditPatientView(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let patientViewController = storyboard.instantiateViewController(withIdentifier:
-            "PatientFormViewController") as? PatientFormViewController else {
+            "PatientTableViewController") as? PatientTableViewController else {
                 fatalError("Unexpected destination:")
         }
         patientViewController.patient = patient

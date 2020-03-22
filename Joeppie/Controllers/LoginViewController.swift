@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
         switch user.role.id {
         case 4: //coach
             guard let controller = storyboard.instantiateViewController(withIdentifier:
-                "PatientsOverviewViewController") as? PatientsOverviewViewController else {
+                "PatientsTableViewController") as? PatientsTableViewController else {
                     fatalError("Unexpected destination:")
             }
             self.navigationController?.pushViewController(controller, animated: true)

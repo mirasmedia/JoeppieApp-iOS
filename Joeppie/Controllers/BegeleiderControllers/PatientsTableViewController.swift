@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class PatientsOverviewViewController: UITableViewController {
+class PatientsTableViewController: UITableViewController {
 
     var patients = [Patient]()
     var patientsNeedAttention = [PatientForBegeleider]()
@@ -162,7 +162,7 @@ class PatientsOverviewViewController: UITableViewController {
     @IBAction func addPatientButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let patientViewController = storyboard.instantiateViewController(withIdentifier:
-            "PatientFormViewController") as? PatientFormViewController else {
+            "PatientTableViewController") as? PatientTableViewController else {
                 fatalError("Unexpected destination:")
         }
         patientViewController.patientsView = self
@@ -183,7 +183,7 @@ class PatientsOverviewViewController: UITableViewController {
     
 }
 
-extension PatientsOverviewViewController {
+extension PatientsTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
