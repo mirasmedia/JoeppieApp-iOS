@@ -73,9 +73,8 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters?&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
+    
     //(GET)/medicines
     static func getMedicines() -> (DataRequest) {
         var headers : [String : String] = [:]
@@ -212,8 +211,6 @@ class ApiService {
             headers["Authorization"] = "Bearer \(token)"
         }
         return Alamofire.request(baseURL + "/patients/\(patinetId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("UPDATE Patient:\(response.result.value)")}
     }
     
     //(GET)/patients
@@ -293,5 +290,7 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/doses", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("UPDATE Patient:\(response.result.value)")}
     }
 }
