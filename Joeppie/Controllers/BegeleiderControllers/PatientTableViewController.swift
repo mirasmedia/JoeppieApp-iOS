@@ -251,9 +251,7 @@ class PatientTableViewController: UIViewController {
                                              insertion: insertion,
                                              last_name: lastName,
                                              date_of_birth: self.dateFormatter.string(from: dateOfBirth))
-                        .responseData(completionHandler: { (response) in
-                            print("RAWRESPONSE \(response.result.value)")
-                            
+                        .responseData(completionHandler: { (response) in                        
                             
                             self.dateFormatter.locale = Locale.current
                             self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
