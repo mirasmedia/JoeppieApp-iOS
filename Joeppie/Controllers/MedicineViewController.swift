@@ -72,10 +72,19 @@ class MedicineViewController: UIViewController {
                     "WalkThroughViewController") as? WalkThroughViewController{
                     controller.modalPresentationStyle = .fullScreen
                     self.navigationController?.present(controller, animated: true)
-                    
+                    self.updateUser()
                 }
             }
         })
+    }
+    
+    func updateUser(){
+        self.patient!.user.confirmed = true
+        var id:String = String(self.patient!.user.id)
+        ApiService.updateOnBoarding(userId: id)
+              .responseData(completionHandler: { [weak self] (response) in
+                  
+              })
     }
     
     func setBackground(){

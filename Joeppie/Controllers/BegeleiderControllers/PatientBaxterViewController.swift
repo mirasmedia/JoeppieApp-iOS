@@ -180,10 +180,7 @@ class PatientBaxterViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
         let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
-        if medicinelist.count<=1{
-            getMedicines()
-            tableview.reloadData()
-        }
+        
         let index:Int = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine })!
         
         

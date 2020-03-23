@@ -16,9 +16,9 @@ class WalkthroughPageViewController: UIPageViewController,UIPageViewControllerDa
     
     weak var walkThroughDelegate:WalkthroughPageViewControllerDelegate?
     
-    var pageHeadings = ["test1","test2","test3","test4"]
+    var pageHeadings = [NSLocalizedString("Joeppie_helps_you", comment: ""),NSLocalizedString("joeppie_happy_take_medicine_on_time", comment: ""),NSLocalizedString("call_digicontact", comment: ""),NSLocalizedString("follow_statistics", comment: "")]
     var images = ["boarding1","boarding2","boarding3","boarding4"]
-    var pageSubHeadings = ["Welkom op Joeppie","Medicijn innemen", "Digicontact","statistieken"]
+    var pageSubHeadings = [NSLocalizedString("wecome_at_joeppie", comment: ""),NSLocalizedString("happy_joeppie", comment: ""), "Digicontact",NSLocalizedString("statistic", comment: "")]
     var currentIndex = 0 
     override func viewDidLoad() {
         super.viewDidLoad()

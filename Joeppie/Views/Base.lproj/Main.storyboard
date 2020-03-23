@@ -229,7 +229,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yDN-ix-KVY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="navigation_question" id="w6b-Rg-M5V"/>
+                    <tabBarItem key="tabBarItem" title="" image="navigation_question" id="w6b-Rg-M5V">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="callButton_digicontact" destination="OnN-Tk-Fba" id="wR8-X5-rWb"/>
                         <outlet property="callView" destination="yiH-NZ-iHc" id="a0e-fC-0uC"/>
@@ -345,7 +347,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LW3-mW-mBD"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="graph_icon" id="OSu-M7-ZHG"/>
+                    <tabBarItem key="tabBarItem" title="" image="graph_icon" id="OSu-M7-ZHG">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="bckimage" destination="hwL-vb-NUd" id="iS6-bD-bps"/>
                         <outlet property="labelHiddenText" destination="5Qr-6n-wlF" id="E5e-Kv-MI9"/>
@@ -1179,7 +1183,7 @@
                                                     <constraint firstAttribute="width" constant="190" id="bJ7-Ne-L05"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Next">
+                                                <state key="normal" title="NEXT">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -1249,7 +1253,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ijM-CU-9cz">
                                         <rect key="frame" x="110" y="333" width="107.5" height="46"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="HEADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8z-Dd-8D9">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="HEADING" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8z-Dd-8D9">
                                                 <rect key="frame" x="14.5" y="0.0" width="78" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

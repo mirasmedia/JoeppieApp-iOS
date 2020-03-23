@@ -36,7 +36,7 @@ struct NestedUser : Codable {
     let id : Int
     let email : String
     let provider : String
-    let confirmed : Bool
+    var confirmed : Bool
     let blocked : Bool
     let role : Int
     let notes : String?

@@ -61,6 +61,18 @@ class ApiService {
         return Alamofire.request(baseURL + "/baxters?_sort=day_of_week:ASC", method: .get, parameters: parameters,headers: headers)
         
     }
+    
+    static func updateOnBoarding(userId:String)-> (DataRequest) {
+        var headers : [String : String] = [:]
+        var parameters : [String : Any] = [:]
+        parameters["confirmed"] = true
+        if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
+            headers["Authorization"] = "Bearer \(token)"
+
+        }
+        
+        return Alamofire.request(baseURL + "/users/" + userId, method: .put, parameters: parameters,headers: headers)
+    }
         
     //(GET)/baxters
     static func getBaxterClient(dayOfWeek: String, patientId: Int) -> (DataRequest) {
