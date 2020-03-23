@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import UserNotifications
 
+enum Weekday: Int {
+    case sunday = 0, monday, tuesday, wednesday, thursday, friday, saturday
+}
+
 class PatientBaxterViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     
@@ -99,13 +103,16 @@ class PatientBaxterViewController: UIViewController {
     }
     
     func handleBaxters(){
-
+        var equipments = [[Int:Baxter]]()
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
+            
             if(self.baxterlist[indexbaxter].doses?.count==0){
                 ApiService.deleteBaxter(baxter: baxterlist[indexbaxter])
                 self.baxterlist.remove(at: indexbaxter)
             }
+            
         }
+
         self.tableview.reloadData()
         
     }
@@ -138,10 +145,7 @@ class PatientBaxterViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
         let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
-        if medicinelist.count<=1{
-            getMedicines()
-            tableview.reloadData()
-        }
+        
         let index:Int = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine })!
         
         

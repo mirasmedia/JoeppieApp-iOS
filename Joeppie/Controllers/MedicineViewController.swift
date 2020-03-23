@@ -47,6 +47,7 @@ class MedicineViewController: UIViewController {
         tableview.allowsSelection = false
         
         setNavigation()
+        checkOnboarding()
         getMedicines()
         setBackground()
         
@@ -58,6 +59,29 @@ class MedicineViewController: UIViewController {
     @objc func applicationWillEnterForeground(notification: Notification) {
         getBaxters()
         setNavigation()
+    }
+    
+    func checkOnboarding(){
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            if !patient!.user.confirmed{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let controller = storyboard.instantiateViewController(withIdentifier:
+                    "WalkThroughViewController") as? WalkThroughViewController{
+                    controller.modalPresentationStyle = .fullScreen
+                    self.navigationController?.present(controller, animated: true)
+                    self.updateUser()
+                }
+            }
+        })
+    }
+    
+    func updateUser(){
+        self.patient?.user.confirmed = true
+        var id:String = String(self.patient!.user.id)
+        ApiService.updateOnBoarding(userId: id)
+              .responseData(completionHandler: { [weak self] (response) in
+                  
+              })
     }
     
     func setBackground(){
@@ -317,7 +341,7 @@ class MedicineViewController: UIViewController {
             tableview.isHidden = true
         }
         
-        
+
         self.tableview.dataSource = self
         self.tableview.delegate = self
         self.tableview.reloadData()

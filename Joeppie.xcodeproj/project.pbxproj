@@ -36,6 +36,9 @@
 		EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7912C423A1375F0003BD6A /* TapbarUI.swift */; };
 		EA93800C241FCEFA009D934B /* PatientBaxterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93800B241FCEFA009D934B /* PatientBaxterViewController.swift */; };
 		EA93800E24203CA2009D934B /* DosesDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93800D24203CA2009D934B /* DosesDataClass.swift */; };
+		EAA13FD12427E777008550B0 /* WalkThroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA13FD02427E777008550B0 /* WalkThroughContentViewController.swift */; };
+		EAA13FD32427EAA6008550B0 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA13FD22427EAA6008550B0 /* WalkthroughPageViewController.swift */; };
+		EAA13FD52427F373008550B0 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA13FD42427F373008550B0 /* WalkThroughViewController.swift */; };
 		EAB719CD23A8026700211816 /* ChartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAB719CC23A8026700211816 /* ChartViewCell.xib */; };
 		EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719CE23A805AF00211816 /* ChartsViewController.swift */; };
 		EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB719D023A8072000211816 /* ChartViewCell.swift */; };
@@ -103,6 +106,9 @@
 		EA7CA3DC24226C9A009E698D /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA93800B241FCEFA009D934B /* PatientBaxterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBaxterViewController.swift; sourceTree = "<group>"; };
 		EA93800D24203CA2009D934B /* DosesDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DosesDataClass.swift; sourceTree = "<group>"; };
+		EAA13FD02427E777008550B0 /* WalkThroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughContentViewController.swift; sourceTree = "<group>"; };
+		EAA13FD22427EAA6008550B0 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		EAA13FD42427F373008550B0 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		EAB719CC23A8026700211816 /* ChartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewCell.xib; sourceTree = "<group>"; };
 		EAB719CE23A805AF00211816 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
 		EAB719D023A8072000211816 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +240,9 @@
 				EA21EAC223A0EA9700969755 /* DigiContactViewController.swift */,
 				EA7912C423A1375F0003BD6A /* TapbarUI.swift */,
 				EAB719CE23A805AF00211816 /* ChartsViewController.swift */,
+				EAA13FD02427E777008550B0 /* WalkThroughContentViewController.swift */,
+				EAA13FD22427EAA6008550B0 /* WalkthroughPageViewController.swift */,
+				EAA13FD42427F373008550B0 /* WalkThroughViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -500,6 +509,7 @@
 				1045527F2427C9DE001ABCC2 /* DayOrdering.swift in Sources */,
 				EA7912C523A1375F0003BD6A /* TapbarUI.swift in Sources */,
 				10887EE32424E93200C28D3D /* DayPickerViewController.swift in Sources */,
+				EAA13FD52427F373008550B0 /* WalkThroughViewController.swift in Sources */,
 				F9EEF8E0239BB84A00C2C714 /* PatientsTableViewController.swift in Sources */,
 				EA5D4D41241AB3DD0005F1F2 /* Charts.swift in Sources */,
 				EA61616F239E9FD000076091 /* Medicine.swift in Sources */,
@@ -509,8 +519,10 @@
 				F9F48270238BF69100299F21 /* SceneDelegate.swift in Sources */,
 				EA1B0F32239DBA9C006094BF /* TapBarController.swift in Sources */,
 				EA25BCD223C51B60001F049F /* DoseTakenTime.swift in Sources */,
+				EAA13FD32427EAA6008550B0 /* WalkthroughPageViewController.swift in Sources */,
 				F9137BEF23AD142A00BCA7E1 /* Intake.swift in Sources */,
 				F9F2B95E239DB6D600AC46FC /* Coach.swift in Sources */,
+				EAA13FD12427E777008550B0 /* WalkThroughContentViewController.swift in Sources */,
 				EA60EF5A239FE89800270B2C /* AlertViewController.swift in Sources */,
 				F9F2B95A239D57F700AC46FC /* User.swift in Sources */,
 			);
