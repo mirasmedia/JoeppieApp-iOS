@@ -38,6 +38,7 @@ class UserService {
     public static func setUser(instance: User) {
         userInstance = instance
         let encoder = JSONEncoder()
+        
         guard let data = try? encoder.encode(instance) else {
             return
         }
@@ -53,6 +54,7 @@ class UserService {
         //If there is an instance saved in userdefaults, return it
         if let data = UserDefaults.standard.data(forKey: Constants.userKey) {
             let decoder = JSONDecoder()
+            
             if let user = try? decoder.decode(User.self, from: data) {
                 userInstance = user
                 cH(user)
@@ -142,7 +144,7 @@ class UserService {
             }
         }
         //If gets the instance from api
-        ApiService.getPatient(userId: userInstance.id).responseData(completionHandler: { response in
+        ApiService.getPatient(withUserId: userInstance.id).responseData(completionHandler: { response in
             guard let jsonData = response.data else {
                 cH(nil)
                 return
@@ -178,18 +180,5 @@ class UserService {
             return
         }
         UserDefaults.standard.set(data, forKey: Constants.patientKey)
-    }
-}
-
-extension Int {
-    func toBool() -> Bool? {
-        switch self {
-        case 1:
-            return true
-        case 0:
-            return false
-        default:
-            return nil
-        }
     }
 }

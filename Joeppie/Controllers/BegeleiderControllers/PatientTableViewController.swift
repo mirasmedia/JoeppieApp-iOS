@@ -223,6 +223,7 @@ class PatientTableViewController: UIViewController {
                                 guard let jsonData = response.data else { return }
                                 guard let pat = try? self.decoder.decode(Patient.self, from: jsonData) else { return }
                                 self.patient = pat
+                                self.jobFinished()
                             })
                         
                     case .failure(_):
@@ -250,9 +251,7 @@ class PatientTableViewController: UIViewController {
                                              insertion: insertion,
                                              last_name: lastName,
                                              date_of_birth: self.dateFormatter.string(from: dateOfBirth))
-                        .responseData(completionHandler: { (response) in
-                            print("RAWRESPONSE \(response.result.value)")
-                            
+                        .responseData(completionHandler: { (response) in                        
                             
                             self.dateFormatter.locale = Locale.current
                             self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -306,22 +305,14 @@ class PatientTableViewController: UIViewController {
             
             if patient != nil{
                 
-                if let text = passwordTextField.text, !text.isEmpty{
-                    if checkPassword(password, conf: confirmPassword){
-                        if updatePatient(username, email,dateOfBirth, firstName, insertion, lastName, password: password){
-                            
-                        }
-                    }
+                if let text = passwordTextField.text, !text.isEmpty && checkPassword(password, conf: confirmPassword){
+                        updatePatient(username, email,dateOfBirth, firstName, insertion, lastName, password: password)
                 }else{
-                    if updatePatient(username, email,dateOfBirth, firstName, insertion, lastName){
-                        
-                    }
+                    updatePatient(username, email,dateOfBirth, firstName, insertion, lastName)
                 }
             }else{
                 if checkPassword(password, conf: confirmPassword){
-                    if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
-                        jobFinished()
-                    }
+                    createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName)
             }
             
             
@@ -331,13 +322,12 @@ class PatientTableViewController: UIViewController {
     }
     
    private func jobFinished(){
-    if let p = patient{
-        self.upDatePatientVc?(p)
-    }
+        if let p = patient{
+            self.upDatePatientVc?(p)
+        }
     
-    self.reloadPatientsList?()
-    self.dismiss(animated: true)
-        
+        self.reloadPatientsList?()
+        self.dismiss(animated: true)
     }
 }
 

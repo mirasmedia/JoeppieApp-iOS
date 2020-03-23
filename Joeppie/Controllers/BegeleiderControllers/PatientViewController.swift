@@ -29,6 +29,7 @@ class PatientViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewWillAppear(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
