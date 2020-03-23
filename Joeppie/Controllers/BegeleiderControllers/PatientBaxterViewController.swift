@@ -19,19 +19,23 @@ class PatientBaxterViewController: UIViewController {
     var popup:UIView!
     var alertvc:AlertViewController!
     var indicator:UIActivityIndicatorView? = nil
-    var checkinTested = false;
-    
+    var checkinTested = false
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
     
     @IBOutlet weak var tapBarItem_home: UITabBarItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-           
         setup()
     }
     
     private func setup(){
         setIndicator()
+        
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         self.tableview.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0);
         tableview.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
@@ -47,7 +51,6 @@ class PatientBaxterViewController: UIViewController {
     @objc func applicationWillEnterForeground(notification: Notification) {
         getBaxters()
     }
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,39 +73,18 @@ class PatientBaxterViewController: UIViewController {
     
 
 
-    func getBaxters(){
-
-        
+    private func getBaxters(){
         ApiService.getAllBaxtersPatient(patientId: self.patient!.id)
-            .responseData(completionHandler: { [weak self] (response) in
+            .responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-                //                print(jsonData)
                 
-                if let json = try? JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers), let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                    //                    print(String(decoding: jsonData, as: UTF8.self))
-                } else {
-                    print("json data malformed")
-                }
+                let rs = try? self.decoder.decode([Baxter].self, from: response.data!)
+                self.baxterlist = rs!.reordered()
                 
-                let decoder = JSONDecoder()
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
-                let rs = try? decoder.decode([Baxter].self, from: response.data!)
-
-                self!.baxterlist = rs!.reordered()
-                
-                
-                
-                
-                self!.handleBaxters()
-                self!.tableview.dataSource = self
-                self!.tableview.delegate = self
-                self!.tableview.reloadData()
+                self.handleBaxters()
+                self.tableview.dataSource = self
+                self.tableview.delegate = self
+                self.tableview.reloadData()
                 
                 guard response.error == nil else {
                     print("error")
@@ -121,39 +103,21 @@ class PatientBaxterViewController: UIViewController {
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
             if(self.baxterlist[indexbaxter].doses?.count==0){
                 ApiService.deleteBaxter(baxter: baxterlist[indexbaxter])
-                .responseData(completionHandler: { [weak self] (response) in
-                })
                 self.baxterlist.remove(at: indexbaxter)
-
-    
             }
         }
-        
-
         self.tableview.reloadData()
         
     }
     
     func getMedicines(){
         ApiService.getMedicines()
-            .responseData(completionHandler: { [weak self] (response) in
-                let jsonData = response.data
-                
-                
-                if let json = try? JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers), let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                    //                    print(String(decoding: jsonData, as: UTF8.self))
-                } else {
-                    print("json data malformed")
+            .responseData(completionHandler: { (response) in
+                guard let jsonData = response.data else { return }
+                let rs = try? self.decoder.decode([Medicine].self, from: jsonData)
+                if let list = rs{
+                    self.medicinelist = list
                 }
-                
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
-                let rs = try! decoder.decode([Medicine].self, from: response.data!)
-                self!.medicinelist = rs
                 
                 guard response.error == nil else {
                     print("error")
@@ -197,8 +161,6 @@ class PatientBaxterViewController: UIViewController {
     
     func deleteDose(dose:NestedDose){
         ApiService.deleteDose(id: String(dose.id))
-        .responseData(completionHandler: { [weak self] (response) in
-        })
     }
     
     
@@ -237,15 +199,17 @@ extension PatientBaxterViewController:UITableViewDelegate{
         let label = UILabel(frame: CGRect(x: 0, y: 8, width: tableView.bounds.size.width, height: 21))
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
+       
+        let df = DateFormatter()
+        df.dateFormat = "HH : mm"
         
-        let calendar = Calendar.current
+        let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
+        let time = df.string(from: baxterlist[section].intakeTime)
         
-        let dateTime:Date =  baxterlist[section].intakeTime
-        let hour = calendar.component(.hour, from: dateTime)
-        let minutes = calendar.component(.minute, from: dateTime)
         
-        let time:String = String.init(format: "%02d:%02d", hour, minutes)
-        label.text = baxterlist[section].dayOfWeek.capitalizingFirstLetter()+" "+time + " "+NSLocalizedString("hour", comment: "")
+        label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
+            
+        
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)
