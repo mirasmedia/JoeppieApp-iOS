@@ -29,7 +29,6 @@ class PatientTableViewController: UIViewController {
     @IBOutlet weak var test: UITextField!
     
     //Shahin: - Properties
-    var patientsView: PatientsTableViewController?
     var selected = false
     var textFields = [UITextField]()
     let dateFormatter = DateFormatter()
@@ -38,6 +37,8 @@ class PatientTableViewController: UIViewController {
     var newUser: NewUser?
     let dateOfBirthPicker = UIDatePicker()
     let decoder = JSONDecoder()
+    var upDatePatientVc: ((_ patient: Patient) -> ())?
+    var reloadPatientsList: (() -> ())?
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -57,7 +58,9 @@ class PatientTableViewController: UIViewController {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.cyan.cgColor
+        let color = UIColor(red: 122/255, green: 107/255, blue: 139/255, alpha: 1.0)
+
+        textField.layer.borderColor = color.cgColor
         textField.layer.borderWidth = 2.0
     }
     
@@ -235,14 +238,12 @@ class PatientTableViewController: UIViewController {
         return false
     }
     
-    fileprivate func updatePatient(_ username: String, _ email: String, _ password: String, _ dateOfBirth: Date, _ firstName: String, _ insertion: String?, _ lastName: String) -> Bool {
+    fileprivate func updatePatient(_ username: String, _ email: String, _ dateOfBirth: Date, _ firstName: String, _ insertion: String?, _ lastName: String, password: String? = nil) -> Bool {
         guard let getPatient = self.patient else { return false}
         
         if Reachability.isConnectedToNetwork(){
             ApiService.updateUser(userId: getPatient.user.id, username: username, email: email, password: password)
                 .responseData(completionHandler: { (response) in
-                    guard let jsonData = response.data else { return }
-                    
                     self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     ApiService.updatePatient(patinetId: getPatient.id,
                                              first_name: firstName,
@@ -250,9 +251,16 @@ class PatientTableViewController: UIViewController {
                                              last_name: lastName,
                                              date_of_birth: self.dateFormatter.string(from: dateOfBirth))
                         .responseData(completionHandler: { (response) in
+                            print("RAWRESPONSE \(response.result.value)")
+                            
+                            
+                            self.dateFormatter.locale = Locale.current
+                            self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                            self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                             guard let jsonData = response.data else { return }
                             guard let pat = try? self.decoder.decode(Patient.self, from: jsonData) else { return }
                             self.patient = pat
+                            self.jobFinished()
                             self.reloadInputViews()
                         })
                     })
@@ -280,10 +288,9 @@ class PatientTableViewController: UIViewController {
         
         //Shahin: Check for birthday field
         //Shahin: Check for empty fields
-        let fields = [firstName, lastName, username, email, password, confirmPassword]
+        let fields = [firstName, lastName, username, email]
         if checkEmptyFields(fields) &&
             checkBirthday(dateOfBirth) &&
-            checkPassword(password, conf: confirmPassword) &&
             checkEmail(email){
             
             //Get Coach instance
@@ -296,25 +303,41 @@ class PatientTableViewController: UIViewController {
                 self.coach = coach
             })
             
+            
             if patient != nil{
-                if updatePatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
-                    jobFinished()
+                
+                if let text = passwordTextField.text, !text.isEmpty{
+                    if checkPassword(password, conf: confirmPassword){
+                        if updatePatient(username, email,dateOfBirth, firstName, insertion, lastName, password: password){
+                            
+                        }
+                    }
+                }else{
+                    if updatePatient(username, email,dateOfBirth, firstName, insertion, lastName){
+                        
+                    }
                 }
-            }else if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
-                    jobFinished()
+            }else{
+                if checkPassword(password, conf: confirmPassword){
+                    if createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName){
+                        jobFinished()
+                    }
             }
             
             
         }
         
     }
+    }
     
-    private func jobFinished(){
-        self.dismiss(animated: true, completion: {
-            self.patientsView?.reloadPatients()
-        })
+   private func jobFinished(){
+    if let p = patient{
+        self.upDatePatientVc?(p)
+    }
+    
+    self.reloadPatientsList?()
+    self.dismiss(animated: true)
         
-        self.patientsView?.reloadPatients()
     }
 }
 

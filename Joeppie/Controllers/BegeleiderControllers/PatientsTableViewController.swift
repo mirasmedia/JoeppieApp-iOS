@@ -22,6 +22,12 @@ class PatientsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewWillAppear(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
         self.navigationItem.setHidesBackButton(true, animated: true)
         logOutButton.title = NSLocalizedString("log_out_button", comment: "")
         
@@ -34,8 +40,8 @@ class PatientsTableViewController: UITableViewController {
         
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
-        showLoadingIndicator()
-        getPatients()
+       getPatients()
+
     }
     
     @objc func realoadPatientsList() {
@@ -43,7 +49,7 @@ class PatientsTableViewController: UITableViewController {
     }
     
     private func getPatients() {
-        print("Get")
+        showLoadingIndicator()
         UserService.getCoachInstance(withCompletionHandler: { coach in
             guard let coach = coach else {
                 UserService.logOut()
@@ -149,8 +155,8 @@ class PatientsTableViewController: UITableViewController {
         }
     }
     
-    public func reloadPatients(){
-        self.getPatients()
+    private func reloadPatients(){
+        getPatients()
     }
     
     
@@ -165,7 +171,8 @@ class PatientsTableViewController: UITableViewController {
             "PatientTableViewController") as? PatientTableViewController else {
                 fatalError("Unexpected destination:")
         }
-        patientViewController.patientsView = self
+        // TODO Update view after adding new patient
+        patientViewController.reloadPatientsList = reloadPatients
         self.navigationController?.present(patientViewController, animated: true, completion: nil)
         
     }
