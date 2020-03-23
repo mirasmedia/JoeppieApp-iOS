@@ -50,9 +50,9 @@ class MedicineViewController: UIViewController {
         tableview.allowsSelection = false
         
         setNavigation()
-        checkOnboarding()
         getMedicines()
         setBackground()
+        checkOnboarding()
         
         let myTimer = Timer(timeInterval: 60.0, target: self, selector:#selector(self.refresh), userInfo: nil, repeats: true)
         RunLoop.main.add(myTimer, forMode: RunLoop.Mode.default)
@@ -65,26 +65,26 @@ class MedicineViewController: UIViewController {
     }
     
     func checkOnboarding(){
-        UserService.getPatientInstance(withCompletionHandler: { patient in
-            if !patient!.user.confirmed{
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let controller = storyboard.instantiateViewController(withIdentifier:
-                    "WalkThroughViewController") as? WalkThroughViewController{
-                    controller.modalPresentationStyle = .fullScreen
-                    self.navigationController?.present(controller, animated: true)
-                    self.updateUser()
-                }
+        
+        guard var state:Bool = UserService.getOnboarding() else {
+            return
+        }
+        
+        if !state{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let controller = storyboard.instantiateViewController(withIdentifier:
+            "WalkThroughViewController") as? WalkThroughViewController{
+            controller.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(controller, animated: true)
+            UserService.setOnboarding(state: true)
             }
-        })
+        }
+          
     }
     
     func updateUser(){
         self.patient?.user.confirmed = true
-        var id:String = String(self.patient!.user.id)
-        ApiService.updateOnBoarding(userId: id)
-              .responseData(completionHandler: { [weak self] (response) in
-                  
-              })
+        UserService.setOnboarding(state: true)
     }
     
     func setBackground(){
@@ -250,7 +250,7 @@ class MedicineViewController: UIViewController {
             }
             labelName.textColor = UIColor.white
             labelName.font = UIFont.systemFont(ofSize: 20)
-            labelName.text = NSLocalizedString("greetting", comment: "") + patient.firstName
+            labelName.text = NSLocalizedString("greetting", comment: "") + patient.firstName.capitalizingFirstLetter()
             self.patient = patient
             
             self.parent?.navigationController?.navigationBar.barTintColor = UIColor(red:0.38, green:0.33, blue:0.46, alpha:1.0)
@@ -447,6 +447,7 @@ class MedicineViewController: UIViewController {
                     decoder.dateDecodingStrategy = .formatted(dateFormatter)
                     guard let rs = try? decoder.decode([Baxter].self, from: jsonData) else { return }
                     self.baxterlist = rs
+                    self.baxterlist = rs.reordered()
                     self.setIntake()
                     self.handleBaxters()
                     
