@@ -142,7 +142,7 @@ class UserService {
             }
         }
         //If gets the instance from api
-        ApiService.getPatient(withUserId: userInstance.id).responseData(completionHandler: { response in
+        ApiService.getPatient(userId: userInstance.id).responseData(completionHandler: { response in
             guard let jsonData = response.data else {
                 cH(nil)
                 return
@@ -178,5 +178,18 @@ class UserService {
             return
         }
         UserDefaults.standard.set(data, forKey: Constants.patientKey)
+    }
+}
+
+extension Int {
+    func toBool() -> Bool? {
+        switch self {
+        case 1:
+            return true
+        case 0:
+            return false
+        default:
+            return nil
+        }
     }
 }
