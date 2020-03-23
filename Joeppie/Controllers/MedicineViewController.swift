@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import UserNotifications
 
-
-
-
 class MedicineViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var backgroundLabelJoeppie: UILabel!
@@ -22,6 +19,8 @@ class MedicineViewController: UIViewController {
     var baxterlist: [Baxter] = []
     var medicinelist: [Medicine] = []
     var popup:UIView!
+    let decoder = JSONDecoder()
+    let dateFormatter = DateFormatter()
     var alertvc:AlertViewController!
     let notificationCenter = UNUserNotificationCenter.current()
     var indicator:UIActivityIndicatorView? = nil
@@ -31,9 +30,14 @@ class MedicineViewController: UIViewController {
     @IBOutlet weak var tapBarItem_home: UITabBarItem!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+           
+        setup()
+    }
+    
+    private func setup(){
         setIndicator()
 
-        
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.38, green:0.33, blue:0.46, alpha:1.0)
         self.tableview.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0);
         tableview.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
@@ -43,6 +47,7 @@ class MedicineViewController: UIViewController {
         tableview.allowsSelection = false
         
         setNavigation()
+        checkOnboarding()
         getMedicines()
         setBackground()
         
@@ -54,6 +59,29 @@ class MedicineViewController: UIViewController {
     @objc func applicationWillEnterForeground(notification: Notification) {
         getBaxters()
         setNavigation()
+    }
+    
+    func checkOnboarding(){
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            if !patient!.user.confirmed{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let controller = storyboard.instantiateViewController(withIdentifier:
+                    "WalkThroughViewController") as? WalkThroughViewController{
+                    controller.modalPresentationStyle = .fullScreen
+                    self.navigationController?.present(controller, animated: true)
+                    self.updateUser()
+                }
+            }
+        })
+    }
+    
+    func updateUser(){
+        self.patient?.user.confirmed = true
+        var id:String = String(self.patient!.user.id)
+        ApiService.updateOnBoarding(userId: id)
+              .responseData(completionHandler: { [weak self] (response) in
+                  
+              })
     }
     
     func setBackground(){
@@ -85,7 +113,7 @@ class MedicineViewController: UIViewController {
         //        print(nextDay)
         
         
-        var date = Date()
+        let date = Date()
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
             if baxterlist[indexbaxter].doses!.count>0{
                 let content = UNMutableNotificationContent()
@@ -122,8 +150,18 @@ class MedicineViewController: UIViewController {
             }
             
         }
+        
+        // TODO : hardcoded id ?!?!? add connection checker, move additional func to an helper
         var baxters:[Baxter]?
-        ApiService.getBaxterClient(dayOfWeek: nextdayString, patientId: "2")
+        
+        //Copy this bit to wherever you need the user
+        var id = Int()
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            if let temp = patient{
+                id = temp.id
+            }
+        })
+        ApiService.getBaxterClient(dayOfWeek: nextdayString, patientId: id)
             .responseData(completionHandler: { [weak self] (response) in
                 guard let jsonData = response.data else { return }
                 //                print(jsonData)
@@ -134,12 +172,11 @@ class MedicineViewController: UIViewController {
                     //                    print("json data malformed")
                 }
                 
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                let rs = try! decoder.decode([Baxter].self, from: response.data!)
+                
+                self?.dateFormatter.locale = Locale.current
+                self?.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                self?.decoder.dateDecodingStrategy = .formatted(self!.dateFormatter)
+                let rs = try? self!.decoder.decode([Baxter].self, from: response.data!)
                 baxters = rs
                 
                 for indexbaxter in stride(from: baxters!.count-1, to: -1, by: -1){
@@ -184,10 +221,11 @@ class MedicineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("will apear")
         getBaxters()
         setNavigation()
     }
+    
+    // TODO : make all func private
     
     func setIndicator(){
         indicator = UIActivityIndicatorView()
@@ -249,7 +287,13 @@ class MedicineViewController: UIViewController {
             dateComponents?.second = calendar.component(.second, from: lastTakeMoment)
             dateComponents?.nanosecond = calendar.component(.nanosecond, from: lastTakeMoment)
             
-            var intakeTime = calendar.date(from: dateComponents!)!
+            guard let dtcomponents = dateComponents else{
+                return
+            }
+            
+            guard let intakeTime = calendar.date(from: dtcomponents) else{
+                return
+            }
             
             if(intakeTime<now){
                 baxterlist.remove(at: indexbaxter)
@@ -297,7 +341,7 @@ class MedicineViewController: UIViewController {
             tableview.isHidden = true
         }
         
-        
+
         self.tableview.dataSource = self
         self.tableview.delegate = self
         self.tableview.reloadData()
@@ -316,8 +360,14 @@ class MedicineViewController: UIViewController {
         
         
         for indexbaxter in stride(from: baxterlist.count-1, to: -1, by: -1){
-            let baxterTime:Date = baxterlist[indexbaxter].intakeTime
-            let lastTakeMoment = calendar.date(byAdding: .minute, value: +45, to: baxterTime)!
+            guard let baxterTime:Date = baxterlist[indexbaxter].intakeTime else{
+                return
+            }
+            
+             guard let lastTakeMoment = calendar.date(byAdding: .minute, value: +45, to: baxterTime) else
+             {
+                return
+            }
             
             var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: Date())
             
@@ -340,11 +390,9 @@ class MedicineViewController: UIViewController {
                     
                     
                     let b = calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day)
-                    print(b)
                     if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month)&&calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
                         setIntake(dose: (baxterlist[indexbaxter].doses?[indexdose])! , patient: self.patient!, timeNow: dateString, state: String(DoseTakenTime.NOT_TAKEN.rawValue))
-                        print(baxterlist[indexbaxter].doses![indexdose].lastTaken)
-                        print(baxterlist[indexbaxter].intakeTime)
+
                         self.updateDose(id: String(self.baxterlist[indexbaxter].doses![indexdose].id), lasttaken: dateString)
                         baxterlist[indexbaxter].doses![indexdose].lastTaken = now
                     }
@@ -369,45 +417,41 @@ class MedicineViewController: UIViewController {
     
     
     func getBaxters(){
-        //        let date = Date()
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "EEEE"
-        //        let dayInWeek = dateFormatter.string(from: date)
-        
-        ApiService.getBaxterClient(dayOfWeek: "thursday", patientId: "2")
-            .responseData(completionHandler: { [weak self] (response) in
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "eeee"
+        let dayInWeek = dateFormatter.string(from: date)
+
+        //Copy this bit to wherever you need the user
+        UserService.getPatientInstance(withCompletionHandler: { patient in
+            guard let patient = patient else {
+                UserService.logOut()
+                return
+            }
+            
+            ApiService.getBaxterClient(dayOfWeek: dayInWeek, patientId: patient.id)
+            .responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-                //                print(jsonData)
-                
-                if let json = try? JSONSerialization.jsonObject(with: response.data!, options: .mutableContainers), let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-                    //                    print(String(decoding: jsonData, as: UTF8.self))
-                } else {
-                    print("json data malformed")
-                }
                 
                 let decoder = JSONDecoder()
-                
                 let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
-                let rs = try? decoder.decode([Baxter].self, from: response.data!)
-                self!.baxterlist = rs!
-                self!.setIntake()
-                self!.handleBaxters()
-                
-                guard response.error == nil else {
-                    print("error")
+                switch(response.result) {
+                case .success(_):
+                    dateFormatter.locale = Locale.current
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
+                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                    guard let rs = try? decoder.decode([Baxter].self, from: jsonData) else { return }
+                    self.baxterlist = rs
+                    self.setIntake()
+                    self.handleBaxters()
                     
-                    if response.response?.statusCode == 409 {
-                        print("error")
-                    }
-                    return
-                    
+                case .failure(_):
+                    print("EROOR MESSAGr\(response.result.error)")
                 }
             })
+        })
     }
     
     func getMedicines(){
@@ -422,13 +466,15 @@ class MedicineViewController: UIViewController {
                     print("json data malformed")
                 }
                 
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+                self!.dateFormatter.locale = Locale.current
+                self!.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                self!.decoder.dateDecodingStrategy = .formatted(self!.dateFormatter)
                 
-                let rs = try! decoder.decode([Medicine].self, from: response.data!)
+                guard let rs = try? self?.decoder.decode([Medicine].self, from: response.data!) else {
+                    print("nodata")
+                    return
+                }
                 self!.medicinelist = rs
                 
                 guard response.error == nil else {
@@ -450,8 +496,6 @@ class MedicineViewController: UIViewController {
         let hour = calendar.component(.hour, from: dateTime)
         let minutes = calendar.component(.minute, from: dateTime)
         
-        print(String(hour) + ":" + String(minutes))
-        
         let curTime:String = String.init(format: "%02d:%02d", hour, minutes)
         
         
@@ -462,8 +506,6 @@ class MedicineViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         indicator?.stopAnimating()
-        print("row" + String(indexPath.row))
-        print ("sec" + String(indexPath.section))
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
         let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
@@ -499,6 +541,7 @@ class MedicineViewController: UIViewController {
         return 35
     }
     
+    //TODO: move this to an helper - MOVE
     func showAlertOntime(indexpath:IndexPath){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         alertvc = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
@@ -517,13 +560,12 @@ class MedicineViewController: UIViewController {
         else if (baxterlist.indices.contains(indexpath.section+1)){
             let calendar = Calendar.current
             
-            print(indexpath.section)
             let dateTime:Date =  baxterlist[indexpath.section+1].intakeTime
             let hour = calendar.component(.hour, from: dateTime)
             let minutes = calendar.component(.minute, from: dateTime)
             
             let time:String = String.init(format: "%02d:%02d", hour, minutes)
-            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + " "+time+" "+NSLocalizedString("hour", comment: "")
             alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
             alertvc.nameAlertView.text = self.patient?.firstName
             alertvc.stateAlertView.text = NSLocalizedString("was_on_time_text", comment: "")
@@ -565,7 +607,7 @@ class MedicineViewController: UIViewController {
             let minutes = calendar.component(.minute, from: dateTime)
             
             let time:String = String.init(format: "%02d:%02d", hour, minutes)
-            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "") + time + NSLocalizedString("hour", comment: "")
+            alertvc.timeNextMedicine.text = NSLocalizedString("till", comment: "")+" "+time + NSLocalizedString("hour", comment: "")
             alertvc.titleNextMedicine.text = NSLocalizedString("we_want_see_you_back", comment: "")
         }
         else{
@@ -577,10 +619,27 @@ class MedicineViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
     }
     
+    func showAlertEarly(indexpath:IndexPath){
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          alertvc = storyboard.instantiateViewController(withIdentifier: "AlertViewController") as! AlertViewController
+          
+          // Add the child's View as a subview
+          alertvc.modalPresentationStyle = .fullScreen
+          self.present(alertvc, animated: true, completion: nil)
+          alertvc.imageAlertView.image = UIImage(named:"Joeppie_surprised")
+          alertvc.titleAlertView.text = NSLocalizedString("can_better_text", comment: "")
+          alertvc.nameAlertView.text = patient?.firstName
+          alertvc.stateAlertView.text = NSLocalizedString("you_are_to_early", comment: "")
+        
+          alertvc.timeNextMedicine.text = NSLocalizedString("hope_next_time_better", comment: "")
+          alertvc.titleNextMedicine.text = NSLocalizedString("thank_you", comment: "")
+          Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.dismissAlert), userInfo: nil, repeats: false)
+      }
+    
     func setIntake(dose:NestedDose, patient:Patient, timeNow:String, state:String){
         ApiService.setIntake(dose:dose, patient: patient, timeNow: timeNow, state: state)
             .responseData(completionHandler: { [weak self] (response) in
-                print(response)
+//                print(response)
             })
     }
     
@@ -612,19 +671,16 @@ class MedicineViewController: UIViewController {
         let maxEndTime = calendar.date(byAdding: .minute, value: 15, to: intakeTime)!
         let lateEndtime = calendar.date(byAdding: .minute, value: 45, to: intakeTime)!
         
+        var date = Date()
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let formatedDate = dateFormatter.string(from: date)
         
         
         if timeNow >= maxStartTime && timeNow <= maxEndTime
         {
-            print("The time is between the range")
             let ingenomen = UIContextualAction(style: .destructive, title: "Medicatie ingenomen") { (action, sourceView, completionHandler) in
-                
-                var date = Date()
-                let dateFormatter : DateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-                let formatedDate = dateFormatter.string(from: date)
-                print(formatedDate)
                 
                 self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
                 self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.ON_TIME.rawValue))
@@ -639,18 +695,27 @@ class MedicineViewController: UIViewController {
             
         }
         else if(timeNow<maxStartTime){
-            let ingenomen = UIContextualAction(style: .destructive, title: "Je bent te vroeg!") { (action, sourceView, completionHandler) in
+            let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("you_are_to_early", comment: "")) { (action, sourceView, completionHandler) in
+                let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("you_take_medicine_to_early", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
+                    self.updateDose(id: String(self.baxterlist[indexPath.section].doses![indexPath.row].id), lasttaken: formatedDate)
+                    self.setIntake(dose: self.baxterlist[indexPath.section].doses![indexPath.row], patient: self.patient!, timeNow: formatedDate, state: String(DoseTakenTime.EARLY.rawValue))
+                    self.showAlertEarly(indexpath: indexPath)
+                    self.getBaxters()
+                }))
+                
+                alert.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: .cancel, handler: nil))
+                self.present(alert, animated: true)
                 
             }
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
             let swipeAction = UISwipeActionsConfiguration(actions: [ingenomen])
             swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
-            print(maxEndTime)
             return swipeAction
             
         }
         else{
-            let ingenomen = UIContextualAction(style: .destructive, title: "Je bent laat!") { (action, sourceView, completionHandler) in
+            let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("you_are_to_late", comment: "")) { (action, sourceView, completionHandler) in
                 
                 var date = Date()
                 let dateFormatter : DateFormatter = DateFormatter()
@@ -663,6 +728,7 @@ class MedicineViewController: UIViewController {
                 self.getBaxters()
                 self.showAlertLate(indexpath: indexPath)
             }
+            
             ingenomen.backgroundColor = UIColor(red:0.36, green:0.87, blue:0.55, alpha:1.0)
             let swipeAction = UISwipeActionsConfiguration(actions: [ingenomen])
             swipeAction.performsFirstActionWithFullSwipe = false // This is the line which disables full swipe
@@ -674,42 +740,34 @@ class MedicineViewController: UIViewController {
     
 }
 
-extension MedicineViewController:UITableViewDelegate{
+extension MedicineViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         let label = UILabel(frame: CGRect(x: 0, y: 8, width: tableView.bounds.size.width, height: 21))
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
+
+        let df = DateFormatter()
+        df.dateFormat = "HH : mm"
         
-        let calendar = Calendar.current
+        let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
+        let time = df.string(from: baxterlist[section].intakeTime)
         
-        let dateTime:Date =  baxterlist[section].intakeTime
-        let hour = calendar.component(.hour, from: dateTime)
-        let minutes = calendar.component(.minute, from: dateTime)
-        
-        print(String(hour) + ":" + String(minutes))
-        
-        let time:String = String.init(format: "%02d:%02d", hour, minutes)
-        
-        label.text = time + " uur"
+        label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)
         return headerView
         
     }
-    
-    
 }
 
 
-extension MedicineViewController:UITableViewDataSource{
-    
-    
+extension MedicineViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         var amount:Int = 0
         for baxter in baxterlist{
-            if baxter.doses!.count>0{
+            if baxter.doses?.count ?? 0>0{
                 amount = amount + 1
             }
         }
@@ -721,12 +779,8 @@ extension MedicineViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.baxterlist[section].doses!.count
+    
+        return self.baxterlist[section].doses?.count ?? 0
     }
     
 }
-
-
-
-
-

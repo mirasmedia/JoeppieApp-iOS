@@ -10,7 +10,7 @@ import Foundation
 
 struct Patient : Codable {
     let id : Int
-    let user : NestedUser
+    var user : NestedUser
     let createdAt : Date
     let updatedAt : Date
     let firstName : String

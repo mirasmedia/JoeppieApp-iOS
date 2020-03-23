@@ -8,6 +8,5 @@ target 'Joeppie' do
   # Pods for Joeppie
 
     pod 'SwiftKeychainWrapper'
-    pod 'Charts' 
-
+    pod 'Charts'
 end

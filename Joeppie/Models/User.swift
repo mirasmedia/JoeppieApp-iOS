@@ -10,8 +10,8 @@
 import Foundation
 
 struct User : Codable {
-    let username : String
     let id : Int
+    let username : String
     let email : String
     let provider : String
     let confirmed : Bool
@@ -20,8 +20,8 @@ struct User : Codable {
     let notes : String?
     
     enum CodingKeys : String, CodingKey {
-        case username
         case id
+        case username
         case email
         case provider
         case confirmed
@@ -36,7 +36,7 @@ struct NestedUser : Codable {
     let id : Int
     let email : String
     let provider : String
-    let confirmed : Bool
+    var confirmed : Bool
     let blocked : Bool
     let role : Int
     let notes : String?

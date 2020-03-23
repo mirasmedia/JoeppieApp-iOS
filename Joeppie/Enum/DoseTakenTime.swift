@@ -13,4 +13,5 @@ enum DoseTakenTime:Int {
     case ON_TIME = 0
     case LATE = 1
     case NOT_TAKEN = 2
+    case EARLY = 3
 }
