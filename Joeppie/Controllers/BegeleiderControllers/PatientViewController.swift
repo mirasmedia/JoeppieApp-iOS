@@ -29,6 +29,16 @@ class PatientViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+       initView()
+
+    }
+    
+    private func initView(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
         
         if let temp = patient{
@@ -69,6 +79,15 @@ class PatientViewController: UIViewController {
         
     }
     
+    private func updatedPatient(updatedPatient: Patient){
+        // Get patient first
+        showLoadingIndicator()
+        
+        patient = updatedPatient
+        initView()
+        hideLoadingIndicator()
+    }
+    
     @objc func showEditPatientView(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let patientViewController = storyboard.instantiateViewController(withIdentifier:
@@ -76,6 +95,7 @@ class PatientViewController: UIViewController {
                 fatalError("Unexpected destination:")
         }
         patientViewController.patient = patient
+        patientViewController.upDatePatientVc = updatedPatient
 //        self.navigationController?.pushViewController(patientViewController, animated: true)
         self.navigationController?.present(patientViewController, animated: true)
     }

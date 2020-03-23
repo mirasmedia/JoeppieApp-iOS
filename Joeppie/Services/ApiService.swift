@@ -190,11 +190,16 @@ class ApiService {
     }
     
     //(PUT)/users
-    static func updateUser(userId: Int, username: String, email : String, password : String) -> (DataRequest) {
+    static func updateUser(userId: Int, username: String, email : String, password : String? = nil) -> (DataRequest) {
         var parameters : [String:String] = [:]
         parameters["username"] = username
         parameters["email"] = email
-        parameters["password"] = password
+        if password != nil {
+          parameters["password"] = password
+        }else{
+            print("Pass is Null")
+        }
+        
         
         var headers : [String : String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
@@ -217,15 +222,19 @@ class ApiService {
             headers["Authorization"] = "Bearer \(token)"
         }
         return Alamofire.request(baseURL + "/patients/\(patinetId)", method: .put, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("UPDATE Patient:\(response.result.value)")}
     }
     
-    //(GET)/patients
-    static func getPatient(withUserId userId : Int) -> (DataRequest) {
+    //(GET)/patient
+    static func getPatient(userId : Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
-        return Alamofire.request(baseURL + "/patients?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        return Alamofire.request(baseURL + "/patients?id=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
+        .responseJSON { response in
+        print("GET Patient:\(response.result.value)")}
     }
     
     //(GET)/coaches
@@ -298,7 +307,5 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/doses", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
 }
