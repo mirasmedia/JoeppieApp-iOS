@@ -66,6 +66,8 @@ class MedicineViewController: UIViewController {
     
     func checkOnboarding(){
         UserService.getPatientInstance(withCompletionHandler: { patient in
+            
+        if let temp = patient{
             if patient!.user.confirmed{
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let controller = storyboard.instantiateViewController(withIdentifier:
@@ -75,6 +77,8 @@ class MedicineViewController: UIViewController {
                     self.updateUser()
                 }
             }
+        }
+            
         })
     }
     
