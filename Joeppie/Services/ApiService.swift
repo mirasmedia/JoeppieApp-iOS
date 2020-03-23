@@ -226,15 +226,13 @@ class ApiService {
         print("UPDATE Patient:\(response.result.value)")}
     }
     
-    //(GET)/patient
-    static func getPatient(userId : Int) -> (DataRequest) {
+    //(GET)/patients
+    static func getPatient(withUserId userId : Int) -> (DataRequest) {
         var headers : [String : String] = [:]
         if let token = KeychainWrapper.standard.string(forKey: Constants.tokenIdentifier) {
             headers["Authorization"] = "Bearer \(token)"
         }
-        return Alamofire.request(baseURL + "/patients?id=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("GET Patient:\(response.result.value)")}
+        return Alamofire.request(baseURL + "/patients?user=\(userId)", method: .get, parameters: nil, encoding: Alamofire.JSONEncoding.default, headers: headers)
     }
     
     //(GET)/coaches

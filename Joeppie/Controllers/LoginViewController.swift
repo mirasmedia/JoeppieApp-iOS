@@ -125,6 +125,7 @@ class LoginViewController: UIViewController {
             ApiService.logUserIn(withIdentiefier: identiefier, andPassword: password).responseData(completionHandler: { response in
                 guard let jsonData = response.data else { return }
                 let decoder = JSONDecoder()
+                
                 let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
                 if loginResponse == nil{
                     Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("login_error_title", comment: ""), msg: NSLocalizedString("login_error_msg", comment: ""))
