@@ -34,11 +34,14 @@ class PatientViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
+       
        initView()
 
     }
     
     private func initView(){
+        self.chartsArray.removeAll()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
         
         if let temp = patient{

@@ -127,6 +127,7 @@ class LoginViewController: UIViewController {
                 let decoder = JSONDecoder()
                 
                 let loginResponse = try? decoder.decode(LoginResponse.self, from: jsonData)
+                print(loginResponse?.token)
                 if loginResponse == nil{
                     Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("login_error_title", comment: ""), msg: NSLocalizedString("login_error_msg", comment: ""))
                 }else{
