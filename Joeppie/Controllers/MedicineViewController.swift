@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import UserNotifications
 
-
-
-
 class MedicineViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var backgroundLabelJoeppie: UILabel!
@@ -749,16 +746,14 @@ extension MedicineViewController: UITableViewDelegate{
         let label = UILabel(frame: CGRect(x: 0, y: 8, width: tableView.bounds.size.width, height: 21))
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
+
+        let df = DateFormatter()
+        df.dateFormat = "HH : mm"
         
-        let calendar = Calendar.current
+        let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
+        let time = df.string(from: baxterlist[section].intakeTime)
         
-        let dateTime:Date =  baxterlist[section].intakeTime
-        let hour = calendar.component(.hour, from: dateTime)
-        let minutes = calendar.component(.minute, from: dateTime)
-        
-        let time:String = String.init(format: "%02d:%02d", hour, minutes)
-        
-        label.text = time + " "+NSLocalizedString("hour", comment: "")
+        label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)

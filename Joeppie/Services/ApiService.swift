@@ -85,6 +85,8 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters?&_sort=intake_time:ASC", method: .get, parameters: parameters,headers: headers)
+        .responseJSON { response in
+        print("JSON:\(response.result.value)")}
     }
     //(GET)/medicines
     static func getMedicines() -> (DataRequest) {
@@ -288,8 +290,6 @@ class ApiService {
         }
         
         return Alamofire.request(baseURL + "/baxters", method: .post, parameters: parameters, encoding: Alamofire.JSONEncoding.default, headers: headers)
-        .responseJSON { response in
-        print("JSON:\(response.result.value)")}
     }
     
     //(POST)/doses
