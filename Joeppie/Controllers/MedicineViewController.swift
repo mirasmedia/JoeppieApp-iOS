@@ -66,7 +66,7 @@ class MedicineViewController: UIViewController {
     
     func checkOnboarding(){
         UserService.getPatientInstance(withCompletionHandler: { patient in
-            if patient!.user.confirmed{
+            if !patient!.user.confirmed{
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let controller = storyboard.instantiateViewController(withIdentifier:
                     "WalkThroughViewController") as? WalkThroughViewController{
@@ -79,7 +79,7 @@ class MedicineViewController: UIViewController {
     }
     
     func updateUser(){
-        self.patient!.user.confirmed = true
+        self.patient?.user.confirmed = true
         var id:String = String(self.patient!.user.id)
         ApiService.updateOnBoarding(userId: id)
               .responseData(completionHandler: { [weak self] (response) in
@@ -344,7 +344,7 @@ class MedicineViewController: UIViewController {
             tableview.isHidden = true
         }
         
-        
+
         self.tableview.dataSource = self
         self.tableview.delegate = self
         self.tableview.reloadData()

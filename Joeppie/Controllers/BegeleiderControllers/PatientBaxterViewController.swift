@@ -87,13 +87,11 @@ class PatientBaxterViewController: UIViewController {
                 } else {
                     print("json data malformed")
                 }
-                
                 let decoder = JSONDecoder()
-                
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale.current
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
                 
                 let rs = try? decoder.decode([Baxter].self, from: response.data!)
