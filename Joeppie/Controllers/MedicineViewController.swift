@@ -390,8 +390,6 @@ class MedicineViewController: UIViewController {
                 let dateString = dateFormatter.string(from: now)
                 for indexdose in stride(from: baxterlist[indexbaxter].doses!.count-1, to: -1, by: -1){
                     let lastTakenTimeChanged:Date = baxterlist[indexbaxter].doses![indexdose].lastTaken
-                    print(lastTakenTimeChanged)
-                    print(now)
          
                     
                     let b = calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day)
