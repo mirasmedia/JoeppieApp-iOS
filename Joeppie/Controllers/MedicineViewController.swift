@@ -606,7 +606,7 @@ class MedicineViewController: UIViewController {
         alertvc.modalPresentationStyle = .fullScreen
         self.present(alertvc, animated: true, completion: nil)
         alertvc.imageAlertView.image = UIImage(named:"Joeppie_surprised")
-        alertvc.titleAlertView.text = NSLocalizedString("can_better_text", comment: "")
+        alertvc.titleAlertView.text = NSLocalizedString("take_now", comment: "")
         alertvc.nameAlertView.text = patient?.firstName
         alertvc.stateAlertView.text = "Net niet op tijd!"
         if baxterlist[indexpath.section].doses!.count > 1
