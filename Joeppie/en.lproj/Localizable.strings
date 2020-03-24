@@ -7,6 +7,8 @@
 */
 
 "" = "";
+// Messages
+"saved_data_msg" = "The data are stored!";
 
 //Shahin: Error
 "connection_error_title" = "Connection failed!";
@@ -56,8 +58,10 @@
 "invalide_conf_pass_msg" = "Your passwords do not match.";
 "there_is_no_data"="There is no data for charts at the moment";
 
+"failure_message" = "Oepsss!!! something went wrong!!!";
+
 // Add medicine
-"intake_time" = "Select Time";
+"intake_time" = "Select Intake time";
 "intake_day" = "Select Day";
 "select_medicine" = "Select a medicine";
 "add_doses" = "Add dose of medicine";
@@ -116,3 +120,22 @@
 "wecome_at_joeppie" = "Welcome at Joeppie";
 "happy_joeppie" = "Happy Joeppie";
 "statistic" = "Statistics";
+"verwijderd" = "Deleted";
+"are_you_sure_to_delete_it" = "Are you sure to delete this?";
+
+"next" = "NEXT";
+"skip" = "Skip";
+"get_started" = "GET STARTED";
+
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+
+"Edit" = "Edit client";
+"add_new_baxter" = "Add new Baxter";
+"select_atleast" = "Select all fields to create a new Baxter";
+"verwijderen" = "Delete";

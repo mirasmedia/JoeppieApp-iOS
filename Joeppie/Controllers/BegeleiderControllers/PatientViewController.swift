@@ -42,7 +42,7 @@ class PatientViewController: UIViewController {
     private func initView(){
         self.chartsArray.removeAll()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Edit", comment: ""), style: .plain, target: self, action: #selector(showEditPatientView))
         
         if let temp = patient{
             patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"
@@ -83,9 +83,8 @@ class PatientViewController: UIViewController {
     }
     
     private func updatedPatient(updatedPatient: Patient){
-        // Get patient first
         showLoadingIndicator()
-        
+        FeedbackMessages.confirmSaveDataMessage(vC: self)
         patient = updatedPatient
         initView()
         hideLoadingIndicator()
@@ -99,8 +98,7 @@ class PatientViewController: UIViewController {
         }
         patientViewController.patient = patient
         patientViewController.upDatePatientVc = updatedPatient
-//        self.navigationController?.pushViewController(patientViewController, animated: true)
-        self.navigationController?.present(patientViewController, animated: true)
+        self.navigationController?.pushViewController(patientViewController, animated: true)
     }
     
     

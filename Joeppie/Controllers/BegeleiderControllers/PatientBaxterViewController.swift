@@ -158,7 +158,17 @@ class PatientBaxterViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
-        cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        switch self.medicinelist[index].type{
+            case "tablet":
+                cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+            case "Druppel":
+                cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
+            case "Capsule":
+                cell.medicine_intake_image.image = UIImage(named:"capsule")
+            default:
+                cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+            }
+        
         return cell
         
     }
@@ -173,12 +183,25 @@ class PatientBaxterViewController: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-          let ingenomen = UIContextualAction(style: .destructive, title: "Verwijderen") { (action, sourceView, completionHandler) in
-              let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: "Weet u zeker dat u dit wilt verwijderen?", preferredStyle: .alert)
+          let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("verwijderen", comment: "")) { (action, sourceView, completionHandler) in
+              let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("are_you_sure_to_delete_it", comment: ""), preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
                 self.deleteDose(dose: self.baxterlist[indexPath.section].doses![indexPath.row])
                 self.baxterlist[indexPath.section].doses?.remove(at: indexPath.row)
                 self.handleBaxters()
+                var imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 40, height: 40))
+                imageView.image = UIImage(named: "vinkje")
+                
+                let alert = UIAlertController(title: "", message: NSLocalizedString("verwijderd", comment: ""), preferredStyle: .alert)
+                alert.view.addSubview(imageView)
+                self.present(alert, animated: true, completion: nil)
+
+                // change to desired number of seconds (in this case 5 seconds)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                  // your code with delay
+                  alert.dismiss(animated: true, completion: nil)
+                }
                   
               }))
 
@@ -205,15 +228,33 @@ extension PatientBaxterViewController:UITableViewDelegate{
         label.font = UIFont.systemFont(ofSize: 20)
        
         let df = DateFormatter()
-        df.dateFormat = "HH : mm"
+        df.dateFormat = "HH:mm"
         
-        let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
         let time = df.string(from: baxterlist[section].intakeTime)
+      
+        var daycheck:String = ""
+        switch baxterlist[section].dayOfWeek.capitalizingFirstLetter() {
+        case "Monday":
+            daycheck = NSLocalizedString("Monday", comment: "")
+        case "Tuesday":
+            daycheck = NSLocalizedString("Tuesday", comment: "")
+        case "Wednesday":
+            daycheck = NSLocalizedString("Wednesday", comment: "")
+        case "Thursday":
+            daycheck = NSLocalizedString("Thursday", comment: "")
+        case "Friday":
+            daycheck = NSLocalizedString("Friday", comment: "")
+        case "Saturday":
+            daycheck = NSLocalizedString("Saturday", comment: "")
+        case "Sunday":
+            daycheck = NSLocalizedString("Sunday", comment: "")
         
+        default:
+            ""
+        }
         
-        label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
+        label.text = "\(daycheck) \(time) \(NSLocalizedString("hour", comment: ""))"
             
-        
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)

@@ -15,18 +15,13 @@ class PatientTableViewController: UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var insertionTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    
-    @IBOutlet weak var dateOfBirthTitle: UILabel!
-    @IBOutlet weak var dateOfBirth: UITextField!
-    
+    @IBOutlet weak var btnBirthday: UIButton!
     @IBOutlet weak var titleLbl: UILabel!
-    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
-    @IBOutlet weak var test: UITextField!
     
     //Shahin: - Properties
     var selected = false
@@ -35,10 +30,10 @@ class PatientTableViewController: UIViewController {
     var patient: Patient?
     var coach: Coach?
     var newUser: NewUser?
-    let dateOfBirthPicker = UIDatePicker()
     let decoder = JSONDecoder()
     var upDatePatientVc: ((_ patient: Patient) -> ())?
     var reloadPatientsList: (() -> ())?
+    var patientBirthday: Date?
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -47,19 +42,33 @@ class PatientTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateOfBirthPicker.datePickerMode = .date
-        dateOfBirthPicker.addTarget(self, action: #selector(self.dateOfBirthChanged(datePicker:)), for: .valueChanged)
-        dateOfBirth.inputView = dateOfBirthPicker
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureReconizer:)))
-        view.addGestureRecognizer(tapGesture)
-        
         setup()
+    }
+    
+    @IBAction func showDatePicker(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let pickerVc = storyboard.instantiateViewController(withIdentifier:
+            "DatepickerViewController") as? DatepickerViewController else {
+                fatalError("Unexpected destination:")
+        }
+        if patient != nil{
+            if let date = patient?.dateOfBirth{
+                pickerVc.selection = date
+            }
+        }
+        pickerVc.setTimeFromDatepicker = pickerChanged
+        self.navigationController?.present(pickerVc, animated: true)
+    }
+    
+    private func pickerChanged(date: Date) -> (){
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        let bDay = dateFormatter.string(from: date)
+        patientBirthday = date
+        btnBirthday.setTitle(bDay, for: .normal)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let color = UIColor(red: 122/255, green: 107/255, blue: 139/255, alpha: 1.0)
-
         textField.layer.borderColor = color.cgColor
         textField.layer.borderWidth = 2.0
     }
@@ -68,30 +77,13 @@ class PatientTableViewController: UIViewController {
            textField.layer.borderWidth = 0.0
        }
     
-    @objc func viewTapped(gestureReconizer: UIGestureRecognizer){
-        view.endEditing(true)
-    }
-    
-    // Change birthday label when picker is changed
-    @objc func dateOfBirthChanged(datePicker: UIDatePicker) {
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirth.text = dateFormatter.string(from: dateOfBirthPicker.date)
-    }
-    
     //Shahin: - Functions
     fileprivate func initNewPatient() {
         titleLbl.text = NSLocalizedString("new_patient_title", comment: "")
         firstNameTextField.placeholder = NSLocalizedString("first_name_placeholder", comment: "")
         insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("last_name_placeholder", comment: "")
-        
-        dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
-        
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirth.text = dateFormatter.string(from: dateOfBirthPicker.date)
-        
+        btnBirthday.setTitle(NSLocalizedString("date_of_birth_title", comment: ""), for: .normal)
         usernameTextField.placeholder = NSLocalizedString("username_placeholder", comment: "")
         emailTextField.placeholder = NSLocalizedString("email_placeholder", comment: "")
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
@@ -107,25 +99,30 @@ class PatientTableViewController: UIViewController {
             insertionTextField.placeholder = NSLocalizedString("insertion_placeholder", comment: "")
         }
         lastNameTextField.text = patient?.lastName
-        
-        dateOfBirthTitle.text = NSLocalizedString("date_of_birth_title", comment: "")
-        
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateOfBirth.text = dateFormatter.string(from: patient?.dateOfBirth ?? dateOfBirthPicker.date)
-        guard let ddd = patient?.dateOfBirth else{return}
-        dateOfBirthPicker.setDate(ddd, animated: false)
+
+        if let ddd = patient?.dateOfBirth{
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            let bDay = dateFormatter.string(from: ddd)
+            btnBirthday.setTitle(bDay, for: .normal)
+            patientBirthday = ddd
+        }else{
+            btnBirthday.setTitle(NSLocalizedString("date_of_birth_title", comment: ""), for: .normal)
+        }
         
         usernameTextField.text = patient?.user.username
         emailTextField.text = patient?.user.email
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         confirmPasswordTextField.placeholder = NSLocalizedString("confirm_password_placeholder", comment: "")
     }
+    
     @IBAction func saveTapped(_ sender: UIButton) {
-        savePatientData()
+        print("Save tapped")
+        self.savePatientData()
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -142,9 +139,6 @@ class PatientTableViewController: UIViewController {
         }else{
             initNewPatient()
         }
-      
-        dateOfBirthPicker.minimumDate = Calendar.current.date(byAdding: .year, value: -99, to: Date())
-        dateOfBirthPicker.maximumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
         
         textFields = [firstNameTextField, insertionTextField, lastNameTextField, usernameTextField, passwordTextField, confirmPasswordTextField]
         
@@ -208,7 +202,6 @@ class PatientTableViewController: UIViewController {
                     case .success(_):
                         guard let addedUser = try? self.decoder.decode(NewUser.self, from: jsonData) else { return }
                         self.newUser = addedUser
-                        
                         guard let coachId = self.coach?.id else { return }
                         guard let userId = self.newUser?.user.id else { return }
                         
@@ -220,10 +213,13 @@ class PatientTableViewController: UIViewController {
                                                  date_of_birth: self.dateFormatter.string(from: dateOfBirth),
                                                  coach_id: coachId)
                             .responseData(completionHandler: { (response) in
-                                guard let jsonData = response.data else { return }
-                                guard let pat = try? self.decoder.decode(Patient.self, from: jsonData) else { return }
-                                self.patient = pat
-                                self.jobFinished()
+                                
+                                switch(response.result){
+                                case .success(_):
+                                    self.jobFinished()
+                                case .failure(_):
+                                    FeedbackMessages.operationFailedMessage(vC: self)
+                                }
                             })
                         
                     case .failure(_):
@@ -273,17 +269,25 @@ class PatientTableViewController: UIViewController {
 
     
     private func savePatientData() {
-        guard let firstName = firstNameTextField.text else { return }
-        guard let insertion = insertionTextField.text else { return }
-        guard let lastName = lastNameTextField.text else { return }
+        let firstName = firstNameTextField.text ?? ""
+        let insertion = insertionTextField.text ?? ""
+        let lastName = lastNameTextField.text ?? ""
+        let bDay = patientBirthday ?? Date()
+        let username = usernameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let confirmPassword = confirmPasswordTextField.text ?? ""
         
-        let dateOfBirth = dateOfBirthPicker.date
+        let dateOfBirth = bDay
         
-        guard let username = usernameTextField.text else { return }
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        guard let confirmPassword = confirmPasswordTextField.text else { return }
-        
+        //Get Coach instance
+        UserService.getCoachInstance(withCompletionHandler: { coach in
+            guard let coach = coach else {
+                UserService.logOut()
+                return
+            }
+            self.coach = coach
+        })
         
         //Shahin: Check for birthday field
         //Shahin: Check for empty fields
@@ -292,42 +296,32 @@ class PatientTableViewController: UIViewController {
             checkBirthday(dateOfBirth) &&
             checkEmail(email){
             
-            //Get Coach instance
-            UserService.getCoachInstance(withCompletionHandler: { coach in
-                guard let coach = coach else {
-                    UserService.logOut()
-                    return
-                }
-                
-                self.coach = coach
-            })
-            
-            
             if patient != nil{
-                
+                print("Editing patient")
                 if let text = passwordTextField.text, !text.isEmpty && checkPassword(password, conf: confirmPassword){
-                        updatePatient(username, email,dateOfBirth, firstName, insertion, lastName, password: password)
+                    updatePatient(username, email,dateOfBirth, firstName, insertion, lastName, password: password)
                 }else{
                     updatePatient(username, email,dateOfBirth, firstName, insertion, lastName)
                 }
             }else{
+                print("Saving new patient")
                 if checkPassword(password, conf: confirmPassword){
+                    print("Saving new after pass check patient")
                     createNewPatient(username, email, password, dateOfBirth, firstName, insertion, lastName)
+                    
+                }
             }
-            
-            
         }
-        
-    }
     }
     
    private func jobFinished(){
+    navigationController?.popViewController(animated: true)
+    
         if let p = patient{
             self.upDatePatientVc?(p)
         }
-    
         self.reloadPatientsList?()
-        self.dismiss(animated: true)
+        
     }
 }
 
@@ -346,5 +340,3 @@ extension PatientTableViewController : UITextFieldDelegate {
         return false
       }
 }
-
-
