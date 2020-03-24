@@ -218,7 +218,7 @@ class PatientBaxterViewController: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-          let ingenomen = UIContextualAction(style: .destructive, title: "Verwijderen") { (action, sourceView, completionHandler) in
+          let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("verwijderen", comment: "")) { (action, sourceView, completionHandler) in
               let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("are_you_sure_to_delete_it", comment: ""), preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
                 self.deleteDose(dose: self.baxterlist[indexPath.section].doses![indexPath.row])
