@@ -134,6 +134,7 @@ class MedicineAddViewController: UIViewController {
             doses = list
         }
         
+        print("BAXTER Time: \(baxterTime)")
         if Reachability.isConnectedToNetwork(){
             ApiService.createNewBaxter(patientId: patientId, intakeTime: baxterTime, doses: doses, dayOfWeek: day)
             .responseData(completionHandler: { (response) in
