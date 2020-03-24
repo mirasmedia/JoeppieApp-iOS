@@ -511,7 +511,6 @@ class MedicineViewController: UIViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         indicator?.stopAnimating()
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
-        let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
         if medicinelist.count<=1{
             getMedicines()
@@ -529,7 +528,17 @@ class MedicineViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
-        cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        switch self.medicinelist[index].type{
+        case "tablet":
+            cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        case "Druppel":
+            cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
+        case "Capsule":
+            cell.medicine_intake_image.image = UIImage(named:"capsule")
+        default:
+            cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        }
+
         return cell
         
     }
