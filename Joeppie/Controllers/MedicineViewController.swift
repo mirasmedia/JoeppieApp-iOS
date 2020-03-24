@@ -70,7 +70,7 @@ class MedicineViewController: UIViewController {
             return
         }
         
-        if state{
+        if !state{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let controller = storyboard.instantiateViewController(withIdentifier:
             "WalkThroughViewController") as? WalkThroughViewController{
