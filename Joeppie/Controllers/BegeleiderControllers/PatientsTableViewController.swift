@@ -50,6 +50,10 @@ class PatientsTableViewController: UITableViewController {
     
     private func getPatients() {
         showLoadingIndicator()
+        patients.removeAll()
+        patientsNeedAttention.removeAll()
+        self.patientsTableView.reloadData()
+        
         UserService.getCoachInstance(withCompletionHandler: { coach in
             guard let coach = coach else {
                 UserService.logOut()
@@ -72,9 +76,6 @@ class PatientsTableViewController: UITableViewController {
     
     private func checkPatients(){
         var index: Int = 0
-        patientsNeedAttention.removeAll()
-        self.patientsTableView.reloadData()
-        
         for p in self.patients{
             self.getPatientIntakes(patient: p, withCompletionHandler: { intakes in
                 self.patientNeedsMoreAttention(intakes: intakes, withCompletionHandler: { bool in
@@ -92,9 +93,12 @@ class PatientsTableViewController: UITableViewController {
     private func reloadView(){
         var arr = [PatientForBegeleider]()
         var arr2 = [PatientForBegeleider]()
-        
         var tempList = [PatientForBegeleider]()
-
+        
+        arr.removeAll()
+        arr2.removeAll()
+        tempList.removeAll()
+        
         for p in patientsNeedAttention{
             if p.needsAttention{
                 arr.append(p)
@@ -102,7 +106,7 @@ class PatientsTableViewController: UITableViewController {
                 arr2.append(p)
             }
         }
-
+        
         tempList = arr.sorted(by: {$0.patient.firstName < $1.patient.firstName})
         tempList += arr2.sorted(by: {$0.patient.firstName < $1.patient.firstName})
         

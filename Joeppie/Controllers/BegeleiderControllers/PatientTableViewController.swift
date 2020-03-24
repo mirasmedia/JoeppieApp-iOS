@@ -316,12 +316,9 @@ class PatientTableViewController: UIViewController {
     
    private func jobFinished(){
     navigationController?.popViewController(animated: true)
-    
         if let p = patient{
             self.upDatePatientVc?(p)
         }
-        self.reloadPatientsList?()
-        
     }
 }
 
