@@ -67,7 +67,7 @@ class MedicineViewController: UIViewController {
             return
         }
         
-        if state{
+        if !state{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let controller = storyboard.instantiateViewController(withIdentifier:
             "WalkThroughViewController") as? WalkThroughViewController{
@@ -387,10 +387,10 @@ class MedicineViewController: UIViewController {
                 let dateString = dateFormatter.string(from: now)
                 for indexdose in stride(from: baxterlist[indexbaxter].doses!.count-1, to: -1, by: -1){
                     let lastTakenTimeChanged:Date = baxterlist[indexbaxter].doses![indexdose].lastTaken
-                    
+         
                     
                     let b = calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day)
-                    if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month)&&calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
+                    if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && !calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month) && !calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
                         setIntake(dose: (baxterlist[indexbaxter].doses?[indexdose])! , patient: self.patient!, timeNow: dateString, state: String(DoseTakenTime.NOT_TAKEN.rawValue))
 
                         self.updateDose(id: String(self.baxterlist[indexbaxter].doses![indexdose].id), lasttaken: dateString)
@@ -418,9 +418,13 @@ class MedicineViewController: UIViewController {
     
     func getBaxters(){
         let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "eeee"
-        let dayInWeek = dateFormatter.string(from: date)
+        let formatterTime = DateFormatter()
+        formatterTime.dateFormat = "eeee"
+        let formatterDayOfWeek = DateFormatter()
+        formatterDayOfWeek.locale = Locale(identifier: "en_US")
+        formatterDayOfWeek.dateFormat = "eeee"
+        let dayInWeek = formatterDayOfWeek.string(from: date)
+        print(dayInWeek)
 
         //Copy this bit to wherever you need the user
         UserService.getPatientInstance(withCompletionHandler: { patient in
@@ -508,7 +512,6 @@ class MedicineViewController: UIViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         indicator?.stopAnimating()
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicineCell",for: indexPath) as!  MedicineCell
-        let b = medicinelist.firstIndex(where: { $0.id == baxterlist[indexPath.section].doses![indexPath.row].medicine})
         
         if medicinelist.count<=1{
             getMedicines()
@@ -526,7 +529,17 @@ class MedicineViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
-        cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        switch self.medicinelist[index].type{
+        case "tablet":
+            cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        case "Druppel":
+            cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
+        case "Capsule":
+            cell.medicine_intake_image.image = UIImage(named:"capsule")
+        default:
+            cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        }
+
         return cell
         
     }
@@ -593,7 +606,7 @@ class MedicineViewController: UIViewController {
         alertvc.modalPresentationStyle = .fullScreen
         self.present(alertvc, animated: true, completion: nil)
         alertvc.imageAlertView.image = UIImage(named:"Joeppie_surprised")
-        alertvc.titleAlertView.text = "Kan beter!"
+        alertvc.titleAlertView.text = NSLocalizedString("take_now", comment: "")
         alertvc.nameAlertView.text = patient?.firstName
         alertvc.stateAlertView.text = "Net niet op tijd!"
         if baxterlist[indexpath.section].doses!.count > 1
