@@ -19,6 +19,8 @@ class WalkThroughViewController: UIViewController,WalkthroughPageViewControllerD
     
     override func viewDidLoad() {
         nextbutton.layer.cornerRadius = 15
+        nextbutton.setTitle(NSLocalizedString("next", comment: ""), for: .normal)
+        skipbutton.setTitle(NSLocalizedString("skip", comment: ""), for: .normal)
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -52,10 +54,10 @@ class WalkThroughViewController: UIViewController,WalkthroughPageViewControllerD
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
             case 0...2:
-                nextbutton.setTitle("NEXT", for: .normal)
+                nextbutton.setTitle(NSLocalizedString("next", comment: ""), for: .normal)
                 skipbutton.isHidden = false
             case 3:
-                nextbutton.setTitle("GET STARTED", for: .normal)
+                nextbutton.setTitle(NSLocalizedString("get_started", comment: ""), for: .normal)
                 skipbutton.isHidden = true
             default:break
                 

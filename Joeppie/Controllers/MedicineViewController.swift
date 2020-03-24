@@ -390,10 +390,12 @@ class MedicineViewController: UIViewController {
                 let dateString = dateFormatter.string(from: now)
                 for indexdose in stride(from: baxterlist[indexbaxter].doses!.count-1, to: -1, by: -1){
                     let lastTakenTimeChanged:Date = baxterlist[indexbaxter].doses![indexdose].lastTaken
-                    
+                    print(lastTakenTimeChanged)
+                    print(now)
+         
                     
                     let b = calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day)
-                    if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month)&&calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
+                    if(!calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.day) && !calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.month) && !calendar.isDate(now, equalTo: lastTakenTimeChanged, toGranularity:.year)){
                         setIntake(dose: (baxterlist[indexbaxter].doses?[indexdose])! , patient: self.patient!, timeNow: dateString, state: String(DoseTakenTime.NOT_TAKEN.rawValue))
 
                         self.updateDose(id: String(self.baxterlist[indexbaxter].doses![indexdose].id), lasttaken: dateString)
@@ -421,9 +423,13 @@ class MedicineViewController: UIViewController {
     
     func getBaxters(){
         let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "eeee"
-        let dayInWeek = dateFormatter.string(from: date)
+        let formatterTime = DateFormatter()
+        formatterTime.dateFormat = "eeee"
+        let formatterDayOfWeek = DateFormatter()
+        formatterDayOfWeek.locale = Locale(identifier: "en_US")
+        formatterDayOfWeek.dateFormat = "eeee"
+        let dayInWeek = formatterDayOfWeek.string(from: date)
+        print(dayInWeek)
 
         //Copy this bit to wherever you need the user
         UserService.getPatientInstance(withCompletionHandler: { patient in
