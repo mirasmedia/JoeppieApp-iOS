@@ -222,8 +222,6 @@ extension PatientBaxterViewController:UITableViewDelegate{
         
         let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
         let time = df.string(from: baxterlist[section].intakeTime)
-        
-        
         label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
             
         

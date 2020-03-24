@@ -7,6 +7,8 @@
 */
 
 "" = "";
+// Messages
+"saved_data_msg" = "The data are stored!";
 
 //Shahin: Error
 "connection_error_title" = "Connection failed!";
@@ -56,8 +58,10 @@
 "invalide_conf_pass_msg" = "Your passwords do not match.";
 "there_is_no_data"="There is no data for charts at the moment";
 
+"failure_message" = "Oepsss!!! something went wrong!!!";
+
 // Add medicine
-"intake_time" = "Select Time";
+"intake_time" = "Select Intake time";
 "intake_day" = "Select Day";
 "select_medicine" = "Select a medicine";
 "add_doses" = "Add dose of medicine";
