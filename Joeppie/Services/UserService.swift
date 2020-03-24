@@ -45,6 +45,19 @@ class UserService {
         UserDefaults.standard.set(data, forKey: Constants.userKey)
     }
     
+    public static func setOnboarding(state:Bool){
+        UserDefaults.standard.set(true, forKey: "onboarding")
+    }
+    
+    public static func getOnboarding()->(Bool){
+        
+        guard let st:Bool = UserDefaults.standard.bool(forKey: "onboarding") else {
+            return false
+        }
+        return st
+        
+    }
+    
     public static func getUser(withCompletionHandeler cH : @escaping (User?) -> ()) {
         //If there is an instance, return it
         if let instance = userInstance {

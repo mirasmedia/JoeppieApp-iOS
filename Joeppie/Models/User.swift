@@ -14,7 +14,7 @@ struct User : Codable {
     let username : String
     let email : String
     let provider : String
-    let confirmed : Bool
+    var confirmed : Bool
     let blocked : Bool
     let role : Role
     let notes : String?
