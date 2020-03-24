@@ -228,34 +228,32 @@ extension PatientBaxterViewController:UITableViewDelegate{
         label.font = UIFont.systemFont(ofSize: 20)
        
         let df = DateFormatter()
-        df.dateFormat = "HH : mm"
+        df.dateFormat = "HH:mm"
         
-        let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
         let time = df.string(from: baxterlist[section].intakeTime)
-        let time:String = String.init(format: "%02d:%02d", hour, minutes)
         
-        var day:String = ""
+        var daycheck:String = ""
         switch baxterlist[section].dayOfWeek.capitalizingFirstLetter() {
         case "Monday":
-            day = NSLocalizedString("Monday", comment: "")
+            daycheck = NSLocalizedString("Monday", comment: "")
         case "Tuesday":
-            day = NSLocalizedString("Tuesday", comment: "")
+            daycheck = NSLocalizedString("Tuesday", comment: "")
         case "Wednesday":
-            day = NSLocalizedString("Wednesday", comment: "")
+            daycheck = NSLocalizedString("Wednesday", comment: "")
         case "Thursday":
-            day = NSLocalizedString("Thursday", comment: "")
+            daycheck = NSLocalizedString("Thursday", comment: "")
         case "Friday":
-            day = NSLocalizedString("Friday", comment: "")
+            daycheck = NSLocalizedString("Friday", comment: "")
         case "Saturday":
-            day = NSLocalizedString("Saturday", comment: "")
+            daycheck = NSLocalizedString("Saturday", comment: "")
         case "Sunday":
-            day = NSLocalizedString("Sunday", comment: "")
+            daycheck = NSLocalizedString("Sunday", comment: "")
         
         default:
             ""
         }
         
-        label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
+        label.text = "\(daycheck) \(time) \(NSLocalizedString("hour", comment: ""))"
             
         label.textColor = .white
         headerView.addSubview(label)
