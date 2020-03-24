@@ -209,11 +209,24 @@ class PatientBaxterViewController: UIViewController {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
           let ingenomen = UIContextualAction(style: .destructive, title: "Verwijderen") { (action, sourceView, completionHandler) in
-              let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: "Weet u zeker dat u dit wilt verwijderen?", preferredStyle: .alert)
+              let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("are_you_sure_to_delete_it", comment: ""), preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
                 self.deleteDose(dose: self.baxterlist[indexPath.section].doses![indexPath.row])
                 self.baxterlist[indexPath.section].doses?.remove(at: indexPath.row)
                 self.handleBaxters()
+                var imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: 40, height: 40))
+                imageView.image = UIImage(named: "vinkje")
+                
+                let alert = UIAlertController(title: "", message: NSLocalizedString("verwijderd", comment: ""), preferredStyle: .alert)
+                alert.view.addSubview(imageView)
+                self.present(alert, animated: true, completion: nil)
+
+                // change to desired number of seconds (in this case 5 seconds)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                  // your code with delay
+                  alert.dismiss(animated: true, completion: nil)
+                }
                   
               }))
 
