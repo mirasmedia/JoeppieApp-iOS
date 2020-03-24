@@ -118,3 +118,20 @@
 "statistic" = "Statistics";
 "verwijderd" = "Deleted";
 "are_you_sure_to_delete_it" = "Are you sure to delete this?";
+
+"next" = "NEXT";
+"skip" = "Skip";
+"get_started" = "GET STARTED";
+
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+
+"Edit" = "Edit client";
+"add_new_baxter" = "Add new Baxter";
+"select_atleast" = "Select all fields to create a new Baxter";
+"verwijderen" = "Delete";

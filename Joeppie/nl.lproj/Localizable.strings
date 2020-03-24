@@ -118,3 +118,19 @@
 "statistic" = "Statistieken";
 "verwijderd" = "Verwijderd";
 "are_you_sure_to_delete_it" = "Weet u zeker dat u dit wilt verwijderen?";
+"next" = "VOLGENDE";
+"skip" = "Overslaan";
+"get_started" = "START NU";
+"Monday" = "Maandag";
+"Tuesday" = "Dinsdag";
+"Wednesday" = "Woensdag";
+"Thursday" = "Donderdag";
+"Friday" = "Vrijdag";
+"Saturday" = "Zaterdag";
+"Sunday" = "Zondag";
+"Edit" = "Bewerk cliënt";
+"add_new_baxter" = "Voeg nieuwe Baxter";
+"empty_value" = "Lege veld!";
+"select_atleast" = "Kies alle velden om een nieuwe Baxter aan te maken";
+"verwijderen" = "Verwijderen";
+

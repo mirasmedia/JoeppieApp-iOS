@@ -158,7 +158,17 @@ class PatientBaxterViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
-        cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+        switch self.medicinelist[index].type{
+            case "tablet":
+                cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+            case "Druppel":
+                cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
+            case "Capsule":
+                cell.medicine_intake_image.image = UIImage(named:"capsule")
+            default:
+                cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
+            }
+        
         return cell
         
     }
@@ -173,7 +183,7 @@ class PatientBaxterViewController: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-          let ingenomen = UIContextualAction(style: .destructive, title: "Verwijderen") { (action, sourceView, completionHandler) in
+          let ingenomen = UIContextualAction(style: .destructive, title: NSLocalizedString("verwijderen", comment: "")) { (action, sourceView, completionHandler) in
               let alert = UIAlertController(title: NSLocalizedString("are_you_sure", comment: ""), message: NSLocalizedString("are_you_sure_to_delete_it", comment: ""), preferredStyle: .alert)
               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: .default, handler: { action in
                 self.deleteDose(dose: self.baxterlist[indexPath.section].doses![indexPath.row])
@@ -222,11 +232,31 @@ extension PatientBaxterViewController:UITableViewDelegate{
         
         let day = baxterlist[section].dayOfWeek.capitalizingFirstLetter()
         let time = df.string(from: baxterlist[section].intakeTime)
+        let time:String = String.init(format: "%02d:%02d", hour, minutes)
         
+        var day:String = ""
+        switch baxterlist[section].dayOfWeek.capitalizingFirstLetter() {
+        case "Monday":
+            day = NSLocalizedString("Monday", comment: "")
+        case "Tuesday":
+            day = NSLocalizedString("Tuesday", comment: "")
+        case "Wednesday":
+            day = NSLocalizedString("Wednesday", comment: "")
+        case "Thursday":
+            day = NSLocalizedString("Thursday", comment: "")
+        case "Friday":
+            day = NSLocalizedString("Friday", comment: "")
+        case "Saturday":
+            day = NSLocalizedString("Saturday", comment: "")
+        case "Sunday":
+            day = NSLocalizedString("Sunday", comment: "")
+        
+        default:
+            ""
+        }
         
         label.text = "\(day) \(time) \(NSLocalizedString("hour", comment: ""))"
             
-        
         label.textColor = .white
         headerView.addSubview(label)
         headerView.backgroundColor = UIColor(red:0.95, green:0.55, blue:0.13, alpha:1.0)

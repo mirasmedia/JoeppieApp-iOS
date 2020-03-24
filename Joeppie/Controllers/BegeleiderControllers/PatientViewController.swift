@@ -42,7 +42,7 @@ class PatientViewController: UIViewController {
     private func initView(){
         self.chartsArray.removeAll()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(showEditPatientView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Edit", comment: ""), style: .plain, target: self, action: #selector(showEditPatientView))
         
         if let temp = patient{
             patientName.text = "\(temp.firstName) \(temp.insertion ?? "") \(temp.lastName)"

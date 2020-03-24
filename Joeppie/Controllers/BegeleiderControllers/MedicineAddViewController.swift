@@ -37,7 +37,7 @@ class MedicineAddViewController: UIViewController {
         // TODO change color and title string
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationItem.title = "Add new baxter"
+        self.navigationItem.title = NSLocalizedString("add_new_baxter", comment: "")
         
         dateFormatter.locale = Locale.current
 
@@ -78,7 +78,7 @@ class MedicineAddViewController: UIViewController {
                 }
         }else{
                 // TODO REMOVE HARDCODED STRINGS
-                Errorpopup.displayErrorMessage(vc: self, title: "Empty Valuw", msg: "Select all fields and add atleast one Dose in order to create a new Baxter.")
+                Errorpopup.displayErrorMessage(vc: self, title: NSLocalizedString("empty_value", comment: ""), msg: NSLocalizedString("select_atleast", comment: ""))
             }
     }
     
