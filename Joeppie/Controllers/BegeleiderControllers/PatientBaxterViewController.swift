@@ -231,7 +231,7 @@ extension PatientBaxterViewController:UITableViewDelegate{
         df.dateFormat = "HH:mm"
         
         let time = df.string(from: baxterlist[section].intakeTime)
-        
+      
         var daycheck:String = ""
         switch baxterlist[section].dayOfWeek.capitalizingFirstLetter() {
         case "Monday":

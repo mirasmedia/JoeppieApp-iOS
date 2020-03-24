@@ -134,13 +134,11 @@ class MedicineAddViewController: UIViewController {
             doses = list
         }
         
-        print("BAXTER Time: \(baxterTime)")
         if Reachability.isConnectedToNetwork(){
             ApiService.createNewBaxter(patientId: patientId, intakeTime: baxterTime, doses: doses, dayOfWeek: day)
             .responseData(completionHandler: { (response) in
                 switch(response.result) {
                 case .success(_):
-                        // TODO: Update baxters list of patient
                     self.closeView()
                 case .failure(_):
                     Errorpopup.displayErrorMessage(vc: self, title: "Failed", msg: "Oeps! something went wrong!")
@@ -184,7 +182,7 @@ class MedicineAddViewController: UIViewController {
         }
     }
     
-    func pickerChanged(time: Date) -> (){
+    private func pickerChanged(time: Date) -> (){
         dateFormatter.dateFormat = "HH : mm"
         btnSelectTime.setTitle(dateFormatter.string(from: time), for: .normal)
         
@@ -193,7 +191,7 @@ class MedicineAddViewController: UIViewController {
         baxterTime = dateFormatter.string(from: time)
     }
     
-    func setChoosenDay(day: WeekDays, dayTitle: String) -> (){
+    private func setChoosenDay(day: WeekDays, dayTitle: String) -> (){
         selectedDay = dayTitle
         weekDaySelected = day
         btnSelectDay.setTitle(NSLocalizedString(dayTitle, comment: ""), for: .normal)
@@ -209,6 +207,7 @@ class MedicineAddViewController: UIViewController {
         pickerVc.isTimePicker = true
         self.navigationController?.present(pickerVc, animated: true)
     }
+    
     @IBAction func selectDayPopUp(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let pickerVc = storyboard.instantiateViewController(withIdentifier:
@@ -269,6 +268,16 @@ class MedicineAddViewController: UIViewController {
     private func deleteDose(doseId: Int){
         if Reachability.isConnectedToNetwork(){
             ApiService.deleteOneDose(doseId: doseId)
+                .responseData { (response) in
+                    switch(response.result){
+                    case .success(_):
+                        FeedbackMessages.confirmDeleteMessage(vC: self)
+                    case .failure(_):
+                        FeedbackMessages.operationFailedMessage(vC: self)
+                    @unknown default:
+                        break
+                    }
+            }
         }
     }
     

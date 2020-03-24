@@ -23,6 +23,7 @@
 		10887EE32424E93200C28D3D /* DayPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10887EE22424E93200C28D3D /* DayPickerViewController.swift */; };
 		10D6A241241C0BC700ED1B84 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A240241C0BC700ED1B84 /* NewUser.swift */; };
 		10D6A249241D4EE300ED1B84 /* MedicineAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */; };
+		10FACB82242A1AC800D2CE28 /* FeedBackMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FACB81242A1AC800D2CE28 /* FeedBackMessages.swift */; };
 		8954FCF6B2377F4B636FB34C /* Pods_Joeppie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC773B4308275297A810D11 /* Pods_Joeppie.framework */; };
 		EA1B0F2A239D1E8D006094BF /* MedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0F29239D1E8D006094BF /* MedicineViewController.swift */; };
 		EA1B0F2C239D82C6006094BF /* MedicineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1B0F2B239D82C6006094BF /* MedicineCell.xib */; };
@@ -86,6 +87,7 @@
 		10887EE22424E93200C28D3D /* DayPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerViewController.swift; sourceTree = "<group>"; };
 		10D6A240241C0BC700ED1B84 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		10D6A248241D4EE300ED1B84 /* MedicineAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineAddViewController.swift; sourceTree = "<group>"; };
+		10FACB81242A1AC800D2CE28 /* FeedBackMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackMessages.swift; sourceTree = "<group>"; };
 		7AC773B4308275297A810D11 /* Pods_Joeppie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Joeppie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8010774172756CD90ED7A79A /* Pods-Joeppie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.release.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.release.xcconfig"; sourceTree = "<group>"; };
 		CC5021137EA1420A70CA9F1F /* Pods-Joeppie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Joeppie.debug.xcconfig"; path = "Target Support Files/Pods-Joeppie/Pods-Joeppie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				106B5E54241925290097B0E1 /* InputValidator.swift */,
 				1045527A2427816D001ABCC2 /* ActivityIndicator.swift */,
 				1045527E2427C9DE001ABCC2 /* DayOrdering.swift */,
+				10FACB81242A1AC800D2CE28 /* FeedBackMessages.swift */,
 			);
 			path = Helppers;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				EA21EAC323A0EA9700969755 /* DigiContactViewController.swift in Sources */,
 				EAB719CF23A805AF00211816 /* ChartsViewController.swift in Sources */,
 				1045527D24278D96001ABCC2 /* WeekDays.swift in Sources */,
+				10FACB82242A1AC800D2CE28 /* FeedBackMessages.swift in Sources */,
 				EA93800E24203CA2009D934B /* DosesDataClass.swift in Sources */,
 				10887EDA2422A06B00C28D3D /* DoseCreate.swift in Sources */,
 				EAB719D123A8072000211816 /* ChartViewCell.swift in Sources */,

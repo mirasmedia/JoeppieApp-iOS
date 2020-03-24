@@ -8,6 +8,10 @@
 
 "" = "";
 
+// Messages
+"saved_data_msg" = "De gegevens zijn opgeslagen!";
+
+
 //Error
 "connection_error_title" = "Verbinding mislukt!";
 "connection_error_msg"   = "Er is iets mis gegaan met internet verbinding.";
@@ -55,8 +59,10 @@
 "invalide_input_title" = "Ongeldige invoer";
 "dose_amount_input_error" = "Kies een nummer tussen 1 en 9";
 
+"failure_message" = "Oepsss!!! iets ging niet helemaal goed!!!";
+
 // Add medicine
-"intake_time" = "Tijd selecteren";
+"intake_time" = "Inname tijd selecteren";
 "intake_day" = "Dag selecteren";
 "select_medicine" = "Selecteer een medicijn";
 "add_doses" = "Dose medicijn toevoegen";

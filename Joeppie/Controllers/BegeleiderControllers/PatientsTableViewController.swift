@@ -30,17 +30,17 @@ class PatientsTableViewController: UITableViewController {
        super.viewWillAppear(animated)
         self.navigationItem.setHidesBackButton(true, animated: true)
         logOutButton.title = NSLocalizedString("log_out_button", comment: "")
-        
-        
+
+
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(realoadPatientsList), for: .valueChanged)
         self.refreshControl = refreshControl
 
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        
+
         patientsTableView.register(UINib(nibName: "PatientTableViewCell", bundle: nil), forCellReuseIdentifier: "PatientTableViewCell")
         
-       getPatients()
+        getPatients()
 
     }
     
@@ -64,7 +64,6 @@ class PatientsTableViewController: UITableViewController {
 
                 self.decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                 guard let patients = try? self.decoder.decode([Patient].self, from: jsonData) else { return }
-//                self.patients = patients.sorted(by: {$0.firstName < $1.firstName})
                 self.patients = patients
                 self.checkPatients()
             })
@@ -74,6 +73,7 @@ class PatientsTableViewController: UITableViewController {
     private func checkPatients(){
         var index: Int = 0
         patientsNeedAttention.removeAll()
+        self.patientsTableView.reloadData()
         
         for p in self.patients{
             self.getPatientIntakes(patient: p, withCompletionHandler: { intakes in
@@ -92,6 +92,8 @@ class PatientsTableViewController: UITableViewController {
     private func reloadView(){
         var arr = [PatientForBegeleider]()
         var arr2 = [PatientForBegeleider]()
+        
+        var tempList = [PatientForBegeleider]()
 
         for p in patientsNeedAttention{
             if p.needsAttention{
@@ -101,8 +103,10 @@ class PatientsTableViewController: UITableViewController {
             }
         }
 
-        patientsNeedAttention = arr.sorted(by: {$0.patient.firstName < $1.patient.firstName})
-        patientsNeedAttention += arr2.sorted(by: {$0.patient.firstName < $1.patient.firstName})
+        tempList = arr.sorted(by: {$0.patient.firstName < $1.patient.firstName})
+        tempList += arr2.sorted(by: {$0.patient.firstName < $1.patient.firstName})
+        
+        patientsNeedAttention = tempList
         
         self.patientsTableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -173,7 +177,7 @@ class PatientsTableViewController: UITableViewController {
         }
         // TODO Update view after adding new patient
         patientViewController.reloadPatientsList = reloadPatients
-        self.navigationController?.present(patientViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(patientViewController, animated: true)
         
     }
     
