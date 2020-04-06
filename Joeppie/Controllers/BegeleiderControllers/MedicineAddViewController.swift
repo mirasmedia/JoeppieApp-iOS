@@ -336,12 +336,4 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         }
     
-        
-//        TODO: EDIT ADDED DOSE
-//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            self.selectedMedicine = listOfMedicines[indexPath.row]
-//            selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)
-//            medicineId = listOfMedicines[indexPath.row].id
-//            removeTransparantView()
-//        }
 }
