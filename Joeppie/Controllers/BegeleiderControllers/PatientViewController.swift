@@ -25,6 +25,7 @@ class PatientViewController: UIViewController {
     @IBOutlet weak var labelNoChartData: UILabel!
     var patient: Patient?
     var chartsArray: [Charts] = []
+    let calendar = Calendar.current
     @IBOutlet weak var addMediButton: UIButton!
     
     override func viewDidLoad() {
@@ -102,52 +103,57 @@ class PatientViewController: UIViewController {
     }
     
     
-        var mondaysDate: Date {
-             return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-         }
+    private var mondaysDate: Date {
+        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+    }
     
-       func getAllChartMedicineUser(){
+       
+    private func getAllChartMedicineUser(){
            
         let formatterDB = DateFormatter()
         formatterDB.dateFormat = "yyyy-MM-dd"
+        
+        let startdayofWeek = formatterDB.string(from: mondaysDate)
+        var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
+        let endofweekDB = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
+        
+        
+        let enddayofweek = formatterDB.string(from: endofweekDB)
+        
+        
+        getChartData(startdayofWeek: startdayofWeek, enddayofweek: enddayofweek)
+    }
+    
+    private func getChartData(startdayofWeek: String, enddayofweek: String){
         
         let formatterLabel = DateFormatter()
         formatterLabel.dateFormat = "dd-MM-yyyy"
         
         let startdayofweekLabel=formatterLabel.string(from: mondaysDate)
-        let startdayofWeek = formatterDB.string(from: mondaysDate)
-           
-       let calendar = Calendar.current
-       var dateComponents: DateComponents? = calendar.dateComponents([.hour, .minute, .second], from: mondaysDate)
-       let endofweekDB = calendar.date(byAdding: .day, value: 7, to: mondaysDate)!
-       let endofweekLabel = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+        let endofweekLabel = calendar.date(byAdding: .day, value: 6, to: mondaysDate)!
+        let enddayofweekLabel=formatterLabel.string(from: endofweekLabel)
         
-       let enddayofweek = formatterDB.string(from: endofweekDB)
-       let enddayofweekLabel=formatterLabel.string(from: endofweekLabel)
-           
-       self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
-        ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
-               .responseData(completionHandler: { (response) in
-                guard let json = response.data else { return }
-    //                   print(String(decoding: response.data!, as: UTF8.self))
-
-                   
-                   let decoder = JSONDecoder()
-                   let dateFormatter = DateFormatter()
-                   dateFormatter.locale = Locale.current
-                   dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                   decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                   let rs = try? decoder.decode([Intake].self, from: json)
-                    if let list = rs{
-                        self.handleintake(rs: list)
-                    }
-                   
-                    self.hideLoadingIndicator()
-                   
-               })
-       
-           
-       }
+        self.chartsDateLabel.text = "\(startdayofweekLabel) \(NSLocalizedString("till_small", comment: "")) \(enddayofweekLabel)"
+         
+         
+         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient!.id)
+                .responseData(completionHandler: { (response) in
+                 guard let json = response.data else { return }
+                    
+                    let decoder = JSONDecoder()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale.current
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                    let rs = try? decoder.decode([Intake].self, from: json)
+                     if let list = rs{
+                         self.handleintake(rs: list)
+                     }
+                    
+                     self.hideLoadingIndicator()
+                    
+                })
+    }
     
     private func showLoadingIndicator(){
         let blurLoader = ActivityIndicator(frame: UIScreen.main.bounds)
