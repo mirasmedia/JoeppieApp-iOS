@@ -7,7 +7,8 @@
 */
 
 "" = "";
-
+"reason" = "Reden";
+"amount" = "Aantal";
 // Messages
 "saved_data_msg" = "De gegevens zijn opgeslagen!";
 
