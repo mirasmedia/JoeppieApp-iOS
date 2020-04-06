@@ -324,7 +324,7 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
             
             switch x.medicine.type {
             case "tablet":
-                cell.imgMedicineType.image = UIImage(named:"medicine_intake_icon")
+                cell.imgMedicineType.image = UIImage(named:"medicine_tablet")
             case "liquid":
                 cell.imgMedicineType.image = UIImage(named:"Drop_medicine")
             case "capsule":
