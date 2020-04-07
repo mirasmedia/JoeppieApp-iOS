@@ -301,8 +301,6 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            listOfCreatedDoses.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
             deletePlanetIndexPath = indexPath
             let planetToDelete = listOfCreatedDoses[indexPath.row]
             deletePlantDose = planetToDelete
@@ -323,15 +321,19 @@ extension MedicineAddViewController: UITableViewDelegate, UITableViewDataSource{
             cell.lblAmountValue.text = String(x.amount)
             cell.lblMedicineName.text = x.medicine.name
             cell.lblReasonValue.text = x.medicine.reason
+            
+            switch x.medicine.type {
+            case "tablet":
+                cell.imgMedicineType.image = UIImage(named:"medicine_tablet")
+            case "liquid":
+                cell.imgMedicineType.image = UIImage(named:"Drop_medicine")
+            case "capsule":
+                cell.imgMedicineType.image = UIImage(named:"capsule")
+            default:
+                cell.imgMedicineType.image = UIImage(named:"medicine_intake_icon")
+            }
+            
             return cell
         }
     
-        
-//        TODO: EDIT ADDED DOSE
-//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            self.selectedMedicine = listOfMedicines[indexPath.row]
-//            selectMedicineBtn.setTitle(listOfMedicines[indexPath.row].name, for: .normal)
-//            medicineId = listOfMedicines[indexPath.row].id
-//            removeTransparantView()
-//        }
 }

@@ -532,9 +532,9 @@ class MedicineViewController: UIViewController {
         switch self.medicinelist[index].type{
         case "tablet":
             cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
-        case "Druppel":
+        case "liquid":
             cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
-        case "Capsule":
+        case "capsule":
             cell.medicine_intake_image.image = UIImage(named:"capsule")
         default:
             cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")

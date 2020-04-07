@@ -2,7 +2,7 @@
 //  AddedDoseCell.swift
 //  Joeppie
 //
-//  Created by qa on 19/03/2020.
+//  Created by Shahin Mirza on 19/03/2020.
 //  Copyright © 2020 Bever-Apps. All rights reserved.
 //
 
@@ -14,7 +14,6 @@ class AddedDoseCell: UITableViewCell{
     
     @IBOutlet weak var lblAmountTitle: UILabel!
     @IBOutlet weak var lblAmountValue: UILabel!
-    @IBOutlet weak var lblReasonTitle: UILabel!
     @IBOutlet weak var lblReasonValue: UILabel!
     @IBOutlet weak var lblMedicineName: UILabel!
     @IBOutlet weak var imgMedicineType: UIImageView!
@@ -22,9 +21,10 @@ class AddedDoseCell: UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        lblReasonTitle.text = "REDEN:"
-        lblAmountTitle.text = "AANTAL:"
-        imgMedicineType.image = UIImage(named: "medicine_intake_icon")
+        lblAmountTitle.text = "\(NSLocalizedString("amount", comment: "")):"
+        
+        lblReasonValue.lineBreakMode = .byWordWrapping
+        lblReasonValue.numberOfLines = 2
     }
 
     override func prepareForReuse() {
