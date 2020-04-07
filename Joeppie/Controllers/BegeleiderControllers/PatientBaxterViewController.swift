@@ -158,7 +158,6 @@ class PatientBaxterViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
-        print("BAXTER TYPE: \(self.medicinelist[index].type)")
         
         switch self.medicinelist[index].type{
             case "tablet":
