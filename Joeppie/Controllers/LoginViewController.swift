@@ -27,10 +27,6 @@ class LoginViewController: UIViewController {
         passwordTextField.placeholder = NSLocalizedString("password_placeholder", comment: "")
         logInButton.setTitle(NSLocalizedString("log_in_button", comment: ""), for: .normal)
         
-        // TODO : Delete this
-        usernameTextField.text = "benjamin123"
-        passwordTextField.text = "joeppieBegeleider123"
-        
         setup()
     }
     
@@ -38,8 +34,8 @@ class LoginViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
 
-        //usernameTextField.text=""
-        //passwordTextField.text=""
+        usernameTextField.text=""
+        passwordTextField.text=""
         checkForUser()
     }
     
