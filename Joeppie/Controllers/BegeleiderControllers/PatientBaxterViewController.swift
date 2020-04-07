@@ -158,12 +158,14 @@ class PatientBaxterViewController: UIViewController {
         cell.textMedicine.font = UIFont.systemFont(ofSize: 23)
         
         cell.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
+        print("BAXTER TYPE: \(self.medicinelist[index].type)")
+        
         switch self.medicinelist[index].type{
             case "tablet":
-                cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")
-            case "Druppel":
+                cell.medicine_intake_image.image = UIImage(named:"medicine_tablet")
+            case "liquid":
                 cell.medicine_intake_image.image = UIImage(named:"Drop_medicine")
-            case "Capsule":
+            case "capsule":
                 cell.medicine_intake_image.image = UIImage(named:"capsule")
             default:
                 cell.medicine_intake_image.image = UIImage(named:"medicine_intake_icon")

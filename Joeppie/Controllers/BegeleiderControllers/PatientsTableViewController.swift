@@ -130,7 +130,6 @@ class PatientsTableViewController: UITableViewController {
         ApiService.getIntakesCountAll(greaterthandate: startdayofWeek, lowerthandate: enddayofweek, patientId: patient.id)
             .responseData(completionHandler: { (response) in
                 guard let jsonData = response.data else { return }
-//                    print(String(decoding: response.data!, as: UTF8.self))
                 
                 switch(response.result) {
                 case .success(_):
